@@ -47,6 +47,25 @@
         ".asset-packs/ui-audio-03.zip.b64.part002",
         ".asset-packs/ui-audio-03.zip.b64.part003"
       ]
+    },
+    {
+      "name": "external-audio-cc0",
+      "destination": "assets/audio/external-cc0",
+      "zip_root": "majapahit-external-audio-cc0",
+      "sha256": "791ded2ab3545bbd3de6f143bac7783af4b11c32bd275e5276d1832ebc64633d",
+      "archive_bytes": 7409048,
+      "parts": [
+        ".asset-packs/external-audio-cc0.zip.b64.part001",
+        ".asset-packs/external-audio-cc0.zip.b64.part002",
+        ".asset-packs/external-audio-cc0.zip.b64.part003",
+        ".asset-packs/external-audio-cc0.zip.b64.part004",
+        ".asset-packs/external-audio-cc0.zip.b64.part005",
+        ".asset-packs/external-audio-cc0.zip.b64.part006",
+        ".asset-packs/external-audio-cc0.zip.b64.part007",
+        ".asset-packs/external-audio-cc0.zip.b64.part008",
+        ".asset-packs/external-audio-cc0.zip.b64.part009",
+        ".asset-packs/external-audio-cc0.zip.b64.part010"
+      ]
     }
   ]
 }

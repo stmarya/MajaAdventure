@@ -30,7 +30,32 @@ python3 tools/restore_assets.py --pack ui-audio-03
 | Paket03 — UI & audio draft | `assets/expansions/ui-audio-03/` | 48 | 0 |
 | **Total** | | **290** | **45** |
 
-Tambahan audio:2BGM OGG +8SFX WAV original sintetis, belum diuji dengar.
+## Audio eksternal CC0 — sumber gratis
+
+**331 file audio eksternal** telah ditambahkan sebagai paket terpisah, bukan hasil sintesis proyek.
+
+| Jenis | File |
+|---|---:|
+| Voiceover Inggris |92|
+| SFX RPG/foley/senjata |51|
+| SFX UI |100|
+| Jingle pendek |85|
+| BGM |2|
+| Ambience |1|
+| **Total** |**331**|
+
+Pulihkan setelah `git pull`:
+
+```sh
+python3 tools/restore_assets.py --pack external-audio-cc0
+```
+
+Folder hasil:`assets/audio/external-cc0/`. Lihat [lisensi, sumber dan kredit](docs/AUDIO_EXTERNAL_CC0.md).
+Audio ini masih kandidat dan belum diuji dengar/diintegrasikan;tidak semua file harus digunakan.
+Seluruh sumber terpilih menyatakanCC0. Lisensi sumber disertakan per paket/track.
+
+Draft lama2BGM+8SFX sintetis tetap tersimpan terpisah di ui-audio-03, bukan bagian paket eksternal.
+
 Katalog dan preview layar PNG tidak termasuk hitungan aset/frame. Tiap paket menyertakan README
 serta manifest. PNG sudah dipisah per objek/gerakan; GIF hanya pratinjau animasi.
 Folder `assets/` merupakan hasil ekstraksi yang dapat dibuat ulang dari paket.
@@ -61,5 +86,5 @@ masih belum tersedia karena layanan generasi gambar gagal. Lihat checklist untuk
 - [Cakupan dan integrasi lima bagian](docs/INTEGRASI_LIMA_BAGIAN.md)
 
 Aset dibuat dengan bantuan AI dan diproses menjadi sprite terpisah.
-Representasi sejarah bersifat interpretasi seni game. Belum ada lisensi
-distribusi yang ditetapkan pada repository ini.
+Representasi sejarah bersifat interpretasi seni game. Audio eksternal tetap mengikutiCC0 dari sumbernya;lisensi distribusi untuk proyek dan aset visual
+repository ini belum ditetapkan.
