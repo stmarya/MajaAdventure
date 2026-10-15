@@ -1,0 +1,179 @@
+{
+  "_komentar": "Schema JSON untuk data level Majapahit Platformer. Setiap file level mengikuti format ini.",
+  "schema_version": "1.0.0",
+
+  "contoh_level": {
+    "meta": {
+      "id": "level_01",
+      "nama": "Gerbang Hutan Majapahit",
+      "urutan": 1,
+      "bgm": "bgm_level01_01.ogg",
+      "background_layers": [
+        { "file": "assets/environment/backgrounds/final/bg_sky_layer.png",     "parallax_x": 0.1, "parallax_y": 0.0, "z": 0 },
+        { "file": "assets/environment/backgrounds/final/bg_jungle_far.png",    "parallax_x": 0.3, "parallax_y": 0.0, "z": 1 },
+        { "file": "assets/environment/backgrounds/final/bg_jungle_near.png",   "parallax_x": 0.6, "parallax_y": 0.0, "z": 2 }
+      ],
+      "tileset": "ruins_bricks",
+      "gravitasi": 0.4,
+      "kamera_batas": { "kiri": 0, "kanan": 3200, "atas": -180, "bawah": 360 }
+    },
+
+    "dimensi": {
+      "lebar_tiles": 200,
+      "tinggi_tiles": 20,
+      "tile_size": 16,
+      "lebar_px": 3200,
+      "tinggi_px": 320
+    },
+
+    "spawn": {
+      "player": { "tile_x": 2, "tile_y": 15 },
+      "checkpoint": [
+        { "id": "cp_01", "tile_x": 50, "tile_y": 15 },
+        { "id": "cp_02", "tile_x": 120, "tile_y": 15 }
+      ]
+    },
+
+    "tile_data": {
+      "_komentar": "Array 2D: tile_data[baris][kolom] = tile_id. 0 = kosong.",
+      "_format": "Array flat dengan lebar dimensi.lebar_tiles untuk efisiensi parsing",
+      "_contoh_baris": "Baris 15 (lantai): [0,0,5,5,5,5,5,...] → tile ID 5 = lantai_bata_rumput"
+    },
+
+    "layer_tile": [
+      {
+        "id": "layer_background",
+        "z": 3,
+        "render_mode": "background",
+        "data": []
+      },
+      {
+        "id": "layer_main",
+        "z": 4,
+        "render_mode": "normal",
+        "data": []
+      },
+      {
+        "id": "layer_foreground",
+        "z": 5,
+        "render_mode": "foreground",
+        "data": []
+      }
+    ],
+
+    "objek": [
+      {
+        "tipe": "enemy_soldier",
+        "id": "soldier_001",
+        "tile_x": 20,
+        "tile_y": 14,
+        "patrol_kiri": 15,
+        "patrol_kanan": 30,
+        "hp": 2,
+        "damage": 1
+      },
+      {
+        "tipe": "enemy_monkey",
+        "id": "monkey_001",
+        "tile_x": 40,
+        "tile_y": 10,
+        "patrol_kiri": 36,
+        "patrol_kanan": 48,
+        "hp": 1,
+        "damage": 1
+      },
+      {
+        "tipe": "item_gobog",
+        "id": "coin_001",
+        "tile_x": 5,
+        "tile_y": 13,
+        "nilai": 1
+      },
+      {
+        "tipe": "item_gobog",
+        "id": "coin_002",
+        "tile_x": 6,
+        "tile_y": 13,
+        "nilai": 1
+      },
+      {
+        "tipe": "item_maja_fruit",
+        "id": "maja_001",
+        "tile_x": 25,
+        "tile_y": 12,
+        "efek": "heal",
+        "nilai": 1
+      },
+      {
+        "tipe": "item_chest",
+        "id": "chest_001",
+        "tile_x": 60,
+        "tile_y": 14,
+        "isi": [
+          { "tipe": "item_gobog", "jumlah": 5 }
+        ]
+      },
+      {
+        "tipe": "prop_candi_bentar",
+        "id": "candi_01",
+        "tile_x": 90,
+        "tile_y": 9,
+        "flip": false
+      },
+      {
+        "tipe": "prop_palmtree",
+        "id": "palm_001",
+        "tile_x": 10,
+        "tile_y": 9,
+        "varian": "tall"
+      },
+      {
+        "tipe": "prop_torch",
+        "id": "torch_001",
+        "tile_x": 15,
+        "tile_y": 13,
+        "animasi": "burn"
+      },
+      {
+        "tipe": "prop_banner",
+        "id": "banner_001",
+        "tile_x": 18,
+        "tile_y": 11,
+        "animasi": "wave"
+      },
+      {
+        "tipe": "trigger_spike",
+        "id": "spike_trigger_001",
+        "tile_x": 35,
+        "tile_y": 15,
+        "lebar_tiles": 3,
+        "interval_aktif_ms": 1500,
+        "durasi_aktif_ms": 1000
+      },
+      {
+        "tipe": "level_exit",
+        "id": "exit_01",
+        "tile_x": 195,
+        "tile_y": 14,
+        "ke_level": "level_02"
+      }
+    ],
+
+    "kamera": {
+      "dead_zone_x": 80,
+      "dead_zone_y": 40,
+      "smoothing": 0.1,
+      "_komentar": "dead_zone = area dari tengah layar di mana kamera tidak bergerak saat player bergerak"
+    }
+  },
+
+  "_panduan_pembuatan_level": {
+    "koordinat": "Semua koordinat dalam satuan TILE (bukan pixel). Engine mengalikan dengan tile_size (16) saat render.",
+    "tile_id_0": "Tile ID 0 selalu = udara/kosong. Jangan definisikan tile dengan ID 0.",
+    "layer_urutan": "background < main < foreground. Render dari z rendah ke tinggi. Player selalu di antara main dan foreground.",
+    "spike_trigger": "Objek trigger_spike mengontrol tile spike dalam radius lebar_tiles. Engine toggle antara tile ID 11 (idle) dan 12 (aktif).",
+    "one_way_platform": "Platform dengan one_way=true: player bisa lompat dari bawah, tidak bisa jatuh dari atas (kecuali tekan panah bawah + lompat).",
+    "checkpoint": "Saat player menyentuh checkpoint, posisi respawn diperbarui ke koordinat checkpoint tersebut.",
+    "kamera_batas": "Level akan stop scroll di batas kanan/kiri. Sesuaikan dengan lebar_px level."
+  }
+}

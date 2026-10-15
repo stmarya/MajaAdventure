@@ -1,0 +1,851 @@
+{
+  "_komentar": "Manifest lengkap semua 58 assets proyek Majapahit Platformer. Sumber kebenaran tunggal untuk pipeline.",
+  "manifest_version": "1.0.0",
+  "total_assets": 58,
+  "kategori": {
+    "character": 9,
+    "enemy": 4,
+    "environment": 11,
+    "ui": 9,
+    "item": 5,
+    "audio": 11,
+    "vfx": 5,
+    "font": 2,
+    "collectible": 2
+  },
+  "assets": {
+    "character": [
+      {
+        "id": "chr_warrior_sheet",
+        "nama": "Sprite Sheet Karakter Utama (Warrior)",
+        "file": "assets/characters/warrior/final/chr_warrior_sheet.png",
+        "format": "PNG-32",
+        "lebar": 480,
+        "tinggi": 270,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 1",
+        "catatan_referensi": "Udeng merah #C1440E, tunik emas #D4A017, jarik indigo #1A3A5C, keris luk 3 lekukan",
+        "dependensi": []
+      },
+      {
+        "id": "chr_warrior_idle",
+        "nama": "Animasi Idle Karakter (4 frame)",
+        "file": "assets/characters/warrior/final/chr_warrior_idle_[00-03].png",
+        "format": "PNG-32",
+        "lebar": 48,
+        "tinggi": 48,
+        "jumlah_frame": 4,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 1",
+        "catatan_referensi": "Napas naik-turun halus, mata berkedip di frame ke-3",
+        "dependensi": [
+          "chr_warrior_sheet"
+        ]
+      },
+      {
+        "id": "chr_warrior_run",
+        "nama": "Animasi Run Cycle (6 frame)",
+        "file": "assets/characters/warrior/final/chr_warrior_run_[00-05].png",
+        "format": "PNG-32",
+        "lebar": 48,
+        "tinggi": 48,
+        "jumlah_frame": 6,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 1",
+        "catatan_referensi": "Gerakan lari natural, jarik bergerak minimal mengikuti langkah",
+        "dependensi": [
+          "chr_warrior_sheet"
+        ]
+      },
+      {
+        "id": "chr_warrior_jump",
+        "nama": "Animasi Jump Arc (3 frame)",
+        "file": "assets/characters/warrior/final/chr_warrior_jump_[00-02].png",
+        "format": "PNG-32",
+        "lebar": 48,
+        "tinggi": 48,
+        "jumlah_frame": 3,
+        "frame_labels": [
+          "ascent",
+          "peak",
+          "descent"
+        ],
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 1",
+        "catatan_referensi": "Frame 0: crouched launch, Frame 1: legs tucked, Frame 2: arms raised",
+        "dependensi": [
+          "chr_warrior_sheet"
+        ]
+      },
+      {
+        "id": "chr_warrior_attack",
+        "nama": "Animasi Melee Attack Keris (3 frame)",
+        "file": "assets/characters/warrior/final/chr_warrior_attack_[00-02].png",
+        "format": "PNG-32",
+        "lebar": 56,
+        "tinggi": 48,
+        "jumlah_frame": 3,
+        "frame_labels": [
+          "windup",
+          "strike",
+          "recovery"
+        ],
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 1",
+        "catatan_referensi": "Keris bilah luk, frame strike: keris thurst maju. Lebar 56px untuk ruang keris.",
+        "dependensi": [
+          "chr_warrior_sheet"
+        ]
+      },
+      {
+        "id": "chr_warrior_death",
+        "nama": "Animasi Death/Defeat (2 frame)",
+        "file": "assets/characters/warrior/final/chr_warrior_death_[00-01].png",
+        "format": "PNG-32",
+        "lebar": 48,
+        "tinggi": 48,
+        "jumlah_frame": 2,
+        "frame_labels": [
+          "stagger",
+          "fallen"
+        ],
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 1",
+        "catatan_referensi": "Frame 0: stagger ke belakang, Frame 1: jatuh berlutut/rebah",
+        "dependensi": [
+          "chr_warrior_sheet"
+        ]
+      },
+      {
+        "id": "chr_warrior_hurt",
+        "nama": "Animasi Terkena Damage (2 frame)",
+        "file": "assets/characters/warrior/final/chr_warrior_hurt_[00-01].png",
+        "format": "PNG-32",
+        "lebar": 48,
+        "tinggi": 48,
+        "jumlah_frame": 2,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 1",
+        "catatan_referensi": "Flash sprite putih #F0EBD8 di frame 1 untuk feedback hit",
+        "dependensi": [
+          "chr_warrior_sheet"
+        ]
+      },
+      {
+        "id": "chr_warrior_portrait",
+        "nama": "Portrait Karakter Utama (UI)",
+        "file": "assets/characters/warrior/final/chr_warrior_portrait.png",
+        "format": "PNG-32",
+        "lebar": 64,
+        "tinggi": 64,
+        "prioritas": "MEDIUM",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 1",
+        "catatan_referensi": "Tampak muka, udeng merah sangat jelas, ekspresi tegas",
+        "dependensi": []
+      }
+    ],
+    "enemy": [
+      {
+        "id": "chr_soldier_sheet",
+        "nama": "Sprite Sheet Enemy Soldier",
+        "file": "assets/characters/enemy_soldier/final/chr_soldier_sheet.png",
+        "format": "PNG-32",
+        "lebar": 288,
+        "tinggi": 52,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 1",
+        "catatan_referensi": "Helm besi, zirah sisik perunggu #7A6650, sash merah #C1440E, tombak 30px",
+        "dependensi": []
+      },
+      {
+        "id": "chr_soldier_idle",
+        "nama": "Enemy Soldier Idle + Attack + Stagger (6 frame total)",
+        "file": "assets/characters/enemy_soldier/final/chr_soldier_[idle_00,idle_01,attack_00,attack_01,attack_02,stagger_00].png",
+        "format": "PNG-32",
+        "lebar": 48,
+        "tinggi": 52,
+        "jumlah_frame": 6,
+        "frame_labels": [
+          "idle_00",
+          "idle_01",
+          "attack_00",
+          "attack_01",
+          "attack_02",
+          "stagger_00"
+        ],
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 1",
+        "catatan_referensi": "Attack: tombak thrust lurus ke depan",
+        "dependensi": [
+          "chr_soldier_sheet"
+        ]
+      },
+      {
+        "id": "chr_monkey_sheet",
+        "nama": "Sprite Sheet Enemy Monkey",
+        "file": "assets/characters/enemy_monkey/final/chr_monkey_sheet.png",
+        "format": "PNG-32",
+        "lebar": 128,
+        "tinggi": 32,
+        "prioritas": "MEDIUM",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 1",
+        "catatan_referensi": "Monyet ekor panjang Jawa, postur semi-bipedal membungkuk",
+        "dependensi": []
+      },
+      {
+        "id": "chr_monkey_anim",
+        "nama": "Enemy Monkey Idle + Jump (4 frame total)",
+        "file": "assets/characters/enemy_monkey/final/chr_monkey_[idle_00,idle_01,jump_00,jump_01].png",
+        "format": "PNG-32",
+        "lebar": 32,
+        "tinggi": 32,
+        "jumlah_frame": 4,
+        "frame_labels": [
+          "idle_00",
+          "idle_01",
+          "jump_00",
+          "jump_01"
+        ],
+        "prioritas": "MEDIUM",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 1",
+        "catatan_referensi": "Idle 00: duduk menggaruk kepala. Jump: lengan terbuka lebar.",
+        "dependensi": [
+          "chr_monkey_sheet"
+        ]
+      }
+    ],
+    "environment": [
+      {
+        "id": "env_ruins_wall_01",
+        "nama": "Tile Bata Andesit Merah Varian 1 (Bersih)",
+        "file": "assets/environment/tilesets/final/env_ruins_wall_01.png",
+        "format": "PNG-32",
+        "lebar": 64,
+        "tinggi": 64,
+        "seamless": true,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 2",
+        "catatan_referensi": "Sheet tileset 4x4 grid, 16 tile @ 16x16px = 64x64px total. Placeholder prosedural."
+      },
+      {
+        "id": "env_ruins_wall_02",
+        "nama": "Tile Bata Andesit Merah Varian 2 (Lumut Ringan)",
+        "file": "assets/environment/tilesets/final/env_ruins_wall_02.png",
+        "format": "PNG-32",
+        "lebar": 16,
+        "tinggi": 16,
+        "seamless": true,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 2",
+        "catatan_referensi": "Lumut di celah bawah, warna #4A7C2F"
+      },
+      {
+        "id": "env_ruins_wall_03",
+        "nama": "Tile Bata Andesit Merah Varian 3 (Rusak/Retak)",
+        "file": "assets/environment/tilesets/final/env_ruins_wall_03.png",
+        "format": "PNG-32",
+        "lebar": 16,
+        "tinggi": 16,
+        "seamless": false,
+        "prioritas": "MEDIUM",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 2",
+        "catatan_referensi": "Sebagian bata hilang, celah retak tampak"
+      },
+      {
+        "id": "env_ruins_floor_01",
+        "nama": "Tile Lantai Bata + Rumput Overgrowth",
+        "file": "assets/environment/tilesets/final/env_ruins_floor_01.png",
+        "format": "PNG-32",
+        "lebar": 16,
+        "tinggi": 16,
+        "seamless": true,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 2",
+        "catatan_referensi": "Rumput #7AB648 di tepi atas, bata di bagian bawah"
+      },
+      {
+        "id": "env_candi_bentar",
+        "nama": "Candi Bentar Split Gate (Kiri + Kanan)",
+        "file_kiri": "assets/environment/props/final/env_candi_bentar_left.png",
+        "file_kanan": "assets/environment/props/final/env_candi_bentar_right.png",
+        "format": "PNG-32",
+        "lebar": 64,
+        "tinggi": 96,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 2",
+        "catatan_referensi": "Gerbang split simetris, puncak berundak tinggi. Ref: Candi Cetho/Sukuh. Kanan = flip horizontal kiri."
+      },
+      {
+        "id": "env_palmtree_tall",
+        "nama": "Pohon Kelapa Tinggi",
+        "file": "assets/environment/props/final/env_palmtree_tall.png",
+        "format": "PNG-32",
+        "lebar": 32,
+        "tinggi": 96,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 2",
+        "catatan_referensi": "Frond hijau gelap #2D5016+#4A7C2F, batang coklat beruas #8B4513"
+      },
+      {
+        "id": "env_palmtree_med",
+        "nama": "Pohon Kelapa Sedang",
+        "file": "assets/environment/props/final/env_palmtree_med.png",
+        "format": "PNG-32",
+        "lebar": 32,
+        "tinggi": 64,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 2",
+        "catatan_referensi": "Versi lebih pendek dari tall"
+      },
+      {
+        "id": "env_palmtree_short",
+        "nama": "Pohon Kelapa Pendek",
+        "file": "assets/environment/props/final/env_palmtree_short.png",
+        "format": "PNG-32",
+        "lebar": 32,
+        "tinggi": 48,
+        "prioritas": "MEDIUM",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 2",
+        "catatan_referensi": "Pohon muda / semak kelapa"
+      },
+      {
+        "id": "env_ladder_tile",
+        "nama": "Tile Tangga Kayu (Tileable Vertikal)",
+        "file": "assets/environment/tilesets/final/env_ladder_tile.png",
+        "format": "PNG-32",
+        "lebar": 16,
+        "tinggi": 16,
+        "seamless": true,
+        "seamless_axis": "vertical",
+        "prioritas": "MEDIUM",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 2",
+        "catatan_referensi": "Dua palang horizontal 2px, dua tiang vertikal 1px, warna #8B4513"
+      },
+      {
+        "id": "env_trap_spike",
+        "nama": "Ground Spike Trap (Idle + Active)",
+        "file_idle": "assets/environment/tilesets/final/env_trap_spike_idle.png",
+        "file_active": "assets/environment/tilesets/final/env_trap_spike_active.png",
+        "format": "PNG-32",
+        "lebar": 16,
+        "tinggi": 16,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 2",
+        "catatan_referensi": "Idle: spike rata lantai #7A6650. Active: spike muncul ke atas 8px, tip #F0EBD8"
+      },
+      {
+        "id": "env_relief_kala",
+        "nama": "Tile Dekorasi Relief Panel Batu Kala",
+        "file": "assets/environment/tilesets/final/env_ruins_relief_01.png",
+        "format": "PNG-32",
+        "lebar": 16,
+        "tinggi": 16,
+        "seamless": false,
+        "prioritas": "MEDIUM",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 2",
+        "catatan_referensi": "Wajah Kala: mata bulat, taring atas, TANPA rahang bawah. Ref: Candi Singosari."
+      },
+      {
+        "id": "env_bg_jungle_canopy",
+        "nama": "Background Jungle Canopy Layer Tile",
+        "file": "assets/environment/backgrounds/final/bg_jungle_near.png",
+        "format": "PNG-32",
+        "lebar": 320,
+        "tinggi": 120,
+        "seamless": true,
+        "seamless_axis": "horizontal",
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 2",
+        "catatan_referensi": "Siluet kanopi hutan tropis, warna #2D5016+#4A7C2F, alpha di atas"
+      },
+      {
+        "id": "env_bg_sky",
+        "nama": "Background Layer Langit",
+        "file": "assets/environment/backgrounds/final/bg_sky_layer.png",
+        "format": "PNG-32",
+        "lebar": 320,
+        "tinggi": 180,
+        "seamless": true,
+        "seamless_axis": "horizontal",
+        "prioritas": "MEDIUM",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 2",
+        "catatan_referensi": "Gradien langit senja (dithered): #2E6B9E atas → #E8623A bawah, siluet candi jauh"
+      },
+      {
+        "id": "env_torch_anim",
+        "nama": "Animasi Api Obor (3 frame)",
+        "file": "assets/vfx/final/vfx_torch_sheet.png",
+        "format": "PNG-32",
+        "lebar": 48,
+        "tinggi": 24,
+        "jumlah_frame": 3,
+        "prioritas": "MEDIUM",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 1",
+        "catatan_referensi": "Api menggoyang kiri-kanan, warna #C1440E → #F5C842 → #FDEEA0"
+      }
+    ],
+    "ui": [
+      {
+        "id": "ui_healthbar",
+        "nama": "HUD Health Bar (Kosong + Isi)",
+        "file_kosong": "assets/ui/hud/final/ui_healthbar_empty.png",
+        "file_isi": "assets/ui/hud/final/ui_healthbar_fill.png",
+        "format": "PNG-32",
+        "lebar": 96,
+        "tinggi": 12,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "UI Artist",
+        "catatan_referensi": "Frame bergaya ukiran batu #7A6650, isi bar merah #C1440E"
+      },
+      {
+        "id": "ui_icon_life",
+        "nama": "Ikon Nyawa (Keris Mini)",
+        "file": "assets/ui/hud/final/ui_icon_life.png",
+        "format": "PNG-32",
+        "lebar": 16,
+        "tinggi": 16,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "UI Artist",
+        "catatan_referensi": "Siluet keris luk emas #D4A017+#F5C842, bilah bergelombang"
+      },
+      {
+        "id": "ui_coin_counter",
+        "nama": "HUD Counter Koin Gobog",
+        "file": "assets/ui/hud/final/ui_coin_counter.png",
+        "format": "PNG-32",
+        "lebar": 48,
+        "tinggi": 16,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "UI Artist",
+        "catatan_referensi": "Ikon Gobog 12×12px + ruang angka 3 digit, warna emas"
+      },
+      {
+        "id": "ui_btn_play",
+        "nama": "Tombol Play/Start",
+        "file": "assets/ui/screens/final/ui_btn_play_normal.png",
+        "file_hover": "assets/ui/screens/final/ui_btn_play_hover.png",
+        "format": "PNG-32",
+        "lebar": 64,
+        "tinggi": 20,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "UI Artist",
+        "catatan_referensi": "Bingkai batu ukir, teks 'MULAI', hover: emas lebih terang"
+      },
+      {
+        "id": "ui_btn_pause",
+        "nama": "Tombol Pause/Resume",
+        "file": "assets/ui/screens/final/ui_btn_pause_normal.png",
+        "format": "PNG-32",
+        "lebar": 64,
+        "tinggi": 20,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "UI Artist"
+      },
+      {
+        "id": "ui_screen_mainmenu",
+        "nama": "Layar Menu Utama",
+        "file": "assets/ui/screens/final/ui_screen_mainmenu.png",
+        "format": "PNG-32",
+        "lebar": 320,
+        "tinggi": 180,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "UI Artist",
+        "catatan_referensi": "Latar siluet candi + hutan, judul game atas, tombol menu tengah"
+      },
+      {
+        "id": "ui_screen_gameover",
+        "nama": "Layar Game Over",
+        "file": "assets/ui/screens/final/ui_screen_gameover.png",
+        "format": "PNG-32",
+        "lebar": 320,
+        "tinggi": 180,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "UI Artist"
+      },
+      {
+        "id": "ui_screen_levelcomplete",
+        "nama": "Layar Level Complete",
+        "file": "assets/ui/screens/final/ui_screen_levelcomplete.png",
+        "format": "PNG-32",
+        "lebar": 320,
+        "tinggi": 180,
+        "prioritas": "MEDIUM",
+        "status": "belum_dibuat",
+        "pic": "UI Artist"
+      },
+      {
+        "id": "ui_screen_pause",
+        "nama": "Layar Pause Overlay",
+        "file": "assets/ui/screens/final/ui_screen_pause.png",
+        "format": "PNG-32",
+        "lebar": 320,
+        "tinggi": 180,
+        "prioritas": "MEDIUM",
+        "status": "belum_dibuat",
+        "pic": "UI Artist"
+      }
+    ],
+    "font": [
+      {
+        "id": "font_bitmap",
+        "nama": "Font Pixel Art Bitmap (8×8)",
+        "file": "assets/ui/fonts/font_majapahit_bitmap.png",
+        "format": "PNG-32",
+        "lebar": 128,
+        "tinggi": 48,
+        "glyph_lebar": 8,
+        "glyph_tinggi": 8,
+        "charset": "A-Z 0-9 !?.,:-/()%",
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "UI Artist",
+        "catatan_referensi": "Warna putih gading #F0EBD8 di atas transparan. Engine beri warna saat render."
+      },
+      {
+        "id": "font_ttf",
+        "nama": "Font TTF (Fallback)",
+        "file": "assets/ui/fonts/font_majapahit.ttf",
+        "format": "TTF",
+        "prioritas": "LOW",
+        "status": "belum_dibuat",
+        "pic": "UI Artist",
+        "catatan_referensi": "Opsional. Hanya jika bitmap font tidak mencukupi."
+      }
+    ],
+    "item": [
+      {
+        "id": "itm_gobog_sheet",
+        "nama": "Koin Gobog Emas (Static + 3 Frame Spin)",
+        "file": "assets/items/final/itm_gobog_sheet.png",
+        "format": "PNG-32",
+        "lebar": 64,
+        "tinggi": 16,
+        "jumlah_frame": 4,
+        "frame_labels": [
+          "static",
+          "spin_00",
+          "spin_01",
+          "spin_02"
+        ],
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 2",
+        "catatan_referensi": "Bulat berlubang tengah 4px, motif teratai 4 titik radial, #D4A017→#F5C842→#FDEEA0"
+      },
+      {
+        "id": "itm_maja_fruit",
+        "nama": "Buah Maja Power-Up (Static + Glow)",
+        "file_static": "assets/items/final/itm_maja_static.png",
+        "file_glow": "assets/items/final/itm_maja_glow.png",
+        "format": "PNG-32",
+        "lebar": 16,
+        "tinggi": 16,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 2",
+        "catatan_referensi": "Bola hijau #7AB648, glow ring #FDEEA0 1–2px di sekeliling"
+      },
+      {
+        "id": "itm_chest",
+        "nama": "Peti Kayu (Tertutup + Terbuka)",
+        "file_closed": "assets/items/final/itm_chest_closed.png",
+        "file_open": "assets/items/final/itm_chest_open.png",
+        "format": "PNG-32",
+        "lebar": 32,
+        "tinggi": 32,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 2",
+        "catatan_referensi": "Tutup: papan kayu #8B4513+#5C2E1A, pengunci emas #D4A017. Buka: cahaya #F5C842 dari dalam."
+      },
+      {
+        "id": "itm_banner_sheet",
+        "nama": "Bendera Majapahit (Diam + Kibas 2 Frame)",
+        "file": "assets/items/final/itm_banner_wave_sheet.png",
+        "format": "PNG-32",
+        "lebar": 48,
+        "tinggi": 32,
+        "jumlah_frame": 3,
+        "frame_labels": [
+          "idle",
+          "wave_00",
+          "wave_01"
+        ],
+        "prioritas": "MEDIUM",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 2",
+        "catatan_referensi": "Merah #C1440E atas, putih gading #F0EBD8 bawah, vertikal. Tiang #8B4513."
+      },
+      {
+        "id": "itm_scroll",
+        "nama": "Gulungan Misi/Peta (Dekorasi)",
+        "file": "assets/items/final/itm_scroll.png",
+        "format": "PNG-32",
+        "lebar": 32,
+        "tinggi": 24,
+        "prioritas": "LOW",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 2"
+      }
+    ],
+    "vfx": [
+      {
+        "id": "vfx_hit_sheet",
+        "nama": "VFX Hit/Slash Keris (3 Frame)",
+        "file": "assets/vfx/final/vfx_hit_sheet.png",
+        "format": "PNG-32",
+        "lebar": 96,
+        "tinggi": 32,
+        "jumlah_frame": 3,
+        "blend_mode": "additive",
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 1",
+        "catatan_referensi": "Kilatan putih-kuning, bukan darah realistis. 3 frame: flash, spark, fade."
+      },
+      {
+        "id": "vfx_dust_sheet",
+        "nama": "VFX Debu Lari + Landing (3 Frame)",
+        "file": "assets/vfx/final/vfx_dust_sheet.png",
+        "format": "PNG-32",
+        "lebar": 72,
+        "tinggi": 16,
+        "jumlah_frame": 3,
+        "prioritas": "MEDIUM",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 1"
+      },
+      {
+        "id": "vfx_coin_burst_sheet",
+        "nama": "VFX Coin Burst (4 Frame)",
+        "file": "assets/vfx/final/vfx_coin_burst_sheet.png",
+        "format": "PNG-32",
+        "lebar": 64,
+        "tinggi": 16,
+        "jumlah_frame": 4,
+        "prioritas": "MEDIUM",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 1"
+      },
+      {
+        "id": "vfx_glow_maja_sheet",
+        "nama": "VFX Glow Buah Maja (2 Frame Pulse)",
+        "file": "assets/vfx/final/vfx_glow_maja_sheet.png",
+        "format": "PNG-32",
+        "lebar": 48,
+        "tinggi": 24,
+        "jumlah_frame": 2,
+        "prioritas": "MEDIUM",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 1",
+        "catatan_referensi": "Pulsating glow hijau-kuning #7AB648→#FDEEA0"
+      },
+      {
+        "id": "vfx_torch_sheet",
+        "nama": "VFX Api Obor (3 Frame)",
+        "file": "assets/vfx/final/vfx_torch_sheet.png",
+        "format": "PNG-32",
+        "lebar": 48,
+        "tinggi": 24,
+        "jumlah_frame": 3,
+        "prioritas": "MEDIUM",
+        "status": "belum_dibuat",
+        "pic": "Pixel Artist 1"
+      }
+    ],
+    "audio": [
+      {
+        "id": "bgm_mainmenu",
+        "nama": "BGM Menu Utama",
+        "file": "assets/audio/bgm/bgm_mainmenu_01.ogg",
+        "format": "OGG",
+        "durasi_detik": 60,
+        "loop": true,
+        "channels": "stereo",
+        "sample_rate": 44100,
+        "ogg_quality": 6,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Sound Designer",
+        "catatan_referensi": "Gamelan chiptune/FM synth, tempo lambat-atmosferik. Instrumen: gender, saron, gong."
+      },
+      {
+        "id": "bgm_level01",
+        "nama": "BGM Level 1",
+        "file": "assets/audio/bgm/bgm_level01_01.ogg",
+        "format": "OGG",
+        "durasi_detik": 90,
+        "loop": true,
+        "channels": "stereo",
+        "sample_rate": 44100,
+        "ogg_quality": 6,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Sound Designer",
+        "catatan_referensi": "Gamelan chiptune energik, beat stabil untuk gameplay."
+      },
+      {
+        "id": "sfx_jump",
+        "nama": "SFX Lompat",
+        "file": "assets/audio/sfx/sfx_jump.wav",
+        "format": "WAV",
+        "durasi_detik": 0.3,
+        "channels": "mono",
+        "sample_rate": 44100,
+        "bit_depth": 16,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Sound Designer"
+      },
+      {
+        "id": "sfx_attack_keris",
+        "nama": "SFX Serangan Keris",
+        "file": "assets/audio/sfx/sfx_attack_keris.wav",
+        "format": "WAV",
+        "durasi_detik": 0.4,
+        "channels": "mono",
+        "sample_rate": 44100,
+        "bit_depth": 16,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Sound Designer"
+      },
+      {
+        "id": "sfx_coin_pickup",
+        "nama": "SFX Ambil Koin",
+        "file": "assets/audio/sfx/sfx_coin_pickup.wav",
+        "format": "WAV",
+        "durasi_detik": 0.3,
+        "channels": "mono",
+        "sample_rate": 44100,
+        "bit_depth": 16,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Sound Designer"
+      },
+      {
+        "id": "sfx_damage_hit",
+        "nama": "SFX Terkena Damage",
+        "file": "assets/audio/sfx/sfx_damage_hit.wav",
+        "format": "WAV",
+        "durasi_detik": 0.4,
+        "channels": "mono",
+        "sample_rate": 44100,
+        "bit_depth": 16,
+        "prioritas": "HIGH",
+        "status": "belum_dibuat",
+        "pic": "Sound Designer"
+      },
+      {
+        "id": "sfx_chest_open",
+        "nama": "SFX Buka Peti",
+        "file": "assets/audio/sfx/sfx_chest_open.wav",
+        "format": "WAV",
+        "durasi_detik": 0.8,
+        "channels": "mono",
+        "sample_rate": 44100,
+        "bit_depth": 16,
+        "prioritas": "MEDIUM",
+        "status": "belum_dibuat",
+        "pic": "Sound Designer"
+      },
+      {
+        "id": "sfx_spike_trap",
+        "nama": "SFX Spike Trap Aktif",
+        "file": "assets/audio/sfx/sfx_spike_trap.wav",
+        "format": "WAV",
+        "durasi_detik": 0.4,
+        "channels": "mono",
+        "sample_rate": 44100,
+        "bit_depth": 16,
+        "prioritas": "MEDIUM",
+        "status": "belum_dibuat",
+        "pic": "Sound Designer"
+      },
+      {
+        "id": "sfx_gameover",
+        "nama": "SFX Game Over Jingle",
+        "file": "assets/audio/sfx/sfx_gameover.wav",
+        "format": "WAV",
+        "durasi_detik": 2.5,
+        "channels": "mono",
+        "sample_rate": 44100,
+        "bit_depth": 16,
+        "prioritas": "MEDIUM",
+        "status": "belum_dibuat",
+        "pic": "Sound Designer"
+      },
+      {
+        "id": "sfx_levelcomplete",
+        "nama": "SFX Level Complete Jingle",
+        "file": "assets/audio/sfx/sfx_levelcomplete.wav",
+        "format": "WAV",
+        "durasi_detik": 2.0,
+        "channels": "mono",
+        "sample_rate": 44100,
+        "bit_depth": 16,
+        "prioritas": "MEDIUM",
+        "status": "belum_dibuat",
+        "pic": "Sound Designer"
+      },
+      {
+        "id": "sfx_ambient_jungle",
+        "nama": "Ambient Hutan Loop",
+        "file": "assets/audio/sfx/sfx_ambient_jungle.wav",
+        "format": "WAV",
+        "durasi_detik": 30,
+        "loop": true,
+        "channels": "mono",
+        "sample_rate": 44100,
+        "bit_depth": 16,
+        "prioritas": "LOW",
+        "status": "belum_dibuat",
+        "pic": "Sound Designer"
+      }
+    ]
+  },
+  "_statistik": {
+    "total_asset": 58,
+    "HIGH": 34,
+    "MEDIUM": 16,
+    "LOW": 8,
+    "total_file_png": 44,
+    "total_file_wav": 9,
+    "total_file_ogg": 2,
+    "total_file_ttf": 1,
+    "estimasi_ukuran_total_mb": "< 10 MB (uncompressed sprite ~2MB, audio ~7MB)"
+  }
+}

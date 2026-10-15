@@ -1,0 +1,150 @@
+{
+  "_komentar": "Palette resmi proyek Majapahit Platformer. 16 warna. JANGAN tambah warna baru tanpa persetujuan tim.",
+  "palette_name": "Majapahit 16-bit Official",
+  "version": "1.0.0",
+  "total_colors": 16,
+  "colors": [
+    {
+      "id": 0,
+      "name": "Hitam Tua",
+      "hex": "#2B1810",
+      "rgb": [43, 24, 16],
+      "penggunaan": ["outline semua sprite", "bayangan terdalam"],
+      "catatan": "Warna outline wajib. 1px di sekeliling semua sprite."
+    },
+    {
+      "id": 1,
+      "name": "Coklat Gelap",
+      "hex": "#5C2E1A",
+      "rgb": [92, 46, 26],
+      "penggunaan": ["badan kayu gelap", "shadow kulit karakter", "tangga kayu"],
+      "catatan": "Tone gelap untuk material kayu dan kulit."
+    },
+    {
+      "id": 2,
+      "name": "Coklat Kayu",
+      "hex": "#8B4513",
+      "rgb": [139, 69, 19],
+      "penggunaan": ["batang pohon", "tangga kayu mid-tone", "handle keris", "bingkai peti"],
+      "catatan": "Warna kayu utama."
+    },
+    {
+      "id": 3,
+      "name": "Merah Bata",
+      "hex": "#C1440E",
+      "rgb": [193, 68, 14],
+      "penggunaan": ["udeng karakter utama", "bata andesit shadow", "sash enemy soldier", "bendera merah"],
+      "catatan": "Warna ikonik Majapahit. Wajib di udeng karakter utama semua frame."
+    },
+    {
+      "id": 4,
+      "name": "Merah Terakota",
+      "hex": "#E8623A",
+      "rgb": [232, 98, 58],
+      "penggunaan": ["bata andesit mid-tone", "highlight udeng", "highlight tunik"],
+      "catatan": "Tone terang dari merah bata untuk highlight bata dan kain."
+    },
+    {
+      "id": 5,
+      "name": "Emas Tua",
+      "hex": "#D4A017",
+      "rgb": [212, 160, 23],
+      "penggunaan": ["tunik karakter", "frame UI", "ikon keris life", "detail koin shadow"],
+      "catatan": "Emas tone gelap. Digunakan sebagai base warna emas."
+    },
+    {
+      "id": 6,
+      "name": "Kuning Emas",
+      "hex": "#F5C842",
+      "rgb": [245, 200, 66],
+      "penggunaan": ["koin Gobog mid-tone", "highlight UI", "glow peti terbuka", "efek cahaya"],
+      "catatan": "Emas terang. Dominan pada koin Gobog."
+    },
+    {
+      "id": 7,
+      "name": "Krem Terang",
+      "hex": "#FDEEA0",
+      "rgb": [253, 238, 160],
+      "penggunaan": ["highlight koin tertinggi", "cahaya obor", "teks UI"],
+      "catatan": "Nilai paling terang dari keluarga emas/kuning."
+    },
+    {
+      "id": 8,
+      "name": "Hijau Gelap",
+      "hex": "#2D5016",
+      "rgb": [45, 80, 22],
+      "penggunaan": ["shadow daun pohon", "lumut bata shadow", "background canopy jauh"],
+      "catatan": "Tone gelap vegetasi tropis."
+    },
+    {
+      "id": 9,
+      "name": "Hijau Hutan",
+      "hex": "#4A7C2F",
+      "rgb": [74, 124, 47],
+      "penggunaan": ["daun pohon mid-tone", "lumut bata", "jarik batik aksen", "rumput"],
+      "catatan": "Warna vegetasi utama."
+    },
+    {
+      "id": 10,
+      "name": "Hijau Daun",
+      "hex": "#7AB648",
+      "rgb": [122, 182, 72],
+      "penggunaan": ["highlight daun", "buah Maja dominan", "rumput terang"],
+      "catatan": "Tone terang vegetasi. Dominan pada buah Maja power-up."
+    },
+    {
+      "id": 11,
+      "name": "Biru Indigo",
+      "hex": "#1A3A5C",
+      "rgb": [26, 58, 92],
+      "penggunaan": ["jarik batik shadow", "langit malam", "motif batik gelap"],
+      "catatan": "Warna indigo khas batik Jawa. Dominan di jarik karakter utama."
+    },
+    {
+      "id": 12,
+      "name": "Biru Langit",
+      "hex": "#2E6B9E",
+      "rgb": [46, 107, 158],
+      "penggunaan": ["langit siang", "jarik batik mid-tone", "air/sungai"],
+      "catatan": "Digunakan sebagai mid-tone langit dan jarik."
+    },
+    {
+      "id": 13,
+      "name": "Pasir Kulit",
+      "hex": "#C8A882",
+      "rgb": [200, 168, 130],
+      "penggunaan": ["kulit karakter (base)", "batu pasir terang", "lantai kuil"],
+      "catatan": "Warna kulit utama semua karakter. Hindari warna kulit lain."
+    },
+    {
+      "id": 14,
+      "name": "Putih Gading",
+      "hex": "#F0EBD8",
+      "rgb": [240, 235, 216],
+      "penggunaan": ["teks UI", "bendera putih", "highlight kulit", "motif batik terang"],
+      "catatan": "Bukan pure white. Gunakan ini, bukan #FFFFFF."
+    },
+    {
+      "id": 15,
+      "name": "Abu Batu",
+      "hex": "#7A6650",
+      "rgb": [122, 102, 80],
+      "penggunaan": ["zirah enemy", "batu relief shadow", "tangga kayu dark", "logam"],
+      "catatan": "Warna batu dan metal. Membedakan enemy dari hero."
+    }
+  ],
+  "dithering_pairs": [
+    { "dari": "#C1440E", "ke": "#E8623A", "tujuan": "transisi bata dinding luas" },
+    { "dari": "#4A7C2F", "ke": "#7AB648", "tujuan": "transisi dedaunan besar" },
+    { "dari": "#2B1810", "ke": "#5C2E1A", "tujuan": "area bayangan sangat gelap" },
+    { "dari": "#D4A017", "ke": "#F5C842", "tujuan": "permukaan emas/logam" }
+  ],
+  "forbidden_colors": [
+    "#FFFFFF",
+    "#000000",
+    "#FF0000",
+    "#00FF00",
+    "#0000FF"
+  ],
+  "_catatan_forbidden": "Pure black/white/primary dilarang. Selalu gunakan padanan dari palette resmi di atas."
+}

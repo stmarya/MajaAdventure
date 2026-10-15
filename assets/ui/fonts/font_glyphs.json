@@ -1,0 +1,317 @@
+{
+  "cell": [
+    8,
+    8
+  ],
+  "note": "Original5x7 uppercase pixel alphabet padded to8x8. Uppercase Latin, digits and listed punctuation only. No TTF/lowercase/accented glyphs.",
+  "glyphs": {
+    "A": {
+      "x": 0,
+      "y": 0,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "B": {
+      "x": 8,
+      "y": 0,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "C": {
+      "x": 16,
+      "y": 0,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "D": {
+      "x": 24,
+      "y": 0,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "E": {
+      "x": 32,
+      "y": 0,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "F": {
+      "x": 40,
+      "y": 0,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "G": {
+      "x": 48,
+      "y": 0,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "H": {
+      "x": 56,
+      "y": 0,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "I": {
+      "x": 64,
+      "y": 0,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "J": {
+      "x": 72,
+      "y": 0,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "K": {
+      "x": 80,
+      "y": 0,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "L": {
+      "x": 88,
+      "y": 0,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "M": {
+      "x": 96,
+      "y": 0,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "N": {
+      "x": 104,
+      "y": 0,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "O": {
+      "x": 112,
+      "y": 0,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "P": {
+      "x": 120,
+      "y": 0,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "Q": {
+      "x": 0,
+      "y": 8,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "R": {
+      "x": 8,
+      "y": 8,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "S": {
+      "x": 16,
+      "y": 8,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "T": {
+      "x": 24,
+      "y": 8,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "U": {
+      "x": 32,
+      "y": 8,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "V": {
+      "x": 40,
+      "y": 8,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "W": {
+      "x": 48,
+      "y": 8,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "X": {
+      "x": 56,
+      "y": 8,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "Y": {
+      "x": 64,
+      "y": 8,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "Z": {
+      "x": 72,
+      "y": 8,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "0": {
+      "x": 80,
+      "y": 8,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "1": {
+      "x": 88,
+      "y": 8,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "2": {
+      "x": 96,
+      "y": 8,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "3": {
+      "x": 104,
+      "y": 8,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "4": {
+      "x": 112,
+      "y": 8,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "5": {
+      "x": 120,
+      "y": 8,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "6": {
+      "x": 0,
+      "y": 16,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "7": {
+      "x": 8,
+      "y": 16,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "8": {
+      "x": 16,
+      "y": 16,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "9": {
+      "x": 24,
+      "y": 16,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "!": {
+      "x": 32,
+      "y": 16,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "?": {
+      "x": 40,
+      "y": 16,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    ":": {
+      "x": 48,
+      "y": 16,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    ".": {
+      "x": 56,
+      "y": 16,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "-": {
+      "x": 64,
+      "y": 16,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "/": {
+      "x": 72,
+      "y": 16,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    "+": {
+      "x": 80,
+      "y": 16,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    },
+    " ": {
+      "x": 88,
+      "y": 16,
+      "width": 8,
+      "height": 8,
+      "advance": 6
+    }
+  }
+}

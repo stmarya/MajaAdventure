@@ -1,0 +1,62 @@
+{
+  "_komentar": "Konfigurasi utama proyek Majapahit Platformer. Jangan ubah nilai di bawah tanpa konsultasi tim.",
+  "project": {
+    "name": "Majapahit Platformer",
+    "version": "0.1.0",
+    "engine": "HTML5 Canvas (vanilla JS)",
+    "target_platforms": ["web", "windows", "android"],
+    "language": "id"
+  },
+  "canvas": {
+    "native_width": 320,
+    "native_height": 180,
+    "aspect_ratio": "16:9",
+    "scale_mode": "integer",
+    "allowed_scales": [2, 3, 4],
+    "pixel_interpolation": "nearest-neighbor"
+  },
+  "sprites": {
+    "character_frame_size": { "width": 48, "height": 48 },
+    "enemy_soldier_frame_size": { "width": 48, "height": 52 },
+    "enemy_monkey_frame_size": { "width": 32, "height": 32 },
+    "item_small_frame_size": { "width": 16, "height": 16 },
+    "item_medium_frame_size": { "width": 32, "height": 32 },
+    "ui_icon_size": { "width": 16, "height": 16 },
+    "font_glyph_size": { "width": 8, "height": 8 }
+  },
+  "tileset": {
+    "tile_size": 16,
+    "grid_unit": 16,
+    "max_prop_size": { "width": 128, "height": 192 }
+  },
+  "audio": {
+    "bgm_format": "ogg",
+    "sfx_format": "wav",
+    "bgm_sample_rate": 44100,
+    "sfx_sample_rate": 44100,
+    "sfx_channels": "mono",
+    "bgm_channels": "stereo",
+    "bgm_ogg_quality": 6
+  },
+  "export": {
+    "sprite_format": "png",
+    "sprite_color_mode": "RGBA",
+    "sprite_bit_depth": 32,
+    "alpha_rule": "full_transparent_or_opaque",
+    "antialiasing": false,
+    "dithering_allowed": true
+  },
+  "naming_convention": {
+    "character_sheet":    "chr_[nama]_sheet.png",
+    "character_frame":    "chr_[nama]_[aksi]_[frame:02d].png",
+    "environment_tile":   "env_[tema]_[jenis]_[varian:02d].png",
+    "environment_prop":   "env_[tema]_[jenis].png",
+    "environment_bg":     "bg_[nama]_layer.png",
+    "ui_element":         "ui_[fungsi]_[state].png",
+    "item_sheet":         "itm_[nama]_sheet.png",
+    "item_frame":         "itm_[nama]_[state]_[frame:02d].png",
+    "audio_bgm":          "bgm_[scene]_[nomor:02d].ogg",
+    "audio_sfx":          "sfx_[aksi].wav",
+    "vfx_sheet":          "vfx_[nama]_sheet.png"
+  }
+}

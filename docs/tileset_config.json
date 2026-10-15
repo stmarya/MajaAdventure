@@ -1,0 +1,54 @@
+{
+  "_komentar": "Konfigurasi tileset dan definisi semua tile ID untuk proyek Majapahit Platformer.",
+  "config_version": "1.0.0",
+  "tile_size": 16,
+
+  "tilesets": [
+    {
+      "id": "ruins_bricks",
+      "nama": "Reruntuhan Bata Andesit Merah",
+      "file": "assets/environment/tilesets/final/env_ruins_wall_01.png",
+      "tile_lebar": 16,
+      "tile_tinggi": 16,
+      "kolom": 4,
+      "baris": 4,
+      "tiles": [
+        { "id": 1,  "nama": "bata_solid_bersih",       "x": 0, "y": 0,  "solid": true,  "surface": "stone", "deskripsi": "Bata andesit merah bersih" },
+        { "id": 2,  "nama": "bata_solid_lumut_ringan",  "x": 1, "y": 0,  "solid": true,  "surface": "stone", "deskripsi": "Bata dengan lumut ringan" },
+        { "id": 3,  "nama": "bata_solid_lumut_lebat",   "x": 2, "y": 0,  "solid": true,  "surface": "stone", "deskripsi": "Bata dengan lumut lebat" },
+        { "id": 4,  "nama": "bata_rusak",               "x": 3, "y": 0,  "solid": true,  "surface": "stone", "deskripsi": "Bata retak/rusak sebagian" },
+        { "id": 5,  "nama": "lantai_bata_rumput",       "x": 0, "y": 1,  "solid": true,  "surface": "grass", "platform": true, "deskripsi": "Lantai bata dengan rumput di atas" },
+        { "id": 6,  "nama": "lantai_bata_bersih",       "x": 1, "y": 1,  "solid": true,  "surface": "stone", "platform": true, "deskripsi": "Lantai bata tanpa rumput" },
+        { "id": 7,  "nama": "relief_kala",              "x": 2, "y": 1,  "solid": true,  "surface": "stone", "dekorasi": true, "deskripsi": "Panel relief wajah Kala" },
+        { "id": 8,  "nama": "bata_tepi_kiri",           "x": 3, "y": 1,  "solid": true,  "surface": "stone", "deskripsi": "Bata ujung kiri platform" },
+        { "id": 9,  "nama": "bata_tepi_kanan",          "x": 0, "y": 2,  "solid": true,  "surface": "stone", "deskripsi": "Bata ujung kanan platform" },
+        { "id": 10, "nama": "tangga_kayu",              "x": 1, "y": 2,  "solid": false, "climbable": true, "surface": "wood", "deskripsi": "Tangga kayu, bisa dipanjat" },
+        { "id": 11, "nama": "spike_idle",               "x": 2, "y": 2,  "solid": false, "hazard": true,   "hazard_aktif": false, "damage": 0,  "deskripsi": "Perangkap spike, tidak aktif" },
+        { "id": 12, "nama": "spike_aktif",              "x": 3, "y": 2,  "solid": false, "hazard": true,   "hazard_aktif": true,  "damage": 1,  "deskripsi": "Perangkap spike aktif, membunuh" },
+        { "id": 13, "nama": "tanah_kosong",             "x": 0, "y": 3,  "solid": false, "deskripsi": "Tile kosong / udara" },
+        { "id": 14, "nama": "one_way_platform",         "x": 1, "y": 3,  "solid": true,  "one_way": true,  "surface": "wood", "deskripsi": "Platform kayu 1 arah (bisa lompat dari bawah)" },
+        { "id": 15, "nama": "air_bata_dalam",           "x": 2, "y": 3,  "solid": true,  "surface": "stone", "deskripsi": "Bata pengisi dalam (tidak terlihat)" },
+        { "id": 16, "nama": "canopy_bg_tile",           "x": 3, "y": 3,  "solid": false, "layer": "background", "deskripsi": "Tile kanopi background" }
+      ]
+    }
+  ],
+
+  "tile_properties_default": {
+    "solid":        false,
+    "platform":     false,
+    "one_way":      false,
+    "climbable":    false,
+    "hazard":       false,
+    "hazard_aktif": false,
+    "damage":       0,
+    "dekorasi":     false,
+    "surface":      "stone",
+    "layer":        "main"
+  },
+
+  "surface_types": {
+    "stone": { "friction": 0.85, "deskripsi": "Batu, sedikit licin" },
+    "grass": { "friction": 1.0,  "deskripsi": "Rumput, grip normal" },
+    "wood":  { "friction": 0.9,  "deskripsi": "Kayu, sedikit di bawah normal" }
+  }
+}
