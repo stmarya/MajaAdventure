@@ -1,0 +1,40 @@
+{
+  "format": "zip+base64-chunks",
+  "packs": [
+    {
+      "name": "base-pack",
+      "destination": "assets/base-pack",
+      "zip_root": "majapahit-assets-terpisah",
+      "sha256": "709d7deb933843c1d7d59079e4e1cb1cb921443f65294d9783bd5a36cf8e0276",
+      "archive_bytes": 2453962,
+      "parts": [
+        ".asset-packs/base-pack.zip.b64.part001",
+        ".asset-packs/base-pack.zip.b64.part002",
+        ".asset-packs/base-pack.zip.b64.part003",
+        ".asset-packs/base-pack.zip.b64.part004",
+        ".asset-packs/base-pack.zip.b64.part005",
+        ".asset-packs/base-pack.zip.b64.part006"
+      ]
+    },
+    {
+      "name": "dunia-hidup-01",
+      "destination": "assets/expansions/dunia-hidup-01",
+      "zip_root": "dunia-hidup",
+      "sha256": "5dda568eb448bc359d8ed9c5e4e29245f0af38d893036d562ffef8d20942f30c",
+      "archive_bytes": 255540,
+      "parts": [
+        ".asset-packs/dunia-hidup-01.zip.b64.part001"
+      ]
+    },
+    {
+      "name": "lima-bagian-02",
+      "destination": "assets/expansions/lima-bagian-02",
+      "zip_root": "ekspansi-lima-bagian",
+      "sha256": "2bed8a846bac3eb5316d27cae1c693e2d8b61bacbc71e42433856fdf3ed33872",
+      "archive_bytes": 382749,
+      "parts": [
+        ".asset-packs/lima-bagian-02.zip.b64.part001"
+      ]
+    }
+  ]
+}
