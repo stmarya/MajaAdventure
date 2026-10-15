@@ -16,15 +16,22 @@ python3 tools/restore_assets.py
 
 Di Windows, gunakan `py tools/restore_assets.py` jika perintah `python3` tidak tersedia.
 Skrip memeriksa SHA-256 dan menolak menimpa folder yang sudah berisi file.
+Untuk mengambil hanya paket baru setelah `git pull`, jalankan:
+
+```sh
+python3 tools/restore_assets.py --pack ui-audio-03
+```
 
 | Paket | Folder setelah ekstraksi | PNG aset/frame | GIF preview |
 |---|---|---:|---:|
 | Base Pack | `assets/base-pack/` | 98 | 13 |
 | Dunia Hidup 01 | `assets/expansions/dunia-hidup-01/` | 64 | 16 |
 | Ekspansi 02 — Lima Bagian | `assets/expansions/lima-bagian-02/` | 80 | 16 |
-| **Total** | | **242** | **45** |
+| Paket03 — UI & audio draft | `assets/expansions/ui-audio-03/` | 48 | 0 |
+| **Total** | | **290** | **45** |
 
-Katalog PNG tidak termasuk hitungan aset/frame. Tiap paket menyertakan README
+Tambahan audio:2BGM OGG +8SFX WAV original sintetis, belum diuji dengar.
+Katalog dan preview layar PNG tidak termasuk hitungan aset/frame. Tiap paket menyertakan README
 serta manifest. PNG sudah dipisah per objek/gerakan; GIF hanya pratinjau animasi.
 Folder `assets/` merupakan hasil ekstraksi yang dapat dibuat ulang dari paket.
 
@@ -42,8 +49,14 @@ pivot dan penyesuaian skala/timing masih perlu implementasi dan pengujian.
 Beberapa rangkaian baru berupa pose/state, bukan set animasi karakter lengkap.
 Air dan terrain belum dijamin seamless.
 
+## Fokus saat ini: lengkapi aset dahulu
+
+Belum masuk pembuatan kode gameplay. Animasi hero/musuh tambahan serta layer parallax
+masih belum tersedia karena layanan generasi gambar gagal. Lihat checklist untuk status jujur tiap aset.
+
 ## Langkah berikutnya
 
+- [Checklist aset master](docs/CHECKLIST_ASET_MASTER.md)
 - [Persiapan vertical slice](docs/PERSIAPAN_VERTICAL_SLICE.md)
 - [Cakupan dan integrasi lima bagian](docs/INTEGRASI_LIMA_BAGIAN.md)
 

@@ -35,6 +35,18 @@
       "parts": [
         ".asset-packs/lima-bagian-02.zip.b64.part001"
       ]
+    },
+    {
+      "name": "ui-audio-03",
+      "destination": "assets/expansions/ui-audio-03",
+      "zip_root": "paket03-ui-audio",
+      "sha256": "17c3fb3fe41f7107608768f99582ebb17a5414f287342679fd4a70b0e0e7b7f9",
+      "archive_bytes": 1415277,
+      "parts": [
+        ".asset-packs/ui-audio-03.zip.b64.part001",
+        ".asset-packs/ui-audio-03.zip.b64.part002",
+        ".asset-packs/ui-audio-03.zip.b64.part003"
+      ]
     }
   ]
 }

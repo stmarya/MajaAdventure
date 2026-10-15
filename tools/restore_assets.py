@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 """Restore lossless PNG/GIF asset packs using only Python's standard library."""
 from pathlib import Path, PurePosixPath
-import base64,hashlib,io,json,zipfile
+import base64,hashlib,io,json,zipfile,argparse
 ROOT=Path(__file__).resolve().parents[1]
 
 def main():
     manifest=json.loads((ROOT/'.asset-packs/manifest.json').read_text())
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--pack', choices=[p['name'] for p in manifest['packs']], help='Restore only the selected pack')
+    args=parser.parse_args()
     for pack in manifest['packs']:
+        if args.pack and pack['name']!=args.pack: continue
         destination=ROOT/pack['destination']
         if destination.exists() and any(destination.iterdir()):
             raise SystemExit(f'Refusing to overwrite existing files: {destination}. Move the folder before restoring again.')
