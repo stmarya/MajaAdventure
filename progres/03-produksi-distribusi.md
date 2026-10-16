@@ -43,3 +43,8 @@ Lihat `hasil/tahap-3-*`. ZIP lokal dibuat dari working tree saat implementasi: s
 - Tidak ada deployment publik. Tim harus melengkapi bukti di `docs/release_approvals.json` secara sah sebelum build publik.
 
 SHA push aktual dicatat pada `push-log.json` setelah konfirmasi GitHub dalam commit finalisasi dokumentasi; tidak menggunakan hash buatan atau hash self-referential.
+
+
+## Konfirmasi pascapush
+
+Commit terkonfirmasi: `a7c89cd74b98136ae3f9b10f2e2e267ea4e91418`. Setelah fetch dan sinkronisasi clean working tree, build internal diulang dengan Pillow 11.3.0: BUILD_INFO menunjuk commit tersebut dan `dirty_worktree=false`; 13 pemeriksaan browser atas paket kembali lulus. Lihat `hasil/tahap-3-clean-commit-*`. Ini verifikasi lokal pascapush, bukan klaim CI remote lulus.
