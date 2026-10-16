@@ -75,7 +75,8 @@ export class Player {
    * @param {import("../engine/AudioManager.js").AudioManager} audio
    */
   update(dt, input, collision, audio) {
-    if (this._mati) return;
+    if (this._mati) { this.animCtrl?.update(dt); return; }
+    this._dropThrough = Math.max(0, (this._dropThrough ?? 0) - dt);
 
     this._updateIframes(dt);
     this._updateInput(dt, input, audio);
@@ -120,6 +121,10 @@ export class Player {
     this.vy = 0;
     this.hp = this.hpMaks;
     this.diTanah = false;
+    this.diTangga = false;
+    this._dropThrough = 0;
+    this._sedangSerang = false;
+    this._iframeTimer = 0;
     this._mati   = false;
     this._iframeSisa = 0;
     this.animCtrl?.mainkan("idle", true);
@@ -238,7 +243,7 @@ export class Player {
     if (input.baruDitekan("lompat") && this.diTanah) {
       if (input.aktif("jongkok")) {
         // Turun dari one-way platform: jongkok + lompat
-        this.y  += 4;
+        this._dropThrough = 0.2;
         this.vy  = 2;
         this.diTanah = false;
       } else {
@@ -275,7 +280,7 @@ export class Player {
       diTanah: this.diTanah,
     };
 
-    collision.gerakkan(hb);
+    collision.gerakkan(hb, this._dropThrough > 0);
 
     // Sinkronisasi kembali posisi dari hitbox yang sudah dikoreksi
     this.x       = hb.x - HITBOX_OFS_X;

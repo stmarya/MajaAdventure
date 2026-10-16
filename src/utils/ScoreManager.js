@@ -39,6 +39,7 @@ export class ScoreManager {
     this._musuhKalah = 0;
     this._waktuDetik = 0;
     this._aktif      = true;
+    this._selesai    = false;
   }
 
   /** Hentikan pencatat waktu (saat pause / gameover). */
@@ -76,6 +77,8 @@ export class ScoreManager {
    * @returns {number} Skor akhir
    */
   selesaikan(hpSisa) {
+    if (this._selesai) return this._skor;
+    this._selesai = true;
     this._aktif = false;
 
     // Bonus waktu: makin cepat = makin tinggi
@@ -132,7 +135,8 @@ export class ScoreManager {
   _muatHighscore() {
     try {
       const val = localStorage.getItem(KEY_HIGHSCORE);
-      return val ? parseInt(val, 10) : 0;
+      const parsed = Number(val);
+      return Number.isSafeInteger(parsed) && parsed >= 0 ? parsed : 0;
     } catch {
       return 0;
     }

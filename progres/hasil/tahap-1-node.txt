@@ -1,0 +1,27 @@
+✔ source sheets render all 18 fauna with correct dimensions, frame and facing (3.328125ms)
+✔ missing sheets warn once per type and retain placeholder rendering (5.842805ms)
+✔ animation advances and reinitialization replaces source sheets (0.823724ms)
+✔ landing snaps exactly to floor and stays stable (2.793866ms)
+✔ right and left walls stop at their actual edges (0.370731ms)
+✔ ceiling in row zero is a collision, not a falsy sentinel (0.187769ms)
+✔ one-way: land above, pass from below, and explicit drop-through (0.229252ms)
+✔ large displacement does not tunnel through a floor (0.227041ms)
+✔ left and right world boundaries are solid (0.254365ms)
+✔ death animation completes and reaches gameover (2.481987ms)
+✔ death takes precedence over reaching exit (0.812432ms)
+✔ checkpoint retry preserves run while full reset starts fresh (1.244393ms)
+✔ falling outside level reaches gameover even with invulnerability (1.446355ms)
+✔ score completion is idempotent (0.294885ms)
+✔ 30/60/120/144Hz rendering produces identical fixed-step movement (2.480408ms)
+✔ idle spawn does not oscillate vertically (12.75381ms)
+✔ level spike mutations do not leak into original level data (1.098399ms)
+✔ fixed clock clamps background catchup and discards accumulator on transition (0.404481ms)
+✔ exit is reachable from actual floor contact, not an embedded sprite (0.967381ms)
+ℹ tests 19
+ℹ suites 0
+ℹ pass 19
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 252.608469

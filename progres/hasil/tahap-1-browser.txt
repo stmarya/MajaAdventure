@@ -1,0 +1,1 @@
+PASS Chromium: boot/start/death/gameover/checkpoint retry/exit/menu/fresh replay; no pageerror. Endpoints injected, not a human start-to-finish playtest.

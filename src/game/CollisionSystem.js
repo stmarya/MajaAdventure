@@ -34,37 +34,32 @@ export class CollisionSystem {
    */
   gerakkan(entity, oneWayPassthrough = false) {
     const hasil = { kiriDinding: false, kananDinding: false, atap: false };
-
-    // ── Sumbu X ──────────────────────────────────────────────────────────────
-    entity.x += entity.vx;
-    const colX = this._cekTumbukan(entity, oneWayPassthrough);
-
-    if (colX.kiri) {
-      entity.x  = colX.kiri * KONFIG.UKURAN_TILE;
-      entity.vx = 0;
-      hasil.kiriDinding = true;
-    } else if (colX.kanan) {
-      entity.x  = (colX.kanan - 1) * KONFIG.UKURAN_TILE - entity.lebar;
-      entity.vx = 0;
-      hasil.kananDinding = true;
-    }
-
-    // ── Sumbu Y ──────────────────────────────────────────────────────────────
-    const sebelumnyaDiTanah = entity.diTanah;
+    // Small substeps prevent tunnelling even for fast test/knockback movement.
+    const steps = Math.max(1, Math.ceil(Math.max(Math.abs(entity.vx), Math.abs(entity.vy)) / 8));
+    const dx = entity.vx / steps, dy = entity.vy / steps;
     entity.diTanah = false;
-    entity.y += entity.vy;
-    const colY = this._cekTumbukan(entity, oneWayPassthrough);
-
-    if (colY.atas) {
-      entity.y  = (colY.atas + 1) * KONFIG.UKURAN_TILE;
-      entity.vy = 0;
-      hasil.atap = true;
-    } else if (colY.bawah) {
-      entity.y      = (colY.bawah - 1) * KONFIG.UKURAN_TILE - entity.tinggi;
-      entity.vy     = 0;
-      entity.diTanah = true;
+    for (let i = 0; i < steps; i++) {
+      if (entity.vx !== 0) {
+        entity.x += dx;
+        for (const tile of this._overlaps(entity)) {
+          if (!tile.prop.solid || tile.prop.one_way) continue;
+          if (dx > 0) { entity.x = Math.min(entity.x, tile.x * KONFIG.UKURAN_TILE - entity.lebar); hasil.kananDinding = true; }
+          else { entity.x = Math.max(entity.x, (tile.x + 1) * KONFIG.UKURAN_TILE); hasil.kiriDinding = true; }
+          entity.vx = 0;
+        }
+      }
+      const oldBottom = entity.y + entity.tinggi;
+      if (entity.vy !== 0) {
+        entity.y += dy;
+        for (const tile of this._overlaps(entity)) {
+          if (!tile.prop.solid) continue;
+          if (tile.prop.one_way && (oneWayPassthrough || dy <= 0 || oldBottom > tile.y * KONFIG.UKURAN_TILE + 0.01)) continue;
+          if (dy > 0) { entity.y = Math.min(entity.y, tile.y * KONFIG.UKURAN_TILE - entity.tinggi); entity.diTanah = true; }
+          else { entity.y = Math.max(entity.y, (tile.y + 1) * KONFIG.UKURAN_TILE); hasil.atap = true; }
+          entity.vy = 0;
+        }
+      }
     }
-
     return hasil;
   }
 
@@ -110,96 +105,16 @@ export class CollisionSystem {
     return false;
   }
 
-  // ─── Internal ──────────────────────────────────────────────────────────────
-
-  /**
-   * Periksa tumbukan entity (setelah posisi diubah).
-   * Mengembalikan tile index yang menyebabkan tumbukan, atau null.
-   *
-   * @param {object} entity
-   * @param {boolean} oneWayPassthrough
-   * @returns {{kiri:number|null, kanan:number|null, atas:number|null, bawah:number|null}}
-   */
-  _cekTumbukan(entity, oneWayPassthrough) {
-    const hasil = { kiri: null, kanan: null, atas: null, bawah: null };
-    const ukuran = KONFIG.UKURAN_TILE;
-    const data   = this._level.tileData;
-    const lebar  = this._level.lebarTiles;
-
-    // Batas tile yang dicakup hitbox
-    const tileX0 = Math.floor(entity.x             / ukuran);
-    const tileX1 = Math.floor((entity.x + entity.lebar  - 1) / ukuran);
-    const tileY0 = Math.floor(entity.y             / ukuran);
-    const tileY1 = Math.floor((entity.y + entity.tinggi - 1) / ukuran);
-
-    // ── Kiri ────────────────────────────────────────────────────────────────
-    for (let ty = tileY0; ty <= tileY1; ty++) {
-      if (this._adalahSolidUntuk(data, lebar, tileX0, ty, oneWayPassthrough, entity, ty === tileY1)) {
-        hasil.kiri = tileX0 + 1;
-        break;
-      }
+  *_overlaps(entity) {
+    const size = KONFIG.UKURAN_TILE;
+    const left = Math.floor(entity.x / size), right = Math.floor((entity.x + entity.lebar - 0.001) / size);
+    const top = Math.floor(entity.y / size), bottom = Math.floor((entity.y + entity.tinggi - 0.001) / size);
+    for (let y = top; y <= bottom; y++) for (let x = left; x <= right; x++) {
+      let prop;
+      if (x < 0 || x >= this._level.lebarTiles || y < 0) prop = { solid: true };
+      else if (y >= this._level.tinggiTiles) prop = { solid: false };
+      else prop = this._tileMapper.dapatPropertiTile(this._level.tileData[y * this._level.lebarTiles + x] ?? 0);
+      yield { x, y, prop };
     }
-
-    // ── Kanan ───────────────────────────────────────────────────────────────
-    for (let ty = tileY0; ty <= tileY1; ty++) {
-      if (this._adalahSolidUntuk(data, lebar, tileX1, ty, oneWayPassthrough, entity, ty === tileY1)) {
-        hasil.kanan = tileX1;
-        break;
-      }
-    }
-
-    // ── Atas ────────────────────────────────────────────────────────────────
-    for (let tx = tileX0; tx <= tileX1; tx++) {
-      if (this._adalahSolidUntuk(data, lebar, tx, tileY0, oneWayPassthrough, entity, false)) {
-        hasil.atas = tileY0;
-        break;
-      }
-    }
-
-    // ── Bawah ───────────────────────────────────────────────────────────────
-    for (let tx = tileX0; tx <= tileX1; tx++) {
-      if (this._adalahSolidUntuk(data, lebar, tx, tileY1, oneWayPassthrough, entity, true)) {
-        hasil.bawah = tileY1;
-        break;
-      }
-    }
-
-    return hasil;
-  }
-
-  /**
-   * Apakah tile di (tileX, tileY) solid untuk entity ini?
-   * Memperhitungkan one_way platform dan mode passthrough.
-   *
-   * @param {number[]} data
-   * @param {number} lebarTiles
-   * @param {number} tileX
-   * @param {number} tileY
-   * @param {boolean} oneWayPassthrough
-   * @param {object} entity
-   * @param {boolean} adalahBawah - true jika sedang memeriksa sisi bawah entity
-   * @returns {boolean}
-   */
-  _adalahSolidUntuk(data, lebarTiles, tileX, tileY, oneWayPassthrough, entity, adalahBawah) {
-    if (tileX < 0 || tileY < 0) return true; // batas luar level = solid
-    if (tileX >= lebarTiles || tileY >= this._level.tinggiTiles) return false;
-
-    const idx    = tileY * lebarTiles + tileX;
-    const tileId = data[idx] ?? 0;
-    if (tileId === 0) return false;
-
-    const prop = this._tileMapper.dapatPropertiTile(tileId);
-    if (!prop.solid) return false;
-
-    // One-way platform: hanya solid dari atas
-    if (prop.one_way) {
-      if (oneWayPassthrough) return false;
-      if (!adalahBawah)      return false; // tidak menghalangi dari sisi lain
-      // Solid hanya jika kaki entity di atas tepi platform
-      const platformTopPx = tileY * KONFIG.UKURAN_TILE;
-      return (entity.y + entity.tinggi - entity.vy) <= platformTopPx + 2;
-    }
-
-    return true;
   }
 }

@@ -1,0 +1,8 @@
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.255s
+
+OK
+=== VERIFIKASI IMPORT ===
+Semua import terverifikasi OK.
+Total file JS dianalisa: 19

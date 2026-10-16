@@ -92,6 +92,7 @@ export class GameManager {
 
     // Mulai skor baru
     this.skor.mulai();
+    this._terminal = null;
   }
 
   /**
@@ -105,6 +106,18 @@ export class GameManager {
     this.inisialisasi(levelJson, animConfig, tileMapper);
   }
 
+  /** Continue the same run at the last checkpoint; collected items/kills stay collected. */
+  respawnCheckpoint() {
+    const point = this._aktifCheckpoint ?? this.level.spawnPx;
+    this.player.respawn(point.x, point.y);
+    this.player._iframeSisa = 1000;
+    this._terminal = null;
+    this.vfx.bersihkan();
+    this._pendingDust = this._pendingHit = this._pendingCoinBurst = null;
+    this.skor.lanjut();
+    return point;
+  }
+
   // ─── Update ────────────────────────────────────────────────────────────────
 
   /**
@@ -116,6 +129,7 @@ export class GameManager {
    */
   update(dt, input, audio) {
     if (!this.player || !this.level || !this.collision) return null;
+    if (this._terminal) return this._terminal;
 
     // Update level (spike timer)
     this.level.update(dt);
@@ -134,6 +148,19 @@ export class GameManager {
 
     // Update player
     this.player.update(dt, input, this.collision, audio);
+    // Kill plane ignores damage invulnerability: an out-of-world player must recover.
+    if (!this.player.mati && this.player.y > this.level.tinggiPx + KONFIG.FRAME_TINGGI) {
+      this.player._iframeSisa = 0;
+      this.player.terimaKerusakan(this.player.hpMaks, audio);
+    }
+    if (this.player.mati) {
+      if (!this.player.animCtrl || this.player.animCtrl.sudahSelesai) {
+        this._terminal = "gameover";
+        this.skor.jeda();
+        return this._terminal;
+      }
+      return null;
+    }
 
     // Deteksi landing → spawn dust VFX (hanya set saat baru mendarat)
     if (!diTanahSebelum && this.player.diTanah) {
@@ -184,7 +211,7 @@ export class GameManager {
       enemy.update(dt, playerState, this.collision);
 
       // Enemy menyerang player
-      if (!this.player.mati && !this.player.diInvincible) {
+      if (!enemy.mati && !this.player.mati && !this.player.diInvincible) {
         const mengenai = enemy.cekTumbukanPlayer(
           this.player.hitboxX, this.player.hitboxY,
           this.player.lebar,   this.player.tinggi
@@ -227,7 +254,10 @@ export class GameManager {
     this._updateItem(dt, audio);
 
     // Cek level exit
-    if (this._cekExit()) return "levelcomplete";
+    if (!this.player.mati && this._cekExit()) {
+      this._terminal = "levelcomplete";
+      return this._terminal;
+    }
 
     // Cek game over
     if (this.player.mati && this.player.animCtrl?.sudahSelesai) {
@@ -510,7 +540,7 @@ export class GameManager {
     for (const exit of exits) {
       const ex = exit.tile_x * KONFIG.UKURAN_TILE;
       const ey = exit.tile_y * KONFIG.UKURAN_TILE;
-      const dist = Math.hypot(this.player.x - ex, this.player.y - ey);
+      const dist = Math.hypot(this.player.pusat.x - (ex + 8), this.player.pusat.y - (ey + 8));
       if (dist < KONFIG.UKURAN_TILE * 2) return true;
     }
     return false;

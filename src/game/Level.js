@@ -44,7 +44,7 @@ export class Level {
     this.tinggiTiles = dim.tinggi_tiles ?? 20;
 
     // Ambil layer tile utama
-    this.layers  = levelJson.layer_tile ?? [];
+    this.layers  = structuredClone(levelJson.layer_tile ?? []);
     const mainLayer = this.layers.find(l => l.id === "layer_main");
     this.tileData   = mainLayer?.data ?? [];
 

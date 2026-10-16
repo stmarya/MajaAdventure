@@ -12,6 +12,7 @@
  *   3. Jalankan game loop
  */
 
+import { FixedStepClock } from "./FixedStepClock.js";
 import { KONFIG }          from "./config.js";
 import { AssetLoader }     from "./AssetLoader.js";
 import { Renderer }        from "./Renderer.js";
@@ -224,6 +225,7 @@ function renderPlaceholderLantai() {
 // ─── Game Loop ─────────────────────────────────────────────────────────────────
 
 let waktuSebelumnya = -1;
+const simClock = new FixedStepClock(KONFIG.FPS_TARGET);
 
 function loop(timestamp) {
   requestAnimationFrame(loop);
@@ -232,6 +234,7 @@ function loop(timestamp) {
   waktuSebelumnya = timestamp;
   dt = Math.min(dt, KONFIG.DT_MAX);
 
+  let inputConsumed = stateGame !== "bermain";
   switch (stateGame) {
 
     case "loading":
@@ -251,6 +254,12 @@ function loop(timestamp) {
           "TEKAN Z UNTUK MULAI",  KONFIG.CANVAS_LEBAR / 2 - 76, KONFIG.CANVAS_TINGGI / 2 + 10);
       }
       if (input.baruDitekan("serang") || input.baruDitekan("konfirmasi")) {
+        gameMgr.reset(levelData, animConfig, tileMapper);
+        const spawn = gameMgr.level.spawnPx;
+        kamera?.teleport(spawn.x, spawn.y);
+        fauna?.inisialisasi(loader);
+        simClock.reset();
+        _statsCache = null;
         audio.putarBGM("bgm_level01");
         stateGame = "bermain";
       }
@@ -259,19 +268,18 @@ function loop(timestamp) {
 
     case "bermain": {
       // Update semua logika game
-      const transisi = gameMgr.update(dt, input, audio);
+      const pauseRequested = input.baruDitekan("pause");
+      let transisi = null;
+      simClock.advance(dt, (step) => {
+        transisi = gameMgr.update(step, input, audio);
+        fauna?.update(step);
+        const player = gameMgr.player;
+        if (kamera && player) kamera.update(player.pusat.x, player.pusat.y);
+        input.akhirFrame();
+        inputConsumed = true;
+        return !transisi;
+      });
 
-      // Update fauna latar
-      fauna?.update(dt);
-
-      // Update kamera mengikuti pusat player
-      const player = gameMgr.player;
-      if (kamera && player) {
-        kamera.update(
-          player.x + KONFIG.FRAME_LEBAR  / 2,
-          player.y + KONFIG.FRAME_TINGGI / 2
-        );
-      }
 
       // Render — guard kamera dan tileMapper tidak null (seharusnya tidak terjadi tapi aman)
       renderer.bersihkan();
@@ -298,7 +306,9 @@ function loop(timestamp) {
       }
 
       // Pause
-      if (input.baruDitekan("pause")) {
+      if (pauseRequested) {
+        inputConsumed = true;
+        simClock.reset();
         audio.pauseBGM();
         stateGame = "pause";
       }
@@ -360,8 +370,8 @@ function loop(timestamp) {
       renderer.renderTeks(loader.ambilGambar("font_bitmap"),
         "TEKAN Z COBA LAGI", KONFIG.CANVAS_LEBAR / 2 - 68, KONFIG.CANVAS_TINGGI / 2 + 44);
       if (input.baruDitekan("serang") || input.baruDitekan("konfirmasi")) {
-        gameMgr.reset(levelData, animConfig, tileMapper);
-        const spawn = gameMgr.level.spawnPx;
+        const spawn = gameMgr.respawnCheckpoint();
+        simClock.reset();
         kamera?.teleport(spawn.x, spawn.y);
         // Reinisialisasi fauna agar posisi acak ulang
         fauna?.inisialisasi(loader);
@@ -396,7 +406,7 @@ function loop(timestamp) {
     }
   }
 
-  input.akhirFrame();
+  if (inputConsumed) input.akhirFrame();
 }
 
 // ─── Helper Render ────────────────────────────────────────────────────────────
