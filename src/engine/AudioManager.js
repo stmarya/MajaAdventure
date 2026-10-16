@@ -22,6 +22,15 @@ export class AudioManager {
     this._bgmAktif  = null;
     this._bgmEl     = null;
     this._dibisukan = false;
+    this._sfxAktif = new Set();
+    try {
+      const s = JSON.parse(localStorage.getItem("maja_audio") ?? "null");
+      if (s) {
+        if (Number.isFinite(s.bgm)) this._volumeBGM = Math.max(0, Math.min(1, s.bgm));
+        if (Number.isFinite(s.sfx)) this._volumeSFX = Math.max(0, Math.min(1, s.sfx));
+        this._dibisukan = s.mute === true;
+      }
+    } catch { /* Storage is optional. */ }
   }
 
   // ─── BGM ──────────────────────────────────────────────────────────────────
@@ -58,7 +67,8 @@ export class AudioManager {
     if (this._bgmEl) {
       this._bgmEl.pause();
       this._bgmEl.currentTime = 0;
-      this._bgmEl.src = ""; // bebaskan resource
+      this._bgmEl.removeAttribute("src");
+      this._bgmEl.load();
       this._bgmEl = null;
     }
     this._bgmAktif = null;
@@ -81,37 +91,51 @@ export class AudioManager {
    * @param {string} id
    */
   putarSFX(id) {
-    if (this._dibisukan) return;
+    if (this._dibisukan || this._sfxAktif.size >= 16) return;
     const sumber = this._loader.ambilAudio(id);
     if (!sumber) return;
 
     const clone    = new Audio(sumber.src);
-    clone.volume   = this._volumeSFX;
-    clone.play().catch(() => {});
-    // Auto-cleanup setelah selesai untuk mencegah memory leak
-    clone.addEventListener("ended", () => { clone.src = ""; }, { once: true });
+    clone.volume = this._volumeSFX;
+    this._sfxAktif.add(clone);
+    const cleanup = () => { this._sfxAktif.delete(clone); clone.removeAttribute("src"); };
+    clone.addEventListener("ended", cleanup, { once:true });
+    clone.addEventListener("error", cleanup, { once:true });
+    clone.play().catch(cleanup);
   }
 
   // ─── Volume & Mute ────────────────────────────────────────────────────────
 
   /** @param {number} vol - 0.0–1.0 */
   setVolumeBGM(vol) {
+    if (!Number.isFinite(vol)) return;
     this._volumeBGM = Math.max(0, Math.min(1, vol));
+    this._simpan();
     if (this._bgmEl) this._bgmEl.volume = this._dibisukan ? 0 : this._volumeBGM;
   }
 
   /** @param {number} vol - 0.0–1.0 */
   setVolumeSFX(vol) {
+    if (!Number.isFinite(vol)) return;
     this._volumeSFX = Math.max(0, Math.min(1, vol));
+    for (const sound of this._sfxAktif) sound.volume = this._dibisukan ? 0 : this._volumeSFX;
+    this._simpan();
   }
 
   /** Toggle bisu/tidak bisu semua audio. */
   toggleBisu() {
     this._dibisukan = !this._dibisukan;
+    for (const sound of this._sfxAktif) sound.volume = this._dibisukan ? 0 : this._volumeSFX;
+    this._simpan();
     if (this._bgmEl) {
       this._bgmEl.volume = this._dibisukan ? 0 : this._volumeBGM;
     }
   }
 
+  _simpan() {
+    try { localStorage.setItem("maja_audio", JSON.stringify({ bgm:this._volumeBGM, sfx:this._volumeSFX, mute:this._dibisukan })); } catch { /* optional */ }
+  }
+  get volumeBGM() { return this._volumeBGM; }
+  get volumeSFX() { return this._volumeSFX; }
   get dibisukan() { return this._dibisukan; }
 }

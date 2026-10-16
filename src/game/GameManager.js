@@ -199,13 +199,12 @@ export class GameManager {
       if (hbSerangan) {
         const sxOfset = this.player.menghadapKanan
           ? hbSerangan.x
-          : -(hbSerangan.x + hbSerangan.lebar);
+          : KONFIG.FRAME_LEBAR - hbSerangan.x - hbSerangan.lebar;
         sxSerangan = this.player.x + sxOfset;
         sySerangan = this.player.y + hbSerangan.y;
       }
     }
 
-    let sfxSeranganDiputar = false; // cegah double SFX satu frame
     for (const enemy of this.enemies) {
       if (!enemy.aktif) continue;
       enemy.update(dt, playerState, this.collision);
@@ -231,12 +230,9 @@ export class GameManager {
         );
         if (kenaEnemy) {
           const sudahMati = enemy.mati;
+          const hpSebelum = enemy.hp;
           enemy.terimaKerusakan(1);
-          // SFX attack hanya 1x per frame meskipun kena beberapa enemy
-          if (!sfxSeranganDiputar) {
-            audio.putarSFX("sfx_attack_keris");
-            sfxSeranganDiputar = true;
-          }
+          if (enemy.hp === hpSebelum) continue;
           // VFX hit — simpan posisi enemy terakhir yang kena
           this._pendingHit = {
             x: enemy.hitboxX + enemy.lebar / 2,
@@ -365,7 +361,7 @@ export class GameManager {
 
     // ── Kanan atas: counter koin dengan ikon (y=4, hindari audio toggle 24+4=28px dari kanan) ─
     // Audio toggle: KONFIG.CANVAS_LEBAR - 28px. Kita tempatkan koin mulai x = KONFIG.CANVAS_LEBAR - 78
-    const coinX = KONFIG.CANVAS_LEBAR - 80;
+    const coinX = KONFIG.CANVAS_LEBAR - 92;
     const ikonKoin = loader.ambilGambar("ui_icon_coin");
     if (ikonKoin) {
       renderer.ctx.drawImage(ikonKoin, coinX, 4, 12, 12);

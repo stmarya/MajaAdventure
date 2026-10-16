@@ -19,6 +19,7 @@ export class Renderer {
   constructor(canvas) {
     this.canvas = canvas;
     this.ctx    = canvas.getContext("2d");
+    this.fontGlyphs = null;
 
     // Terapkan skala awal
     this._skala = KONFIG.SKALA_DEFAULT;
@@ -139,9 +140,10 @@ export class Renderer {
     let xPos = x;
     for (const karakter of teks.toUpperCase()) {
       const idx = CHARSET.indexOf(karakter);
-      if (idx >= 0) {
-        const srcX = (idx % KOLOM) * GLYPH_L;
-        const srcY = Math.floor(idx / KOLOM) * GLYPH_T;
+      if (idx >= 0 || this.fontGlyphs) {
+        const glyph = this.fontGlyphs?.[karakter] ?? this.fontGlyphs?.["?"];
+        const srcX = glyph?.x ?? (idx % KOLOM) * GLYPH_L;
+        const srcY = glyph?.y ?? Math.floor(idx / KOLOM) * GLYPH_T;
         this.ctx.drawImage(fontSheet, srcX, srcY, GLYPH_L, GLYPH_T, xPos, y, GLYPH_L, GLYPH_T);
       }
       xPos += GLYPH_L + spasi;

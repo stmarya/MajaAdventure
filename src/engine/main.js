@@ -33,12 +33,12 @@ const audio    = new AudioManager(loader);
 const gameMgr  = new GameManager();
 let   fauna    = /** @type {FaunaSystem|null} */ (null);
 
-// Tekan D untuk toggle debug hitbox (hanya saat bermain)
+// Debug explicitly opt-in via ?debug=1; F3 never conflicts with movement.
 let debugMode = false;
 window.addEventListener("keydown", (e) => {
-  if (e.code === "KeyD") debugMode = !debugMode;
-  // M = toggle mute audio
-  if (e.code === "KeyM") audio.toggleBisu();
+  if (/^(INPUT|TEXTAREA|SELECT|BUTTON)$/.test(e.target?.tagName ?? "") || e.repeat) return;
+  if (e.code === "F3" && new URLSearchParams(location.search).get("debug") === "1") { e.preventDefault(); debugMode = !debugMode; }
+  if (e.code === "KeyM") { audio.toggleBisu(); syncUI(true); }
 });
 
 window.addEventListener("resize", () => renderer.terapkanAutoSkala());
@@ -141,20 +141,24 @@ let tileMapper = /** @type {TilemapRenderer|null} */ (null);
 
 async function muatKonfigurasi() {
   try {
-    const [rA, rL, rT] = await Promise.all([
+    const [rA, rL, rT, rF] = await Promise.all([
       fetch("docs/animation_config.json"),
       fetch("levels/level_01.json"),
       fetch("docs/tileset_config.json"),
+      fetch("assets/ui/fonts/font_glyphs.json"),
     ]);
     if (!rA.ok) throw new Error(`animation_config: ${rA.status}`);
     if (!rL.ok) throw new Error(`level_01: ${rL.status}`);
     if (!rT.ok) throw new Error(`tileset_config: ${rT.status}`);
+    if (!rF.ok) throw new Error(`font_glyphs: ${rF.status}`);
 
     animConfig = await rA.json();
     levelData  = await rL.json();
     tilesetCfg = await rT.json();
+    renderer.fontGlyphs = (await rF.json()).glyphs;
   } catch (e) {
     console.error("[main] Gagal muat konfigurasi:", e);
+    throw e;
   }
 }
 
@@ -254,14 +258,7 @@ function loop(timestamp) {
           "TEKAN Z UNTUK MULAI",  KONFIG.CANVAS_LEBAR / 2 - 76, KONFIG.CANVAS_TINGGI / 2 + 10);
       }
       if (input.baruDitekan("serang") || input.baruDitekan("konfirmasi")) {
-        gameMgr.reset(levelData, animConfig, tileMapper);
-        const spawn = gameMgr.level.spawnPx;
-        kamera?.teleport(spawn.x, spawn.y);
-        fauna?.inisialisasi(loader);
-        simClock.reset();
-        _statsCache = null;
-        audio.putarBGM("bgm_level01");
-        stateGame = "bermain";
+        startRun();
       }
       break;
     }
@@ -348,8 +345,7 @@ function loop(timestamp) {
       // Tampilkan tombol audio di pause screen juga
       _renderAudioToggle(renderer, loader, audio);
       if (input.baruDitekan("pause")) {
-        audio.resumeBGM();
-        stateGame = "bermain";
+        resumeGame();
       }
       break;
     }
@@ -370,14 +366,7 @@ function loop(timestamp) {
       renderer.renderTeks(loader.ambilGambar("font_bitmap"),
         "TEKAN Z COBA LAGI", KONFIG.CANVAS_LEBAR / 2 - 68, KONFIG.CANVAS_TINGGI / 2 + 44);
       if (input.baruDitekan("serang") || input.baruDitekan("konfirmasi")) {
-        const spawn = gameMgr.respawnCheckpoint();
-        simClock.reset();
-        kamera?.teleport(spawn.x, spawn.y);
-        // Reinisialisasi fauna agar posisi acak ulang
-        fauna?.inisialisasi(loader);
-        audio.putarBGM("bgm_level01");
-        _statsCache = null;
-        stateGame = "bermain";
+        retryCheckpoint();
       }
       break;
     }
@@ -406,6 +395,7 @@ function loop(timestamp) {
     }
   }
 
+  syncUI();
   if (inputConsumed) input.akhirFrame();
 }
 
@@ -469,7 +459,7 @@ async function bootstrap() {
   renderer.renderLoading(0);
 
   loader.onProgress = (persen, nama) => {
-    if (elBarIsi)   elBarIsi.style.width = `${persen}%`;
+    if (elBarIsi) { elBarIsi.style.width = `${persen}%`; elBarIsi.parentElement.setAttribute("aria-valuenow", String(persen)); }
     if (elTeksLoad) elTeksLoad.textContent = `MEMUAT: ${nama} (${persen}%)`;
     renderer.renderLoading(persen);
   };
@@ -479,8 +469,75 @@ async function bootstrap() {
   if (elBarIsi)   elBarIsi.parentElement.style.display = "none";
   if (elTeksLoad) elTeksLoad.style.display = "none";
 
+  const missing = DAFTAR_ASSET.filter(a => a.tipe === "gambar" && !loader.ambilGambar(a.id));
+  if (missing.length) throw new Error(`Aset gambar gagal dimuat: ${missing.map(a=>a.id).join(", ")}`);
   inisialisasiBermain();
+  syncUI(true);
   requestAnimationFrame(loop);
 }
 
-bootstrap();
+// DOM controls remain accessible independently of the Canvas artwork.
+let lastUIState = "";
+const ui = id => document.getElementById(id);
+function applyPreferences() { gameMgr.player.kurangiKedip = ui("reduce-flash").checked; }
+function focusGame() { ui("canvas").focus({ preventScroll:true }); input.reset(); }
+function startRun() {
+  if (!levelData || !animConfig || !tileMapper) return;
+  gameMgr.reset(levelData, animConfig, tileMapper);
+  const p = gameMgr.level.spawnPx; kamera.teleport(p.x, p.y);
+  fauna?.inisialisasi(loader); simClock.reset(); _statsCache = null;
+  applyPreferences(); audio.putarBGM("bgm_level01"); stateGame = "bermain"; focusGame(); syncUI(true);
+}
+function retryCheckpoint() {
+  const p = gameMgr.respawnCheckpoint(); kamera?.teleport(p.x,p.y); simClock.reset();
+  _statsCache = null; applyPreferences(); audio.putarBGM("bgm_level01"); stateGame = "bermain"; focusGame(); syncUI(true);
+}
+function pauseGame() {
+  if (stateGame !== "bermain") return;
+  stateGame = "pause"; input.reset(); simClock.reset(); audio.pauseBGM(); syncUI(true);
+}
+function resumeGame() {
+  if (stateGame !== "pause") return;
+  stateGame = "bermain"; simClock.reset(); waktuSebelumnya = -1; audio.resumeBGM(); focusGame(); syncUI(true);
+}
+function homeGame() { stateGame = "mainmenu"; input.reset(); simClock.reset(); audio.putarBGM("bgm_mainmenu"); syncUI(true); }
+function syncUI(force = false) {
+  if (!force && lastUIState === stateGame) return;
+  lastUIState = stateGame;
+  const visible = {
+    start:["mainmenu"], pause:["bermain"], resume:["pause"], retry:["gameover"],
+    restart:["pause","gameover","levelcomplete"], home:["pause","gameover","levelcomplete"],
+    mute:["mainmenu","bermain","pause","gameover","levelcomplete"], reload:["error"],
+  };
+  for (const [id,states] of Object.entries(visible)) ui(id).hidden = !states.includes(stateGame);
+  const names = { loading:"Memuat permainan…", mainmenu:"Siap. Mulai lalu capai gerbang di ujung kanan.",
+    bermain:"Bermain — Z menyerang, Spasi melompat, Esc menjeda.", pause:"Permainan dijeda.",
+    gameover:"Kamu gugur. Coba lagi dari checkpoint atau ulang dari awal.", levelcomplete:"Level selesai! Pilih ulang dari awal atau kembali ke menu.", error:"Gagal memuat permainan. Periksa koneksi lalu muat ulang halaman." };
+  ui("status").textContent = names[stateGame] + (_statsCache ? ` Skor ${_statsCache.skor}; koin ${_statsCache.koin}; waktu ${_statsCache.waktu}.` : "");
+  ui("mute").setAttribute("aria-pressed",String(audio.dibisukan));
+  ui("mute").textContent = audio.dibisukan ? "Aktifkan audio" : "Bisukan audio";
+  if (["gameover","levelcomplete","pause","mainmenu","error"].includes(stateGame)) {
+    const id = {gameover:"retry",levelcomplete:"restart",pause:"resume",mainmenu:"start",error:"reload"}[stateGame];
+    ui(id).focus({preventScroll:true});
+  }
+}
+ui("start").onclick = startRun; ui("restart").onclick = startRun; ui("retry").onclick = retryCheckpoint;
+ui("pause").onclick = pauseGame; ui("resume").onclick = resumeGame; ui("home").onclick = homeGame;
+ui("mute").onclick = () => { audio.toggleBisu(); syncUI(true); };
+ui("reload").onclick = () => location.reload();
+ui("volume-bgm").value = audio.volumeBGM; ui("volume-sfx").value = audio.volumeSFX;
+ui("volume-bgm").oninput = e => audio.setVolumeBGM(Number(e.target.value));
+ui("volume-sfx").oninput = e => audio.setVolumeSFX(Number(e.target.value));
+try { ui("reduce-flash").checked = localStorage.getItem("maja_reduce_flash") === "true"; } catch { /* optional */ }
+ui("reduce-flash").onchange = e => { if (gameMgr.player) applyPreferences(); try { localStorage.setItem("maja_reduce_flash",String(e.target.checked)); } catch { /* optional */ } };
+canvas.addEventListener("pointerup", e => {
+  const rect = canvas.getBoundingClientRect(), x=(e.clientX-rect.left)*320/rect.width, y=(e.clientY-rect.top)*180/rect.height;
+  if (["bermain","pause"].includes(stateGame) && x>=292 && x<=316 && y>=4 && y<=28) { audio.toggleBisu(); syncUI(true); }
+});
+for (const button of document.querySelectorAll("[data-action]")) {
+  button.addEventListener("pointerdown",e=>{ if(stateGame!=="bermain")return; e.preventDefault();button.setPointerCapture(e.pointerId);input.setVirtual(`touch-${e.pointerId}`,button.dataset.action,true); });
+  for (const type of ["pointerup","pointercancel","lostpointercapture"]) button.addEventListener(type,e=>input.setVirtual(`touch-${e.pointerId}`,button.dataset.action,false));
+}
+window.addEventListener("blur",pauseGame);
+document.addEventListener("visibilitychange",()=>{if(document.hidden)pauseGame();});
+bootstrap().catch(error => { console.error("[bootstrap]",error); stateGame="error"; if(elBarIsi)elBarIsi.parentElement.hidden=true;if(elTeksLoad)elTeksLoad.hidden=true;syncUI(true); });

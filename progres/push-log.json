@@ -1,0 +1,12 @@
+{
+  "repository": "stmarya/MajaAdventure",
+  "branch": "main",
+  "pushes": [
+    {
+      "stage": 1,
+      "sha": "7259c5b9002a271764dae3d01d9ca66717479e2c",
+      "url": "https://github.com/stmarya/MajaAdventure/commit/7259c5b9002a271764dae3d01d9ca66717479e2c",
+      "message": "fix(stage-1): stabilize collision, fixed-step simulation and recovery flows"
+    }
+  ]
+}

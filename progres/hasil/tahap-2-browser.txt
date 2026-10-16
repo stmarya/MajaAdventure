@@ -1,0 +1,18 @@
+
+> maja-adventure@0.1.1 test:browser
+> node tools/browser_smoke.mjs
+
+PASS production page has no test bridge
+PASS boot and native start button
+PASS D moves player without toggling debug
+PASS pause freezes timer and resume works
+PASS DOM mute and Canvas audio icon work
+PASS death reaches gameover and retry uses checkpoint
+PASS completion, accessible summary, menu and fresh replay
+PASS focus loss auto-pauses
+PASS 360px viewport has no horizontal overflow
+PASS no unexpected JavaScript exception
+PASS configuration failure is explicit and recoverable
+PASS missing essential image does not pretend loading succeeded
+PASS experimental touch controls are visible and respond to tap
+Browser smoke: 13 checks passed. Endpoints injected; NOT a human playthrough, audio review or real-device certification.

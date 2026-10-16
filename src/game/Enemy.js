@@ -83,7 +83,8 @@ export class Enemy {
       this.hp = 0;
       this._state = "dead";
       this.vx = 0;
-      this.animCtrl?.mainkan("death", true);
+      if (this.animCtrl?.punyaAnimasi("death")) this.animCtrl.mainkan("death", true);
+      else this.aktif = false; // No authored death pose: remove, never leave an immortal corpse.
     } else {
       this._state = "stagger";
       this._iframeSisa = 400; // ms
@@ -167,12 +168,14 @@ export class Enemy {
 
   /** Apakah hitbox musuh bertumpang tindih dengan hitbox player? */
   cekTumbukanPlayer(playerHitboxX, playerHitboxY, playerLebar, playerTinggi) {
-    return (
-      this.hitboxX    < playerHitboxX + playerLebar  &&
-      this.hitboxKanan > playerHitboxX                &&
-      this.hitboxY    < playerHitboxY + playerTinggi &&
-      this.hitboxBawah > playerHitboxY
-    );
+    if (this.mati || !this.hitboxSeranganAktif) return false;
+    const def = this.animCtrl?.hitbox;
+    const box = def ? {
+      x: this.x + (this._arahKanan ? def.x : this.frameLebar - def.x - def.lebar),
+      y: this.y + def.y, lebar: def.lebar, tinggi: def.tinggi,
+    } : { x:this.hitboxX, y:this.hitboxY, lebar:this.lebar, tinggi:this.tinggi };
+    return box.x < playerHitboxX + playerLebar && box.x + box.lebar > playerHitboxX &&
+      box.y < playerHitboxY + playerTinggi && box.y + box.tinggi > playerHitboxY;
   }
 }
 
@@ -219,7 +222,7 @@ export class EnemySoldier extends Enemy {
 
     if (this._state === "attack") {
       // Tunggu animasi selesai
-      if (this.animCtrl?.sudahSelesai) {
+      if (!this.animCtrl || this.animCtrl.sudahSelesai || this.animCtrl.animasiAktif !== "attack") {
         this._state       = "patrol";
         this._serangan    = false;
         this._attackCooldown = 1200;

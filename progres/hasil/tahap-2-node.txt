@@ -1,0 +1,37 @@
+✔ source sheets render all 18 fauna with correct dimensions, frame and facing (2.751942ms)
+✔ missing sheets warn once per type and retain placeholder rendering (2.195163ms)
+✔ animation advances and reinitialization replaces source sheets (0.725759ms)
+✔ landing snaps exactly to floor and stays stable (3.72076ms)
+✔ right and left walls stop at their actual edges (0.507274ms)
+✔ ceiling in row zero is a collision, not a falsy sentinel (0.299749ms)
+✔ one-way: land above, pass from below, and explicit drop-through (0.415102ms)
+✔ large displacement does not tunnel through a floor (0.513031ms)
+✔ left and right world boundaries are solid (0.446519ms)
+✔ death animation completes and reaches gameover (3.893669ms)
+✔ death takes precedence over reaching exit (1.19814ms)
+✔ checkpoint retry preserves run while full reset starts fresh (1.801051ms)
+✔ falling outside level reaches gameover even with invulnerability (2.461498ms)
+✔ score completion is idempotent (0.596493ms)
+✔ 30/60/120/144Hz rendering produces identical fixed-step movement (4.227913ms)
+✔ idle spawn does not oscillate vertically (18.808768ms)
+✔ level spike mutations do not leak into original level data (1.128204ms)
+✔ fixed clock clamps background catchup and discards accumulator on transition (0.389729ms)
+✔ exit is reachable from actual floor contact, not an embedded sprite (1.090898ms)
+✔ keyboard aliases stay active until every mapped key is released (2.445294ms)
+✔ blur clears held keys, virtual pointers and stale edges (0.582742ms)
+✔ multiple virtual pointers do not release each other (0.422653ms)
+✔ soldier telegraph and recovery do not cause damage; strike does (0.883048ms)
+✔ soldier exits recovery when animation next has changed to idle (0.668191ms)
+✔ dead enemy never deals attack damage (0.241001ms)
+✔ jump buffer can trigger on next grounded tick; coyote time permits edge jump (0.735062ms)
+✔ renderer uses punctuation metadata rather than stale charset offsets (0.499896ms)
+Traversal: finished, deaths=1, both checkpoints activated; no teleport, no HP overrides.
+✔ real level clears using movement, jump, combat and checkpoint retry; no teleport or invulnerability override (97.608054ms)
+ℹ tests 28
+ℹ suites 0
+ℹ pass 28
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 577.511456

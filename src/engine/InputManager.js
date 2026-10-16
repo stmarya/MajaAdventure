@@ -1,115 +1,45 @@
-/**
- * InputManager.js
- * Menangani input keyboard dan touch untuk game.
- * Menggunakan pola "tombol ditekan saat ini" + "tombol baru ditekan frame ini"
- * agar bisa dibedakan antara tap sekali dan tahan.
- */
-
+/** Keyboard + virtual-button actions. Edges are consumed by a simulation tick. */
 export class InputManager {
-  constructor() {
-    /** @type {Set<string>} Tombol yang sedang ditekan */
+  constructor(target = window) {
+    this._target = target;
     this._ditekan = new Set();
-    /** @type {Set<string>} Tombol yang baru ditekan frame ini */
-    this._baruDitekan = new Set();
-    /** @type {Set<string>} Tombol yang baru dilepas frame ini */
-    this._baruDilepas = new Set();
-
-    // Peta kode tombol ke aksi game
-    this._peta = {
-      "ArrowLeft":  "kiri",
-      "ArrowRight": "kanan",
-      "ArrowUp":    "lompat",
-      "ArrowDown":  "jongkok",
-      "KeyZ":       "serang",
-      "KeyX":       "lompat",
-      "Space":      "lompat",
-      "KeyA":       "kiri",
-      "KeyD":       "kanan",
-      "KeyW":       "lompat",
-      "KeyS":       "jongkok",
-      "Escape":     "pause",
-      "Enter":      "konfirmasi",
+    this._virtual = new Map();
+    this._aksiAktif = new Set(); this._aksiBaru = new Set(); this._aksiDilepas = new Set();
+    this._peta = { ArrowLeft:"kiri", ArrowRight:"kanan", ArrowUp:"lompat", ArrowDown:"jongkok",
+      KeyZ:"serang", KeyX:"lompat", Space:"lompat", KeyA:"kiri", KeyD:"kanan", KeyW:"lompat",
+      KeyS:"jongkok", Escape:"pause", Enter:"konfirmasi" };
+    this._keydown = e => {
+      if (/^(INPUT|TEXTAREA|SELECT|BUTTON)$/.test(e.target?.tagName ?? "") || e.target?.isContentEditable) return;
+      if (!this._peta[e.code]) return;
+      e.preventDefault();
+      if (this._ditekan.has(e.code)) return;
+      this._ditekan.add(e.code); this._sync();
     };
-
-    // Inisialisasi state aksi
-    this._aksiAktif    = new Set();
-    this._aksiBaru     = new Set();
-    this._aksiDilepas  = new Set();
-
-    this._daftarEventListener();
+    this._keyup = e => { this._ditekan.delete(e.code); this._sync(); };
+    this._blur = () => this.reset();
+    target.addEventListener("keydown", this._keydown);
+    target.addEventListener("keyup", this._keyup);
+    target.addEventListener("blur", this._blur);
   }
-
-  _daftarEventListener() {
-    window.addEventListener("keydown", (e) => {
-      if (this._ditekan.has(e.code)) return; // cegah repeat
-      this._ditekan.add(e.code);
-      this._baruDitekan.add(e.code);
-
-      const aksi = this._peta[e.code];
-      if (aksi) {
-        this._aksiAktif.add(aksi);
-        this._aksiBaru.add(aksi);
-      }
-
-      // Cegah scroll halaman saat bermain
-      if (["ArrowUp", "ArrowDown", "Space"].includes(e.code)) {
-        e.preventDefault();
-      }
-    });
-
-    window.addEventListener("keyup", (e) => {
-      this._ditekan.delete(e.code);
-      this._baruDilepas.add(e.code);
-
-      const aksi = this._peta[e.code];
-      if (aksi) {
-        this._aksiAktif.delete(aksi);
-        this._aksiDilepas.add(aksi);
-      }
-    });
-
-    // Blur — lepas semua tombol saat jendela kehilangan fokus
-    window.addEventListener("blur", () => {
-      this._ditekan.clear();
-      this._aksiAktif.clear();
-    });
+  _sync() {
+    const next = new Set([...this._ditekan].map(k=>this._peta[k]).filter(Boolean));
+    for (const action of this._virtual.values()) next.add(action);
+    for (const action of next) if (!this._aksiAktif.has(action)) this._aksiBaru.add(action);
+    for (const action of this._aksiAktif) if (!next.has(action)) this._aksiDilepas.add(action);
+    this._aksiAktif = next;
   }
-
-  /**
-   * Apakah aksi sedang aktif (tombol ditahan)?
-   * @param {string} aksi
-   * @returns {boolean}
-   */
-  aktif(aksi) {
-    return this._aksiAktif.has(aksi);
+  setVirtual(source, action, pressed) {
+    if (pressed) this._virtual.set(source, action); else this._virtual.delete(source);
+    this._sync();
   }
-
-  /**
-   * Apakah aksi baru saja dimulai frame ini (tap sekali)?
-   * @param {string} aksi
-   * @returns {boolean}
-   */
-  baruDitekan(aksi) {
-    return this._aksiBaru.has(aksi);
-  }
-
-  /**
-   * Apakah aksi baru saja dilepas frame ini?
-   * @param {string} aksi
-   * @returns {boolean}
-   */
-  baruDilepas(aksi) {
-    return this._aksiDilepas.has(aksi);
-  }
-
-  /**
-   * Harus dipanggil DI AKHIR setiap frame game loop.
-   * Membersihkan state "baru ditekan/dilepas" untuk frame berikutnya.
-   */
-  akhirFrame() {
-    this._baruDitekan.clear();
-    this._baruDilepas.clear();
-    this._aksiBaru.clear();
-    this._aksiDilepas.clear();
+  aktif(action) { return this._aksiAktif.has(action); }
+  baruDitekan(action) { return this._aksiBaru.has(action); }
+  baruDilepas(action) { return this._aksiDilepas.has(action); }
+  akhirFrame() { this._aksiBaru.clear(); this._aksiDilepas.clear(); }
+  reset() { this._ditekan.clear(); this._virtual.clear(); this._aksiAktif.clear(); this.akhirFrame(); }
+  destroy() {
+    this._target.removeEventListener("keydown", this._keydown);
+    this._target.removeEventListener("keyup", this._keyup);
+    this._target.removeEventListener("blur", this._blur); this.reset();
   }
 }

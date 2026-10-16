@@ -78,6 +78,9 @@ export class Player {
     if (this._mati) { this.animCtrl?.update(dt); return; }
     this._dropThrough = Math.max(0, (this._dropThrough ?? 0) - dt);
 
+    this._coyote = this.diTanah ? 0.1 : Math.max(0, (this._coyote ?? 0) - dt);
+    this._jumpBuffer = Math.max(0, (this._jumpBuffer ?? 0) - dt);
+    if (input.baruDitekan("lompat")) this._jumpBuffer = 0.1;
     this._updateIframes(dt);
     this._updateInput(dt, input, audio);
     this._terapkanFisika(dt, collision);
@@ -123,6 +126,7 @@ export class Player {
     this.diTanah = false;
     this.diTangga = false;
     this._dropThrough = 0;
+    this._coyote = this._jumpBuffer = 0;
     this._sedangSerang = false;
     this._iframeTimer = 0;
     this._mati   = false;
@@ -141,7 +145,7 @@ export class Player {
    */
   render(renderer, camera, loader, debug = false) {
     // Saat iframe, kedipkan sprite
-    if (this.diInvincible) {
+    if (this.diInvincible && !this.kurangiKedip) {
       const ticks = Math.floor(this._iframeTimer * KEDIP_PER_DETIK);
       if (ticks % 2 === 1) return; // lewati frame ganjil → efek kedip
     }
@@ -196,6 +200,7 @@ export class Player {
       audio?.putarSFX("sfx_attack_keris");
       this.vx *= 0.3; // perlambat sedikit saat menyerang
       this._sedangSerang = true;
+      return;
     }
 
     // Tandai tidak sedang menyerang jika animasi attack selesai
@@ -240,7 +245,8 @@ export class Player {
     }
 
     // ── Lompat ───────────────────────────────────────────────────────────────
-    if (input.baruDitekan("lompat") && this.diTanah) {
+    if (this._jumpBuffer > 0 && (this.diTanah || this._coyote > 0)) {
+      this._jumpBuffer = this._coyote = 0;
       if (input.aktif("jongkok")) {
         // Turun dari one-way platform: jongkok + lompat
         this._dropThrough = 0.2;

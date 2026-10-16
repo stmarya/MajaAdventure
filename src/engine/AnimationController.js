@@ -110,6 +110,8 @@ export class AnimationController {
    * Apakah animasi non-loop sudah selesai?
    * @returns {boolean}
    */
+  punyaAnimasi(nama) { return Boolean(this._config.animasi?.[nama]); }
+
   get sudahSelesai() { return this._selesai; }
 
   /**
