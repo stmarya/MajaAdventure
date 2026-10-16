@@ -7,6 +7,12 @@
       "sha": "7259c5b9002a271764dae3d01d9ca66717479e2c",
       "url": "https://github.com/stmarya/MajaAdventure/commit/7259c5b9002a271764dae3d01d9ca66717479e2c",
       "message": "fix(stage-1): stabilize collision, fixed-step simulation and recovery flows"
+    },
+    {
+      "stage": 2,
+      "sha": "187a0b4fd430add8ab1b6757e6c3dc9d676b9ffa",
+      "url": "https://github.com/stmarya/MajaAdventure/commit/187a0b4fd430add8ab1b6757e6c3dc9d676b9ffa",
+      "message": "feat(stage-2): improve playable slice UX, combat and browser regression tests"
     }
   ]
 }

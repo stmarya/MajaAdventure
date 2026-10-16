@@ -6,7 +6,11 @@
   "scripts": {
     "test": "node --test tools/test_*.mjs",
     "serve": "python3 -m http.server 8080",
-    "test:browser": "node tools/browser_smoke.mjs"
+    "test:browser": "node tools/browser_smoke.mjs",
+    "validate": "python3 tools/validation/validate_assets.py",
+    "test:delivery": "python3 -m unittest discover -s tools -p test_delivery.py",
+    "build": "python3 tools/build_web.py",
+    "build:public": "python3 tools/build_web.py --channel public"
   },
   "engines": {
     "node": ">=22"

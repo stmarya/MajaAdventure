@@ -1,0 +1,65 @@
+name: Game quality and internal web candidate
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  quality:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+      - run: npm ci
+      - run: python -m pip install -r requirements-dev.txt
+      - run: npm test
+      - run: python -m unittest discover -s tools -p test_source_integration.py
+      - run: python -m unittest discover -s tools -p test_delivery.py
+      - name: Technical runtime validation (not final art approval)
+        run: python tools/validation/validate_assets.py --report runtime-validation.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: runtime-validation-${{ matrix.os }}
+          path: runtime-validation.json
+  internal-web:
+    needs: quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: npm ci
+      - run: python -m pip install -r requirements-dev.txt
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser
+      - run: python tools/build_web.py --channel internal
+      - name: Smoke test the actual packaged runtime
+        run: npm run test:browser
+        env:
+          TEST_WEB_ROOT: ${{ github.workspace }}/dist/web
+      - uses: actions/upload-artifact@v4
+        with:
+          name: internal-web-playtest-only
+          path: |
+            dist/*.zip
+            dist/*.sha256
+# No deployment or public release. Green CI is not licensing / human QA approval.

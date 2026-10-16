@@ -1,851 +1,518 @@
 {
-  "_komentar": "Manifest lengkap semua 58 assets proyek Majapahit Platformer. Sumber kebenaran tunggal untuk pipeline.",
-  "manifest_version": "1.0.0",
-  "total_assets": 58,
-  "kategori": {
-    "character": 9,
-    "enemy": 4,
-    "environment": 11,
-    "ui": 9,
-    "item": 5,
-    "audio": 11,
-    "vfx": 5,
-    "font": 2,
-    "collectible": 2
-  },
-  "assets": {
-    "character": [
-      {
-        "id": "chr_warrior_sheet",
-        "nama": "Sprite Sheet Karakter Utama (Warrior)",
-        "file": "assets/characters/warrior/final/chr_warrior_sheet.png",
-        "format": "PNG-32",
-        "lebar": 480,
-        "tinggi": 270,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 1",
-        "catatan_referensi": "Udeng merah #C1440E, tunik emas #D4A017, jarik indigo #1A3A5C, keris luk 3 lekukan",
-        "dependensi": []
-      },
-      {
-        "id": "chr_warrior_idle",
-        "nama": "Animasi Idle Karakter (4 frame)",
-        "file": "assets/characters/warrior/final/chr_warrior_idle_[00-03].png",
-        "format": "PNG-32",
-        "lebar": 48,
-        "tinggi": 48,
-        "jumlah_frame": 4,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 1",
-        "catatan_referensi": "Napas naik-turun halus, mata berkedip di frame ke-3",
-        "dependensi": [
-          "chr_warrior_sheet"
-        ]
-      },
-      {
-        "id": "chr_warrior_run",
-        "nama": "Animasi Run Cycle (6 frame)",
-        "file": "assets/characters/warrior/final/chr_warrior_run_[00-05].png",
-        "format": "PNG-32",
-        "lebar": 48,
-        "tinggi": 48,
-        "jumlah_frame": 6,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 1",
-        "catatan_referensi": "Gerakan lari natural, jarik bergerak minimal mengikuti langkah",
-        "dependensi": [
-          "chr_warrior_sheet"
-        ]
-      },
-      {
-        "id": "chr_warrior_jump",
-        "nama": "Animasi Jump Arc (3 frame)",
-        "file": "assets/characters/warrior/final/chr_warrior_jump_[00-02].png",
-        "format": "PNG-32",
-        "lebar": 48,
-        "tinggi": 48,
-        "jumlah_frame": 3,
-        "frame_labels": [
-          "ascent",
-          "peak",
-          "descent"
-        ],
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 1",
-        "catatan_referensi": "Frame 0: crouched launch, Frame 1: legs tucked, Frame 2: arms raised",
-        "dependensi": [
-          "chr_warrior_sheet"
-        ]
-      },
-      {
-        "id": "chr_warrior_attack",
-        "nama": "Animasi Melee Attack Keris (3 frame)",
-        "file": "assets/characters/warrior/final/chr_warrior_attack_[00-02].png",
-        "format": "PNG-32",
-        "lebar": 56,
-        "tinggi": 48,
-        "jumlah_frame": 3,
-        "frame_labels": [
-          "windup",
-          "strike",
-          "recovery"
-        ],
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 1",
-        "catatan_referensi": "Keris bilah luk, frame strike: keris thurst maju. Lebar 56px untuk ruang keris.",
-        "dependensi": [
-          "chr_warrior_sheet"
-        ]
-      },
-      {
-        "id": "chr_warrior_death",
-        "nama": "Animasi Death/Defeat (2 frame)",
-        "file": "assets/characters/warrior/final/chr_warrior_death_[00-01].png",
-        "format": "PNG-32",
-        "lebar": 48,
-        "tinggi": 48,
-        "jumlah_frame": 2,
-        "frame_labels": [
-          "stagger",
-          "fallen"
-        ],
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 1",
-        "catatan_referensi": "Frame 0: stagger ke belakang, Frame 1: jatuh berlutut/rebah",
-        "dependensi": [
-          "chr_warrior_sheet"
-        ]
-      },
-      {
-        "id": "chr_warrior_hurt",
-        "nama": "Animasi Terkena Damage (2 frame)",
-        "file": "assets/characters/warrior/final/chr_warrior_hurt_[00-01].png",
-        "format": "PNG-32",
-        "lebar": 48,
-        "tinggi": 48,
-        "jumlah_frame": 2,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 1",
-        "catatan_referensi": "Flash sprite putih #F0EBD8 di frame 1 untuk feedback hit",
-        "dependensi": [
-          "chr_warrior_sheet"
-        ]
-      },
-      {
-        "id": "chr_warrior_portrait",
-        "nama": "Portrait Karakter Utama (UI)",
-        "file": "assets/characters/warrior/final/chr_warrior_portrait.png",
-        "format": "PNG-32",
-        "lebar": 64,
-        "tinggi": 64,
-        "prioritas": "MEDIUM",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 1",
-        "catatan_referensi": "Tampak muka, udeng merah sangat jelas, ekspresi tegas",
-        "dependensi": []
-      }
-    ],
-    "enemy": [
-      {
-        "id": "chr_soldier_sheet",
-        "nama": "Sprite Sheet Enemy Soldier",
-        "file": "assets/characters/enemy_soldier/final/chr_soldier_sheet.png",
-        "format": "PNG-32",
-        "lebar": 288,
-        "tinggi": 52,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 1",
-        "catatan_referensi": "Helm besi, zirah sisik perunggu #7A6650, sash merah #C1440E, tombak 30px",
-        "dependensi": []
-      },
-      {
-        "id": "chr_soldier_idle",
-        "nama": "Enemy Soldier Idle + Attack + Stagger (6 frame total)",
-        "file": "assets/characters/enemy_soldier/final/chr_soldier_[idle_00,idle_01,attack_00,attack_01,attack_02,stagger_00].png",
-        "format": "PNG-32",
-        "lebar": 48,
-        "tinggi": 52,
-        "jumlah_frame": 6,
-        "frame_labels": [
-          "idle_00",
-          "idle_01",
-          "attack_00",
-          "attack_01",
-          "attack_02",
-          "stagger_00"
-        ],
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 1",
-        "catatan_referensi": "Attack: tombak thrust lurus ke depan",
-        "dependensi": [
-          "chr_soldier_sheet"
-        ]
-      },
-      {
-        "id": "chr_monkey_sheet",
-        "nama": "Sprite Sheet Enemy Monkey",
-        "file": "assets/characters/enemy_monkey/final/chr_monkey_sheet.png",
-        "format": "PNG-32",
-        "lebar": 128,
-        "tinggi": 32,
-        "prioritas": "MEDIUM",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 1",
-        "catatan_referensi": "Monyet ekor panjang Jawa, postur semi-bipedal membungkuk",
-        "dependensi": []
-      },
-      {
-        "id": "chr_monkey_anim",
-        "nama": "Enemy Monkey Idle + Jump (4 frame total)",
-        "file": "assets/characters/enemy_monkey/final/chr_monkey_[idle_00,idle_01,jump_00,jump_01].png",
-        "format": "PNG-32",
-        "lebar": 32,
-        "tinggi": 32,
-        "jumlah_frame": 4,
-        "frame_labels": [
-          "idle_00",
-          "idle_01",
-          "jump_00",
-          "jump_01"
-        ],
-        "prioritas": "MEDIUM",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 1",
-        "catatan_referensi": "Idle 00: duduk menggaruk kepala. Jump: lengan terbuka lebar.",
-        "dependensi": [
-          "chr_monkey_sheet"
-        ]
-      }
-    ],
-    "environment": [
-      {
-        "id": "env_ruins_wall_01",
-        "nama": "Tile Bata Andesit Merah Varian 1 (Bersih)",
-        "file": "assets/environment/tilesets/final/env_ruins_wall_01.png",
-        "format": "PNG-32",
-        "lebar": 64,
-        "tinggi": 64,
-        "seamless": true,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 2",
-        "catatan_referensi": "Sheet tileset 4x4 grid, 16 tile @ 16x16px = 64x64px total. Placeholder prosedural."
-      },
-      {
-        "id": "env_ruins_wall_02",
-        "nama": "Tile Bata Andesit Merah Varian 2 (Lumut Ringan)",
-        "file": "assets/environment/tilesets/final/env_ruins_wall_02.png",
-        "format": "PNG-32",
-        "lebar": 16,
-        "tinggi": 16,
-        "seamless": true,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 2",
-        "catatan_referensi": "Lumut di celah bawah, warna #4A7C2F"
-      },
-      {
-        "id": "env_ruins_wall_03",
-        "nama": "Tile Bata Andesit Merah Varian 3 (Rusak/Retak)",
-        "file": "assets/environment/tilesets/final/env_ruins_wall_03.png",
-        "format": "PNG-32",
-        "lebar": 16,
-        "tinggi": 16,
-        "seamless": false,
-        "prioritas": "MEDIUM",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 2",
-        "catatan_referensi": "Sebagian bata hilang, celah retak tampak"
-      },
-      {
-        "id": "env_ruins_floor_01",
-        "nama": "Tile Lantai Bata + Rumput Overgrowth",
-        "file": "assets/environment/tilesets/final/env_ruins_floor_01.png",
-        "format": "PNG-32",
-        "lebar": 16,
-        "tinggi": 16,
-        "seamless": true,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 2",
-        "catatan_referensi": "Rumput #7AB648 di tepi atas, bata di bagian bawah"
-      },
-      {
-        "id": "env_candi_bentar",
-        "nama": "Candi Bentar Split Gate (Kiri + Kanan)",
-        "file_kiri": "assets/environment/props/final/env_candi_bentar_left.png",
-        "file_kanan": "assets/environment/props/final/env_candi_bentar_right.png",
-        "format": "PNG-32",
-        "lebar": 64,
-        "tinggi": 96,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 2",
-        "catatan_referensi": "Gerbang split simetris, puncak berundak tinggi. Ref: Candi Cetho/Sukuh. Kanan = flip horizontal kiri."
-      },
-      {
-        "id": "env_palmtree_tall",
-        "nama": "Pohon Kelapa Tinggi",
-        "file": "assets/environment/props/final/env_palmtree_tall.png",
-        "format": "PNG-32",
-        "lebar": 32,
-        "tinggi": 96,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 2",
-        "catatan_referensi": "Frond hijau gelap #2D5016+#4A7C2F, batang coklat beruas #8B4513"
-      },
-      {
-        "id": "env_palmtree_med",
-        "nama": "Pohon Kelapa Sedang",
-        "file": "assets/environment/props/final/env_palmtree_med.png",
-        "format": "PNG-32",
-        "lebar": 32,
-        "tinggi": 64,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 2",
-        "catatan_referensi": "Versi lebih pendek dari tall"
-      },
-      {
-        "id": "env_palmtree_short",
-        "nama": "Pohon Kelapa Pendek",
-        "file": "assets/environment/props/final/env_palmtree_short.png",
-        "format": "PNG-32",
-        "lebar": 32,
-        "tinggi": 48,
-        "prioritas": "MEDIUM",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 2",
-        "catatan_referensi": "Pohon muda / semak kelapa"
-      },
-      {
-        "id": "env_ladder_tile",
-        "nama": "Tile Tangga Kayu (Tileable Vertikal)",
-        "file": "assets/environment/tilesets/final/env_ladder_tile.png",
-        "format": "PNG-32",
-        "lebar": 16,
-        "tinggi": 16,
-        "seamless": true,
-        "seamless_axis": "vertical",
-        "prioritas": "MEDIUM",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 2",
-        "catatan_referensi": "Dua palang horizontal 2px, dua tiang vertikal 1px, warna #8B4513"
-      },
-      {
-        "id": "env_trap_spike",
-        "nama": "Ground Spike Trap (Idle + Active)",
-        "file_idle": "assets/environment/tilesets/final/env_trap_spike_idle.png",
-        "file_active": "assets/environment/tilesets/final/env_trap_spike_active.png",
-        "format": "PNG-32",
-        "lebar": 16,
-        "tinggi": 16,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 2",
-        "catatan_referensi": "Idle: spike rata lantai #7A6650. Active: spike muncul ke atas 8px, tip #F0EBD8"
-      },
-      {
-        "id": "env_relief_kala",
-        "nama": "Tile Dekorasi Relief Panel Batu Kala",
-        "file": "assets/environment/tilesets/final/env_ruins_relief_01.png",
-        "format": "PNG-32",
-        "lebar": 16,
-        "tinggi": 16,
-        "seamless": false,
-        "prioritas": "MEDIUM",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 2",
-        "catatan_referensi": "Wajah Kala: mata bulat, taring atas, TANPA rahang bawah. Ref: Candi Singosari."
-      },
-      {
-        "id": "env_bg_jungle_canopy",
-        "nama": "Background Jungle Canopy Layer Tile",
-        "file": "assets/environment/backgrounds/final/bg_jungle_near.png",
-        "format": "PNG-32",
-        "lebar": 320,
-        "tinggi": 120,
-        "seamless": true,
-        "seamless_axis": "horizontal",
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 2",
-        "catatan_referensi": "Siluet kanopi hutan tropis, warna #2D5016+#4A7C2F, alpha di atas"
-      },
-      {
-        "id": "env_bg_sky",
-        "nama": "Background Layer Langit",
-        "file": "assets/environment/backgrounds/final/bg_sky_layer.png",
-        "format": "PNG-32",
-        "lebar": 320,
-        "tinggi": 180,
-        "seamless": true,
-        "seamless_axis": "horizontal",
-        "prioritas": "MEDIUM",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 2",
-        "catatan_referensi": "Gradien langit senja (dithered): #2E6B9E atas → #E8623A bawah, siluet candi jauh"
-      },
-      {
-        "id": "env_torch_anim",
-        "nama": "Animasi Api Obor (3 frame)",
-        "file": "assets/vfx/final/vfx_torch_sheet.png",
-        "format": "PNG-32",
-        "lebar": 48,
-        "tinggi": 24,
-        "jumlah_frame": 3,
-        "prioritas": "MEDIUM",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 1",
-        "catatan_referensi": "Api menggoyang kiri-kanan, warna #C1440E → #F5C842 → #FDEEA0"
-      }
-    ],
-    "ui": [
-      {
-        "id": "ui_healthbar",
-        "nama": "HUD Health Bar (Kosong + Isi)",
-        "file_kosong": "assets/ui/hud/final/ui_healthbar_empty.png",
-        "file_isi": "assets/ui/hud/final/ui_healthbar_fill.png",
-        "format": "PNG-32",
-        "lebar": 96,
-        "tinggi": 12,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "UI Artist",
-        "catatan_referensi": "Frame bergaya ukiran batu #7A6650, isi bar merah #C1440E"
-      },
-      {
-        "id": "ui_icon_life",
-        "nama": "Ikon Nyawa (Keris Mini)",
-        "file": "assets/ui/hud/final/ui_icon_life.png",
-        "format": "PNG-32",
-        "lebar": 16,
-        "tinggi": 16,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "UI Artist",
-        "catatan_referensi": "Siluet keris luk emas #D4A017+#F5C842, bilah bergelombang"
-      },
-      {
-        "id": "ui_coin_counter",
-        "nama": "HUD Counter Koin Gobog",
-        "file": "assets/ui/hud/final/ui_coin_counter.png",
-        "format": "PNG-32",
-        "lebar": 48,
-        "tinggi": 16,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "UI Artist",
-        "catatan_referensi": "Ikon Gobog 12×12px + ruang angka 3 digit, warna emas"
-      },
-      {
-        "id": "ui_btn_play",
-        "nama": "Tombol Play/Start",
-        "file": "assets/ui/screens/final/ui_btn_play_normal.png",
-        "file_hover": "assets/ui/screens/final/ui_btn_play_hover.png",
-        "format": "PNG-32",
-        "lebar": 64,
-        "tinggi": 20,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "UI Artist",
-        "catatan_referensi": "Bingkai batu ukir, teks 'MULAI', hover: emas lebih terang"
-      },
-      {
-        "id": "ui_btn_pause",
-        "nama": "Tombol Pause/Resume",
-        "file": "assets/ui/screens/final/ui_btn_pause_normal.png",
-        "format": "PNG-32",
-        "lebar": 64,
-        "tinggi": 20,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "UI Artist"
-      },
-      {
-        "id": "ui_screen_mainmenu",
-        "nama": "Layar Menu Utama",
-        "file": "assets/ui/screens/final/ui_screen_mainmenu.png",
-        "format": "PNG-32",
-        "lebar": 320,
-        "tinggi": 180,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "UI Artist",
-        "catatan_referensi": "Latar siluet candi + hutan, judul game atas, tombol menu tengah"
-      },
-      {
-        "id": "ui_screen_gameover",
-        "nama": "Layar Game Over",
-        "file": "assets/ui/screens/final/ui_screen_gameover.png",
-        "format": "PNG-32",
-        "lebar": 320,
-        "tinggi": 180,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "UI Artist"
-      },
-      {
-        "id": "ui_screen_levelcomplete",
-        "nama": "Layar Level Complete",
-        "file": "assets/ui/screens/final/ui_screen_levelcomplete.png",
-        "format": "PNG-32",
-        "lebar": 320,
-        "tinggi": 180,
-        "prioritas": "MEDIUM",
-        "status": "belum_dibuat",
-        "pic": "UI Artist"
-      },
-      {
-        "id": "ui_screen_pause",
-        "nama": "Layar Pause Overlay",
-        "file": "assets/ui/screens/final/ui_screen_pause.png",
-        "format": "PNG-32",
-        "lebar": 320,
-        "tinggi": 180,
-        "prioritas": "MEDIUM",
-        "status": "belum_dibuat",
-        "pic": "UI Artist"
-      }
-    ],
-    "font": [
-      {
-        "id": "font_bitmap",
-        "nama": "Font Pixel Art Bitmap (8×8)",
-        "file": "assets/ui/fonts/font_majapahit_bitmap.png",
-        "format": "PNG-32",
-        "lebar": 128,
-        "tinggi": 48,
-        "glyph_lebar": 8,
-        "glyph_tinggi": 8,
-        "charset": "A-Z 0-9 !?.,:-/()%",
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "UI Artist",
-        "catatan_referensi": "Warna putih gading #F0EBD8 di atas transparan. Engine beri warna saat render."
-      },
-      {
-        "id": "font_ttf",
-        "nama": "Font TTF (Fallback)",
-        "file": "assets/ui/fonts/font_majapahit.ttf",
-        "format": "TTF",
-        "prioritas": "LOW",
-        "status": "belum_dibuat",
-        "pic": "UI Artist",
-        "catatan_referensi": "Opsional. Hanya jika bitmap font tidak mencukupi."
-      }
-    ],
-    "item": [
-      {
-        "id": "itm_gobog_sheet",
-        "nama": "Koin Gobog Emas (Static + 3 Frame Spin)",
-        "file": "assets/items/final/itm_gobog_sheet.png",
-        "format": "PNG-32",
-        "lebar": 64,
-        "tinggi": 16,
-        "jumlah_frame": 4,
-        "frame_labels": [
-          "static",
-          "spin_00",
-          "spin_01",
-          "spin_02"
-        ],
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 2",
-        "catatan_referensi": "Bulat berlubang tengah 4px, motif teratai 4 titik radial, #D4A017→#F5C842→#FDEEA0"
-      },
-      {
-        "id": "itm_maja_fruit",
-        "nama": "Buah Maja Power-Up (Static + Glow)",
-        "file_static": "assets/items/final/itm_maja_static.png",
-        "file_glow": "assets/items/final/itm_maja_glow.png",
-        "format": "PNG-32",
-        "lebar": 16,
-        "tinggi": 16,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 2",
-        "catatan_referensi": "Bola hijau #7AB648, glow ring #FDEEA0 1–2px di sekeliling"
-      },
-      {
-        "id": "itm_chest",
-        "nama": "Peti Kayu (Tertutup + Terbuka)",
-        "file_closed": "assets/items/final/itm_chest_closed.png",
-        "file_open": "assets/items/final/itm_chest_open.png",
-        "format": "PNG-32",
-        "lebar": 32,
-        "tinggi": 32,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 2",
-        "catatan_referensi": "Tutup: papan kayu #8B4513+#5C2E1A, pengunci emas #D4A017. Buka: cahaya #F5C842 dari dalam."
-      },
-      {
-        "id": "itm_banner_sheet",
-        "nama": "Bendera Majapahit (Diam + Kibas 2 Frame)",
-        "file": "assets/items/final/itm_banner_wave_sheet.png",
-        "format": "PNG-32",
-        "lebar": 48,
-        "tinggi": 32,
-        "jumlah_frame": 3,
-        "frame_labels": [
-          "idle",
-          "wave_00",
-          "wave_01"
-        ],
-        "prioritas": "MEDIUM",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 2",
-        "catatan_referensi": "Merah #C1440E atas, putih gading #F0EBD8 bawah, vertikal. Tiang #8B4513."
-      },
-      {
-        "id": "itm_scroll",
-        "nama": "Gulungan Misi/Peta (Dekorasi)",
-        "file": "assets/items/final/itm_scroll.png",
-        "format": "PNG-32",
-        "lebar": 32,
-        "tinggi": 24,
-        "prioritas": "LOW",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 2"
-      }
-    ],
-    "vfx": [
-      {
-        "id": "vfx_hit_sheet",
-        "nama": "VFX Hit/Slash Keris (3 Frame)",
-        "file": "assets/vfx/final/vfx_hit_sheet.png",
-        "format": "PNG-32",
-        "lebar": 96,
-        "tinggi": 32,
-        "jumlah_frame": 3,
-        "blend_mode": "additive",
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 1",
-        "catatan_referensi": "Kilatan putih-kuning, bukan darah realistis. 3 frame: flash, spark, fade."
-      },
-      {
-        "id": "vfx_dust_sheet",
-        "nama": "VFX Debu Lari + Landing (3 Frame)",
-        "file": "assets/vfx/final/vfx_dust_sheet.png",
-        "format": "PNG-32",
-        "lebar": 72,
-        "tinggi": 16,
-        "jumlah_frame": 3,
-        "prioritas": "MEDIUM",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 1"
-      },
-      {
-        "id": "vfx_coin_burst_sheet",
-        "nama": "VFX Coin Burst (4 Frame)",
-        "file": "assets/vfx/final/vfx_coin_burst_sheet.png",
-        "format": "PNG-32",
-        "lebar": 64,
-        "tinggi": 16,
-        "jumlah_frame": 4,
-        "prioritas": "MEDIUM",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 1"
-      },
-      {
-        "id": "vfx_glow_maja_sheet",
-        "nama": "VFX Glow Buah Maja (2 Frame Pulse)",
-        "file": "assets/vfx/final/vfx_glow_maja_sheet.png",
-        "format": "PNG-32",
-        "lebar": 48,
-        "tinggi": 24,
-        "jumlah_frame": 2,
-        "prioritas": "MEDIUM",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 1",
-        "catatan_referensi": "Pulsating glow hijau-kuning #7AB648→#FDEEA0"
-      },
-      {
-        "id": "vfx_torch_sheet",
-        "nama": "VFX Api Obor (3 Frame)",
-        "file": "assets/vfx/final/vfx_torch_sheet.png",
-        "format": "PNG-32",
-        "lebar": 48,
-        "tinggi": 24,
-        "jumlah_frame": 3,
-        "prioritas": "MEDIUM",
-        "status": "belum_dibuat",
-        "pic": "Pixel Artist 1"
-      }
-    ],
-    "audio": [
-      {
-        "id": "bgm_mainmenu",
-        "nama": "BGM Menu Utama",
-        "file": "assets/audio/bgm/bgm_mainmenu_01.ogg",
-        "format": "OGG",
-        "durasi_detik": 60,
-        "loop": true,
-        "channels": "stereo",
-        "sample_rate": 44100,
-        "ogg_quality": 6,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Sound Designer",
-        "catatan_referensi": "Gamelan chiptune/FM synth, tempo lambat-atmosferik. Instrumen: gender, saron, gong."
-      },
-      {
-        "id": "bgm_level01",
-        "nama": "BGM Level 1",
-        "file": "assets/audio/bgm/bgm_level01_01.ogg",
-        "format": "OGG",
-        "durasi_detik": 90,
-        "loop": true,
-        "channels": "stereo",
-        "sample_rate": 44100,
-        "ogg_quality": 6,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Sound Designer",
-        "catatan_referensi": "Gamelan chiptune energik, beat stabil untuk gameplay."
-      },
-      {
-        "id": "sfx_jump",
-        "nama": "SFX Lompat",
-        "file": "assets/audio/sfx/sfx_jump.wav",
-        "format": "WAV",
-        "durasi_detik": 0.3,
-        "channels": "mono",
-        "sample_rate": 44100,
-        "bit_depth": 16,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Sound Designer"
-      },
-      {
-        "id": "sfx_attack_keris",
-        "nama": "SFX Serangan Keris",
-        "file": "assets/audio/sfx/sfx_attack_keris.wav",
-        "format": "WAV",
-        "durasi_detik": 0.4,
-        "channels": "mono",
-        "sample_rate": 44100,
-        "bit_depth": 16,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Sound Designer"
-      },
-      {
-        "id": "sfx_coin_pickup",
-        "nama": "SFX Ambil Koin",
-        "file": "assets/audio/sfx/sfx_coin_pickup.wav",
-        "format": "WAV",
-        "durasi_detik": 0.3,
-        "channels": "mono",
-        "sample_rate": 44100,
-        "bit_depth": 16,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Sound Designer"
-      },
-      {
-        "id": "sfx_damage_hit",
-        "nama": "SFX Terkena Damage",
-        "file": "assets/audio/sfx/sfx_damage_hit.wav",
-        "format": "WAV",
-        "durasi_detik": 0.4,
-        "channels": "mono",
-        "sample_rate": 44100,
-        "bit_depth": 16,
-        "prioritas": "HIGH",
-        "status": "belum_dibuat",
-        "pic": "Sound Designer"
-      },
-      {
-        "id": "sfx_chest_open",
-        "nama": "SFX Buka Peti",
-        "file": "assets/audio/sfx/sfx_chest_open.wav",
-        "format": "WAV",
-        "durasi_detik": 0.8,
-        "channels": "mono",
-        "sample_rate": 44100,
-        "bit_depth": 16,
-        "prioritas": "MEDIUM",
-        "status": "belum_dibuat",
-        "pic": "Sound Designer"
-      },
-      {
-        "id": "sfx_spike_trap",
-        "nama": "SFX Spike Trap Aktif",
-        "file": "assets/audio/sfx/sfx_spike_trap.wav",
-        "format": "WAV",
-        "durasi_detik": 0.4,
-        "channels": "mono",
-        "sample_rate": 44100,
-        "bit_depth": 16,
-        "prioritas": "MEDIUM",
-        "status": "belum_dibuat",
-        "pic": "Sound Designer"
-      },
-      {
-        "id": "sfx_gameover",
-        "nama": "SFX Game Over Jingle",
-        "file": "assets/audio/sfx/sfx_gameover.wav",
-        "format": "WAV",
-        "durasi_detik": 2.5,
-        "channels": "mono",
-        "sample_rate": 44100,
-        "bit_depth": 16,
-        "prioritas": "MEDIUM",
-        "status": "belum_dibuat",
-        "pic": "Sound Designer"
-      },
-      {
-        "id": "sfx_levelcomplete",
-        "nama": "SFX Level Complete Jingle",
-        "file": "assets/audio/sfx/sfx_levelcomplete.wav",
-        "format": "WAV",
-        "durasi_detik": 2.0,
-        "channels": "mono",
-        "sample_rate": 44100,
-        "bit_depth": 16,
-        "prioritas": "MEDIUM",
-        "status": "belum_dibuat",
-        "pic": "Sound Designer"
-      },
-      {
-        "id": "sfx_ambient_jungle",
-        "nama": "Ambient Hutan Loop",
-        "file": "assets/audio/sfx/sfx_ambient_jungle.wav",
-        "format": "WAV",
-        "durasi_detik": 30,
-        "loop": true,
-        "channels": "mono",
-        "sample_rate": 44100,
-        "bit_depth": 16,
-        "prioritas": "LOW",
-        "status": "belum_dibuat",
-        "pic": "Sound Designer"
-      }
-    ]
-  },
-  "_statistik": {
-    "total_asset": 58,
-    "HIGH": 34,
-    "MEDIUM": 16,
-    "LOW": 8,
-    "total_file_png": 44,
-    "total_file_wav": 9,
-    "total_file_ogg": 2,
-    "total_file_ttf": 1,
-    "estimasi_ukuran_total_mb": "< 10 MB (uncompressed sprite ~2MB, audio ~7MB)"
-  }
+  "manifest_version": "2.0.0",
+  "scope": "Runtime assets loaded by main.js; not a final-art or licensing approval. Legacy wishlist: asset_manifest.legacy.json.",
+  "assets": [
+    {
+      "id": "chr_warrior_sheet",
+      "type": "gambar",
+      "file": "assets/characters/warrior/final/chr_warrior_sheet.png",
+      "sha256": "ddaab1ae4cd85fd7ca78fb752ee201756f3d32aa9eca8e196eedf65a3b9f6ab9",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 480,
+      "height": 96
+    },
+    {
+      "id": "chr_soldier_sheet",
+      "type": "gambar",
+      "file": "assets/characters/enemy_soldier/final/chr_soldier_sheet.png",
+      "sha256": "542fa640aa832c07dfbb0f08a166e9f39f192f2718fc29308d856f9e8b49976d",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 288,
+      "height": 52
+    },
+    {
+      "id": "chr_monkey_sheet",
+      "type": "gambar",
+      "file": "assets/characters/enemy_monkey/final/chr_monkey_sheet.png",
+      "sha256": "abf4bea9d7f0db7d71120b1a70e594aabe0b8cc98637016262d6c53bf302942b",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 128,
+      "height": 32
+    },
+    {
+      "id": "tileset_ruins",
+      "type": "gambar",
+      "file": "assets/environment/tilesets/final/env_ruins_wall_01.png",
+      "sha256": "1f1ad1ba485dd1a8e1a62965e57c4bb5852f0becf56db56c829f16fe065aae24",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "id": "bg_sky",
+      "type": "gambar",
+      "file": "assets/environment/backgrounds/final/bg_sky_layer.png",
+      "sha256": "1edec3f344f173859535188ec85c6c886f2936571a0d8220e5afee72a6b8eb47",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 640,
+      "height": 180
+    },
+    {
+      "id": "bg_jungle_far",
+      "type": "gambar",
+      "file": "assets/environment/backgrounds/final/bg_jungle_far.png",
+      "sha256": "7b899cb0b7ad970593e46fef177aa3aad849a0e22b3e9532ce7ff04d3ee91a4c",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 640,
+      "height": 180
+    },
+    {
+      "id": "bg_jungle_near",
+      "type": "gambar",
+      "file": "assets/environment/backgrounds/final/bg_jungle_near.png",
+      "sha256": "8d4ca1fd3924235ab29933144966d0f90b0db47a5787ccd4598f070a276b55af",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 640,
+      "height": 180
+    },
+    {
+      "id": "env_palmtree_tall",
+      "type": "gambar",
+      "file": "assets/environment/props/final/env_palmtree_tall.png",
+      "sha256": "24e45d72d5d08f9a01f807929e15b51923c12f14600ce213c8ff9415373e1ce1",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 32,
+      "height": 64
+    },
+    {
+      "id": "env_palmtree_med",
+      "type": "gambar",
+      "file": "assets/environment/props/final/env_palmtree_med.png",
+      "sha256": "439d7a42bac6e6262d2b82afb6eb386584eff49fe0ce67554ae587815345746a",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 32,
+      "height": 48
+    },
+    {
+      "id": "env_palmtree_short",
+      "type": "gambar",
+      "file": "assets/environment/props/final/env_palmtree_short.png",
+      "sha256": "9b2e9b90e57e421b89972b01891d006c277de95754ed0d77570c7f20a4536a5f",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 24,
+      "height": 32
+    },
+    {
+      "id": "env_candi_bentar_left",
+      "type": "gambar",
+      "file": "assets/environment/props/final/env_candi_bentar_left.png",
+      "sha256": "0773ea9a96e243b32363f9a12365e2203ed9f1332da76f0544ad4c75c77b7c95",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 32,
+      "height": 64
+    },
+    {
+      "id": "env_candi_bentar_right",
+      "type": "gambar",
+      "file": "assets/environment/props/final/env_candi_bentar_right.png",
+      "sha256": "67eb10f059e0c6e887b0b45f83221560a976d13bd21b88bc4689b0a3b597539f",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 32,
+      "height": 64
+    },
+    {
+      "id": "env_banner_majapahit",
+      "type": "gambar",
+      "file": "assets/environment/props/final/env_banner_majapahit.png",
+      "sha256": "98c4a57749e56a8eebbae290c6b4b63b9f62446d1a7fb7dfb2ff2d959e7e8219",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 16,
+      "height": 32
+    },
+    {
+      "id": "env_ruins_relief_01",
+      "type": "gambar",
+      "file": "assets/environment/tilesets/final/env_ruins_relief_01.png",
+      "sha256": "5b2cb8de7779a4a960fc3ae95855285e8a9b16d67c6aca52c8fd6178b23551d3",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "id": "itm_gobog_sheet",
+      "type": "gambar",
+      "file": "assets/items/final/itm_gobog_sheet.png",
+      "sha256": "b43080c81b6cf827f7edda6e84529c39982610aa24c40ff1d603a186e0d4f451",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 64,
+      "height": 16
+    },
+    {
+      "id": "itm_maja_static",
+      "type": "gambar",
+      "file": "assets/items/final/itm_maja_static.png",
+      "sha256": "0ec29d21eceea1102c988e121f17990b28ea3c4687da918d3fbcd01aea5b8238",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 16,
+      "height": 16
+    },
+    {
+      "id": "itm_chest_closed",
+      "type": "gambar",
+      "file": "assets/items/final/itm_chest_closed.png",
+      "sha256": "8c95a16641fc01d9b5865e641b179fadc64118f4a9211200095977c1a3480828",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "id": "itm_chest_open",
+      "type": "gambar",
+      "file": "assets/items/final/itm_chest_open.png",
+      "sha256": "4bbca1762677f18a266b99a8c7da150d5b162d1072f062322b7e27527ed614af",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 32,
+      "height": 32
+    },
+    {
+      "id": "vfx_hit",
+      "type": "gambar",
+      "file": "assets/vfx/final/vfx_hit_sheet.png",
+      "sha256": "412288069c79875d3008006db79c38abdd1ad9d1509c9a2eb539691c0015b942",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 96,
+      "height": 32
+    },
+    {
+      "id": "vfx_dust",
+      "type": "gambar",
+      "file": "assets/vfx/final/vfx_dust_sheet.png",
+      "sha256": "e753bcd6fbb14a41366b879d53effd447eaaefa20b6caef09d3c3ac2e6d3f41c",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 72,
+      "height": 16
+    },
+    {
+      "id": "vfx_torch",
+      "type": "gambar",
+      "file": "assets/vfx/final/vfx_torch_sheet.png",
+      "sha256": "8238f0f1ad19be2b1ec65738a43cafa6f6ca0d5cfc17e22538e0add9fc29b49a",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 48,
+      "height": 24
+    },
+    {
+      "id": "fauna_burung",
+      "type": "gambar",
+      "file": "assets/environment/fauna/fauna_burung_sheet.png",
+      "sha256": "7d753be239e7c29c004f178a04f7def14a86b4e3fe65b0f16840580eec54c5a4",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 48,
+      "height": 8
+    },
+    {
+      "id": "fauna_kupu_kupu",
+      "type": "gambar",
+      "file": "assets/environment/fauna/fauna_kupu_kupu_sheet.png",
+      "sha256": "8d59139e667f3d4d469c8ce01b0059bfc69d067986afd64b79a74f2dc8e20f2b",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 40,
+      "height": 8
+    },
+    {
+      "id": "fauna_capung",
+      "type": "gambar",
+      "file": "assets/environment/fauna/fauna_capung_sheet.png",
+      "sha256": "4a5b7025dc58372a96aaf9d49a22a8033b8160cf3531248d6dcc159f0b47dc56",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 48,
+      "height": 6
+    },
+    {
+      "id": "fauna_kunang_kunang",
+      "type": "gambar",
+      "file": "assets/environment/fauna/fauna_kunang_kunang_sheet.png",
+      "sha256": "034b805db3d4f7c842140379c04a0c1c3ecf9da74f6974eba1e6db02eb50bcd4",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 24,
+      "height": 6
+    },
+    {
+      "id": "ui_healthbar_empty",
+      "type": "gambar",
+      "file": "assets/ui/hud/final/ui_healthbar_empty.png",
+      "sha256": "5fa5e51073252e39f1e9b3e769e0921cd9e858504bd9693c0b7bcf1ae8e152f6",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 96,
+      "height": 12
+    },
+    {
+      "id": "ui_healthbar_fill",
+      "type": "gambar",
+      "file": "assets/ui/hud/final/ui_healthbar_fill.png",
+      "sha256": "f29f66172b7c59ee901f7fa700fb684b8ff96743b41cdee44e440aec705da833",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 96,
+      "height": 12
+    },
+    {
+      "id": "ui_icon_life",
+      "type": "gambar",
+      "file": "assets/ui/hud/final/ui_icon_life.png",
+      "sha256": "8d26f595f570e3d2ea49631978f99871dcc154d699c0f1c9c74bacd7b30ff79a",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 14,
+      "height": 14
+    },
+    {
+      "id": "ui_icon_coin",
+      "type": "gambar",
+      "file": "assets/ui/hud/final/ui_coin_icon.png",
+      "sha256": "cc94565bf456610097b96f3ce3707e526926a2388532808d457eba7c0a412c8a",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 12,
+      "height": 12
+    },
+    {
+      "id": "font_bitmap",
+      "type": "gambar",
+      "file": "assets/ui/fonts/font_majapahit_bitmap.png",
+      "sha256": "7c4d2754f53a23d248821c4b5fd603ee1aabe2818dd635c0cd34284b5f9c8330",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 128,
+      "height": 48
+    },
+    {
+      "id": "ui_screen_mainmenu",
+      "type": "gambar",
+      "file": "assets/ui/screens/final/ui_screen_mainmenu.png",
+      "sha256": "e0ad9956e56d27dd2aec9064c200f3b757aabd739af9ad9a115b5df08887e666",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "id": "ui_screen_gameover",
+      "type": "gambar",
+      "file": "assets/ui/screens/final/ui_screen_gameover.png",
+      "sha256": "c6b0731ed3e9dfbd646bd1c2e35301352fb4b9e57b8eb493167706bff3cc8ad1",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "id": "ui_screen_levelcomplete",
+      "type": "gambar",
+      "file": "assets/ui/screens/final/ui_screen_levelcomplete.png",
+      "sha256": "58e8ef000f4a97026898113f9028a625e196dc5ac863912cfb84e45a54c2a787",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "id": "ui_screen_pause",
+      "type": "gambar",
+      "file": "assets/ui/screens/final/ui_screen_pause.png",
+      "sha256": "0aa6c52d32412d3f4b3bbbf478eaf49e549bacab6b20d0e23205c65eb6c042a6",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 320,
+      "height": 180
+    },
+    {
+      "id": "ui_btn_audio_on",
+      "type": "gambar",
+      "file": "assets/ui/buttons/audio_on/ui_btn_audio_on_normal.png",
+      "sha256": "9a9bbbc925cd31fbe3c6b773540030c3059f04d770fb69057d8b3107e3087f7b",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "id": "ui_btn_audio_off",
+      "type": "gambar",
+      "file": "assets/ui/buttons/audio_off/ui_btn_audio_off_normal.png",
+      "sha256": "413c470d62588a2303b80a5b93566d56e2ca97fdce7440a4ec4da18036c9f79a",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "id": "ui_btn_pause",
+      "type": "gambar",
+      "file": "assets/ui/buttons/pause/ui_btn_pause_normal.png",
+      "sha256": "56b34c5082f5cc320019da8bb0aba1c14dd4713c23ec08ba7abd19ca48a57e87",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "id": "ui_btn_play",
+      "type": "gambar",
+      "file": "assets/ui/buttons/play/ui_btn_play_normal.png",
+      "sha256": "72e10c0c5ce5c15cf9cfff3487729f9ecb436d99e27e9b30b40ae08256990505",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "id": "ui_btn_retry",
+      "type": "gambar",
+      "file": "assets/ui/buttons/retry/ui_btn_retry_normal.png",
+      "sha256": "bbc50e70d4e6ed8dadfc0b3c448645c3fede7de7468541fdd99ab6bf944ca1ce",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "id": "ui_btn_home",
+      "type": "gambar",
+      "file": "assets/ui/buttons/home/ui_btn_home_normal.png",
+      "sha256": "12ae5c932eb2d28651f07865ac4c7e055e914e98b4251906f21c71f32dbf2951",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 24,
+      "height": 24
+    },
+    {
+      "id": "ui_btn_mulai",
+      "type": "gambar",
+      "file": "assets/ui/buttons/mulai/ui_btn_mulai_normal.png",
+      "sha256": "0a52b8b627a99cacb8a785f6a2a7a2aff21ecf60205861d964de4e400b19339c",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance",
+      "width": 64,
+      "height": 20
+    },
+    {
+      "id": "bgm_mainmenu",
+      "type": "audio",
+      "file": "assets/audio/bgm/bgm_mainmenu_02.ogg",
+      "sha256": "9173e526765af83093e6d256d43db3c5971a4a5812ccd78846d8c56c9c6a05c9",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance"
+    },
+    {
+      "id": "bgm_level01",
+      "type": "audio",
+      "file": "assets/audio/bgm/bgm_level01_02.ogg",
+      "sha256": "a623f25c97859b6fe87545211e630f00473d5a386ebee4f2700492be5e658a94",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance"
+    },
+    {
+      "id": "sfx_jump",
+      "type": "audio",
+      "file": "assets/audio/sfx/sfx_jump.wav",
+      "sha256": "eb0d07c9c36001b5569788f7c01efe0f69de9d16209236efe38f0c251242b1f6",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance"
+    },
+    {
+      "id": "sfx_attack_keris",
+      "type": "audio",
+      "file": "assets/audio/sfx/sfx_attack_keris.wav",
+      "sha256": "c45b13d67ed6363c7bc64bfd9469df6812187ed8511bf79603237ad83357a9db",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance"
+    },
+    {
+      "id": "sfx_coin_pickup",
+      "type": "audio",
+      "file": "assets/audio/sfx/sfx_coin_pickup.wav",
+      "sha256": "554af671055070b99e1433fb9f04ac648301dd49e16394d0a9675711ca3bfbf3",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance"
+    },
+    {
+      "id": "sfx_damage_hit",
+      "type": "audio",
+      "file": "assets/audio/sfx/sfx_damage_hit.wav",
+      "sha256": "1bb4b12cb5fed392fe8a333e5f4674952659d382004b7123560cedc055588a88",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance"
+    },
+    {
+      "id": "sfx_chest_open",
+      "type": "audio",
+      "file": "assets/audio/sfx/sfx_chest_open.wav",
+      "sha256": "2841b2b9fcec3dd11d9a20e5b526b66ccfafa94f22b7aabcabce7dfe98f46a23",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance"
+    },
+    {
+      "id": "sfx_spike_trap",
+      "type": "audio",
+      "file": "assets/audio/sfx/sfx_spike_trap.wav",
+      "sha256": "caa00b6e0a2fb89cc03d925af34449a5210bea411bd615555913ff51fa690192",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance"
+    },
+    {
+      "id": "sfx_gameover",
+      "type": "audio",
+      "file": "assets/audio/sfx/sfx_gameover.wav",
+      "sha256": "60d1a21885e2c8d42f2e9431784993e31f67b92f8bb614b01888e578e0d11a49",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance"
+    },
+    {
+      "id": "sfx_levelcomplete",
+      "type": "audio",
+      "file": "assets/audio/sfx/sfx_levelcomplete.wav",
+      "sha256": "a6cf28a2554a257191de8fdb7d914704bf1b6a2ab4b6ea2d259f26eff403ece4",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance"
+    },
+    {
+      "id": "sfx_checkpoint",
+      "type": "audio",
+      "file": "assets/audio/sfx/sfx_checkpoint.wav",
+      "sha256": "c7abce2efdbfe9d4ed1b1425e02f88fe8f0ff72eb45251b4d8fb39ed284f9270",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance"
+    },
+    {
+      "id": "sfx_ambient_jungle",
+      "type": "audio",
+      "file": "assets/audio/sfx/sfx_ambient_jungle.wav",
+      "sha256": "0f029a9457676ea57ffbdeedc7749c56fcd00c6766d1cd5d047a032006dfa47a",
+      "status": "prototype_runtime",
+      "rights": "pending_clearance"
+    }
+  ],
+  "data_files": [
+    "assets/ui/fonts/font_glyphs.json",
+    "docs/animation_config.json",
+    "docs/tileset_config.json",
+    "levels/level_01.json"
+  ]
 }

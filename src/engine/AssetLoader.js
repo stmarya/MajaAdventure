@@ -37,20 +37,18 @@ export class AssetLoader {
     this._totalAsset++;
     return new Promise((resolve) => {
       const img = new Image();
-      img.onload = () => {
-        this.gambar.set(id, img);
-        this._dimuat++;
-        this._lapor(id);
-        resolve();
+      let selesai = false;
+      const finish = berhasil => {
+        if (selesai) return;
+        selesai = true; clearTimeout(timeout);
+        img.onload = img.onerror = null;
+        if (!berhasil) console.warn(`[AssetLoader] Gambar gagal dimuat: ${path}`);
+        this.gambar.set(id, berhasil ? img : null);
+        this._dimuat++; this._lapor(id); resolve();
       };
-      img.onerror = () => {
-        // Asset belum dibuat — simpan null, jangan crash
-        console.warn(`[AssetLoader] Gambar tidak ditemukan: ${path}`);
-        this.gambar.set(id, null);
-        this._dimuat++;
-        this._lapor(id);
-        resolve();
-      };
+      const timeout = setTimeout(() => finish(false), 10_000);
+      img.onload = () => finish(true);
+      img.onerror = () => finish(false);
       img.src = path;
     });
   }
@@ -72,6 +70,7 @@ export class AssetLoader {
       const selesaikan = (berhasil) => {
         if (selesai) return; // pastikan hanya dipanggil sekali
         selesai = true;
+        clearTimeout(timeout);
         if (!berhasil) {
           console.warn(`[AssetLoader] Audio tidak ditemukan atau tidak bisa diputar: ${path}`);
           this.audio.set(id, null);
@@ -89,7 +88,7 @@ export class AssetLoader {
       el.addEventListener("error",          () => selesaikan(false), { once: true });
 
       // Timeout 10 detik agar loading tidak hang selamanya
-      setTimeout(() => selesaikan(false), 10_000);
+      const timeout = setTimeout(() => selesaikan(false), 10_000);
 
       el.src = path;
       el.load();

@@ -217,3 +217,8 @@ Sebelum setiap asset dipindah ke folder `final/`, pastikan:
 - [ ] Ukuran sesuai spesifikasi (karakter 48×48, tile 16×16, dll.)
 - [ ] Nama file mengikuti naming convention
 - [ ] Elemen khas Majapahit hadir (udeng, keris, motif, dll.) jika relevan
+
+
+## 9. Status validasi runtime (tahap 3)
+
+Kebijakan 16 warna dan tanpa semi-transparency tetap berlaku; runtime yang diwarisi masih menyimpang. Jalankan `python tools/validation/validate_assets.py --strict-art` untuk menampilkan dan menolak deviasi. Lulus validasi teknis bukan final-art approval. Pipeline baru memakai nearest-neighbor, tetapi sprite runtime tidak diganti massal tanpa review visual tim.

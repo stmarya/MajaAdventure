@@ -1,0 +1,132 @@
+{
+  "technical_errors": [],
+  "art_findings": [
+    {
+      "file": "assets/characters/warrior/final/chr_warrior_sheet.png",
+      "semi_transparent_pixels": 5566,
+      "colors_outside_palette": 11171
+    },
+    {
+      "file": "assets/characters/enemy_soldier/final/chr_soldier_sheet.png",
+      "semi_transparent_pixels": 1712,
+      "colors_outside_palette": 1685
+    },
+    {
+      "file": "assets/characters/enemy_monkey/final/chr_monkey_sheet.png",
+      "semi_transparent_pixels": 845,
+      "colors_outside_palette": 925
+    },
+    {
+      "file": "assets/environment/tilesets/final/env_ruins_wall_01.png",
+      "semi_transparent_pixels": 1669,
+      "colors_outside_palette": 2732
+    },
+    {
+      "file": "assets/environment/backgrounds/final/bg_sky_layer.png",
+      "semi_transparent_pixels": 0,
+      "colors_outside_palette": 1
+    },
+    {
+      "file": "assets/environment/backgrounds/final/bg_jungle_far.png",
+      "semi_transparent_pixels": 16181,
+      "colors_outside_palette": 14248
+    },
+    {
+      "file": "assets/environment/backgrounds/final/bg_jungle_near.png",
+      "semi_transparent_pixels": 18578,
+      "colors_outside_palette": 59177
+    },
+    {
+      "file": "assets/environment/props/final/env_palmtree_tall.png",
+      "semi_transparent_pixels": 622,
+      "colors_outside_palette": 742
+    },
+    {
+      "file": "assets/environment/props/final/env_palmtree_med.png",
+      "semi_transparent_pixels": 470,
+      "colors_outside_palette": 566
+    },
+    {
+      "file": "assets/environment/props/final/env_palmtree_short.png",
+      "semi_transparent_pixels": 309,
+      "colors_outside_palette": 341
+    },
+    {
+      "file": "assets/environment/props/final/env_candi_bentar_left.png",
+      "semi_transparent_pixels": 533,
+      "colors_outside_palette": 1229
+    },
+    {
+      "file": "assets/environment/props/final/env_candi_bentar_right.png",
+      "semi_transparent_pixels": 560,
+      "colors_outside_palette": 1258
+    },
+    {
+      "file": "assets/environment/props/final/env_banner_majapahit.png",
+      "semi_transparent_pixels": 253,
+      "colors_outside_palette": 324
+    },
+    {
+      "file": "assets/environment/tilesets/final/env_ruins_relief_01.png",
+      "semi_transparent_pixels": 166,
+      "colors_outside_palette": 235
+    },
+    {
+      "file": "assets/items/final/itm_gobog_sheet.png",
+      "semi_transparent_pixels": 339,
+      "colors_outside_palette": 561
+    },
+    {
+      "file": "assets/items/final/itm_maja_static.png",
+      "semi_transparent_pixels": 94,
+      "colors_outside_palette": 87
+    },
+    {
+      "file": "assets/items/final/itm_chest_closed.png",
+      "semi_transparent_pixels": 288,
+      "colors_outside_palette": 662
+    },
+    {
+      "file": "assets/items/final/itm_chest_open.png",
+      "semi_transparent_pixels": 316,
+      "colors_outside_palette": 812
+    },
+    {
+      "file": "assets/ui/hud/final/ui_healthbar_fill.png",
+      "semi_transparent_pixels": 0,
+      "colors_outside_palette": 74
+    },
+    {
+      "file": "assets/ui/hud/final/ui_icon_life.png",
+      "semi_transparent_pixels": 76,
+      "colors_outside_palette": 74
+    },
+    {
+      "file": "assets/ui/hud/final/ui_coin_icon.png",
+      "semi_transparent_pixels": 90,
+      "colors_outside_palette": 103
+    },
+    {
+      "file": "assets/ui/screens/final/ui_screen_mainmenu.png",
+      "semi_transparent_pixels": 0,
+      "colors_outside_palette": 197
+    },
+    {
+      "file": "assets/ui/screens/final/ui_screen_gameover.png",
+      "semi_transparent_pixels": 0,
+      "colors_outside_palette": 237
+    },
+    {
+      "file": "assets/ui/screens/final/ui_screen_levelcomplete.png",
+      "semi_transparent_pixels": 0,
+      "colors_outside_palette": 170
+    },
+    {
+      "file": "assets/ui/screens/final/ui_screen_pause.png",
+      "semi_transparent_pixels": 0,
+      "colors_outside_palette": 157
+    }
+  ],
+  "runtime_assets": 53,
+  "art_checked": true
+}

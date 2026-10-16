@@ -1,5 +1,5 @@
 {
-  "_komentar": "Schema JSON untuk data level Majapahit Platformer. Setiap file level mengikuti format ini.",
+  "_komentar": "Dokumen contoh level (bukan JSON Schema formal). Kontrak runtime authoritative: src/game/validateLevel.js; contoh historis ini tidak menjadi gate build.",
   "schema_version": "1.0.0",
 
   "contoh_level": {

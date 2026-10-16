@@ -1,142 +1,63 @@
-# 🏯 Majapahit Platformer
+# Majapahit Platformer / MajaAdventure
 
-**Game 2D Retro Platformer berlatar Kerajaan Majapahit — Visual Style 16-bit Pixel Art**
+Game platformer 2D bertema Majapahit, menggunakan HTML5 Canvas dan JavaScript modules. Native canvas 320×180; tampilan pixel-art nearest-neighbor.
 
----
+**Versi 0.1.1 — kandidat vertical slice untuk playtest internal, belum rilis publik.** Target aktif: web + keyboard. Windows native belum dipaketkan; kontrol sentuh bersifat eksperimental, bukan sertifikasi Android.
 
-## Gambaran Proyek
+## Menjalankan lokal
 
-| Properti | Nilai |
-|---|---|
-| Engine | HTML5 Canvas (Vanilla JavaScript) |
-| Resolusi Native | 320 × 180 px (16:9) |
-| Skala | Integer ×2 / ×3 / ×4 |
-| Interpolasi | Nearest-neighbor (pixel art) |
-| Platform Target | Web, Windows, Android |
-| Versi | 0.1.0 |
+Prasyarat: Node.js ≥22, Python 3.13, Git. Jalankan dari root repo:
 
----
-
-## Struktur Folder
-
-```
-MajapahitPlatformer/
-├── assets/            ← Semua file asset game
-│   ├── characters/    ← Sprite karakter dan musuh
-│   ├── environment/   ← Tileset, prop, background
-│   ├── ui/            ← HUD, layar menu, font
-│   ├── items/         ← Collectible, power-up, dekorasi
-│   ├── vfx/           ← Visual effects spritesheet
-│   └── audio/         ← BGM dan SFX
-├── docs/              ← Dokumentasi, spec, checklist
-├── src/               ← Source code engine + game
-│   ├── engine/        ← Core engine (loader, renderer, dll)
-│   ├── game/          ← Game logic (player, enemy, level)
-│   └── utils/         ← Utility helpers
-├── levels/            ← Data level (JSON)
-├── tools/             ← Pipeline & validation scripts
-│   ├── pipeline/      ← Script processing asset
-│   └── validation/    ← Script QA otomatis
-└── build/             ← Output build per platform
-```
-
----
-
-## Konvensi Penamaan File
-
-| Kategori | Format |
-|---|---|
-| Sprite sheet | `chr_[nama]_sheet.png` |
-| Frame karakter | `chr_[nama]_[aksi]_00.png` |
-| Tile environment | `env_[tema]_[jenis]_01.png` |
-| UI element | `ui_[fungsi]_[state].png` |
-| Item | `itm_[nama]_[state]_00.png` |
-| BGM | `bgm_[scene]_01.ogg` |
-| SFX | `sfx_[aksi].wav` |
-| VFX sheet | `vfx_[nama]_sheet.png` |
-
----
-
-## Dokumentasi
-
-| File | Isi |
-|---|---|
-| `docs/project_config.json` | Konfigurasi teknis proyek |
-| `docs/color_palette.json` | Palette resmi 16 warna |
-| `docs/style_guide.md` | Panduan visual & pixel art |
-| `docs/asset_manifest.json` | Manifest lengkap 58 assets |
-| `docs/animation_config.json` | Konfigurasi semua animasi |
-| `docs/tileset_config.json` | Konfigurasi tileset & schema level |
-| `docs/production_checklist.md` | Checklist status produksi |
-
----
-
-## Cara Menjalankan
-
-```bash
-# Buka di browser (development)
-# Cukup serve folder root dengan HTTP server lokal
+```sh
+npm ci
+python -m pip install -r requirements-dev.txt
 python -m http.server 8080
-# Buka http://localhost:8080/index.html
 ```
 
----
+Buka `http://localhost:8080` (jangan langsung `file://`). Semua aset runtime sudah dilacak di Git. Source pack opsional dapat direstorasi dengan `python tools/restore_assets.py`; bukan syarat menjalankan game.
 
-## Integrasi MajaAdventure
+Kontrol: A/D atau panah untuk bergerak, X/Space/panah atas melompat, Z menyerang, panah bawah untuk turun dari platform satu-arah, Esc pause, M mute. Tombol menu juga dapat dipakai dengan keyboard. F3 hanya mengaktifkan debug jika URL memiliki `?debug=1`. Lihat petunjuk pada layar; UI memiliki opsi volume dan pengurangan flashing. Canvas gameplay belum mendukung permainan nonvisual penuh.
 
-Sumber utama aset: https://github.com/stmarya/MajaAdventure, diimpor dari
-`MajaAdventure-main.zip` pada 16 Oktober 2026. Snapshot ZIP dipakai untuk integrasi
-awal; versi GitHub mempertahankan riwayat repo sumber.
+## Pengujian dan build
 
-Salinan repo, dokumentasi sumber, arsip Base64 dan aset asli yang telah dipulihkan
-disimpan di [staging/MajaAdventure](staging/MajaAdventure/README.md).
-Folder staging hanya ada pada workspace integrasi lokal dan tidak diunggah.
-Pada clone GitHub, sumber utama adalah `.asset-packs/` di root repo;
-dokumentasi awal dipertahankan di [docs/README_ASSET_SOURCE.md](docs/README_ASSET_SOURCE.md).
-Kelima paket telah diperiksa SHA-256 dan setiap file hasil ekstraksi dibandingkan
-dengan isi arsip. Gambar/audio sumber sama dengan staging lama; engine Canvas,
-level, UI yang sudah disesuaikan, dan pemilihan audio lokal dipertahankan.
-
-Untuk membangun ulang sprite sheet dari sumber utama (memerlukan Pillow):
-
-```powershell
-# Pada clone GitHub baru, pulihkan paket dahulu (sekali saja):
-python tools\restore_assets.py
-# Di workspace ZIP lokal, paket sudah dipulihkan di staging/MajaAdventure.
-python tools\pipeline\assemble_new_assets.py
-# Atau tentukan folder repo lain yang paketnya sudah dipulihkan:
-python tools\pipeline\assemble_new_assets.py --source "C:\path\ke\MajaAdventure"
-```
-
-Pipeline menulis ulang sprite sheet karakter, tileset, properti, item dan ikon
-base pack pada lokasi yang sama dengan engine. Fauna kini menggunakan empat
-frame asli Dunia Hidup, bukan kotak placeholder. Obor memakai sprite obor,
-bukan bendera; efek benturan/debu juga memakai frame sumber.
-Sheet fauna dan VFX baru menggunakan nearest-neighbor dan crop bersama untuk
-menjaga pivot. VFX tetap tiga frame sesuai kontrak engine; frame keempat
-tetap tersedia di repo sumber. Resolusi, collision, AI dan kontrol tidak diubah.
-
-Paket Lima Bagian dan audio eksternal tetap tersedia sebagai bahan produksi,
-bukan otomatis menjadi musuh, level, dialog atau soundtrack baru.
-Lihat checklist sumber di `docs/CHECKLIST_ASET_MASTER.md` pada clone GitHub,
-atau `staging/MajaAdventure/docs/CHECKLIST_ASET_MASTER.md` pada workspace ZIP.
-Lisensi distribusi aset visual belum ditetapkan oleh repo sumber.
-Audio eksternal berlisensi CC0; dokumen `AUDIO_EXTERNAL_CC0.md` di folder docs sumber
-dipertahankan beserta dokumen lisensi di dalam paket.
-
-Validasi integrasi:
-
-```powershell
+```sh
+npm test
 python -m unittest discover -s tools -p test_source_integration.py
-node --test tools\test_fauna.mjs
-python tools\test_sprite_dimensions.py
-python tools\verify_imports.py
+python -m unittest discover -s tools -p test_delivery.py
+python tools/validation/validate_assets.py
+npx playwright install chromium
+npm run test:browser
+python tools/build_web.py --channel internal
 ```
 
-Backup sebelum integrasi tersedia di
-`build/backups/before-maja-integration-20261016.zip`.
+Browser smoke memakai Python HTTP server sementara. Pada Windows atau interpreter bernama `python`, atur `TEST_PYTHON=python` di environment. Chromium lokal opsional melalui `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH`.
 
----
+Build allowlist menghasilkan `dist/web/`, ZIP internal, checksum, dan `BUILD_INFO.json`. Tidak menyertakan source pack, tools, node_modules, atau progres. `python tools/build_web.py --channel public` **sengaja gagal** selama hak distribusi, final-art, dan QA manusia belum disetujui. Build internal juga bukan pemberian hak distribusi aset.
 
-*Proyek ini menggunakan pipeline asset berbasis Python untuk validasi dan processing.*  
-*Lihat `tools/` untuk script otomasi.*
+## Dokumentasi tim
+
+- [Progres dan detail push per tahap](progres/README.md)
+- [Prosedur build dan gerbang rilis](docs/BUILD_RELEASE.md)
+- [Checklist produksi](docs/production_checklist.md)
+- [Protokol playtest manusia](docs/PLAYTEST.md)
+- [Hak aset dan lisensi](docs/ASSET_RIGHTS.md)
+- [Manifest runtime](docs/asset_manifest.json): 53 aset yang benar-benar dimuat, hash dan dimensi; manifest lama dipertahankan sebagai `asset_manifest.legacy.json`.
+- [Style guide](docs/style_guide.md), [animasi](docs/animation_config.json), [tileset](docs/tileset_config.json).
+
+Dokumentasi sumber awal tetap tersedia pada [README_ASSET_SOURCE](docs/README_ASSET_SOURCE.md) dan [checklist master aset](docs/CHECKLIST_ASET_MASTER.md).
+
+## Pipeline aset
+
+Pipeline lintas OS menggunakan `pathlib` dan nearest-neighbor. Uji kandidat tanpa menimpa runtime:
+
+```sh
+python tools/restore_assets.py
+python tools/pipeline/assemble_new_assets.py --source . --output dist/asset-candidate
+python tools/validation/validate_assets.py --strict-art
+```
+
+Kandidat pipeline **belum otomatis disetujui** sebagai final art. Validator saat ini masih menemukan deviasi palette/alpha pada runtime; jangan sekadar melonggarkan kebijakan agar tes hijau. Penggantian sprite memerlukan pemeriksaan visual tim. Hak visual, audio dan lisensi kode juga belum disahkan.
+
+## CI
+
+`.github/workflows/quality.yml`: unit/regression + integritas pack + pipeline/build pada Ubuntu/Windows; browser smoke dan ZIP internal pada Ubuntu. Tidak melakukan deployment. Hasil konfigurasi CI bukan bukti job remote sudah lulus—periksa tab Actions setelah push.

@@ -1,0 +1,48 @@
+{
+  "scope": "public_web_release",
+  "status": "blocked",
+  "required_checks": {
+    "visual_rights": {
+      "approved": false,
+      "reviewer": null,
+      "reviewed_at": null,
+      "evidence": null
+    },
+    "audio_rights": {
+      "approved": false,
+      "reviewer": null,
+      "reviewed_at": null,
+      "evidence": null
+    },
+    "code_license": {
+      "approved": false,
+      "reviewer": null,
+      "reviewed_at": null,
+      "evidence": null
+    },
+    "art_qa": {
+      "approved": false,
+      "reviewer": null,
+      "reviewed_at": null,
+      "evidence": null
+    },
+    "human_playtest": {
+      "approved": false,
+      "reviewer": null,
+      "reviewed_at": null,
+      "evidence": null
+    },
+    "audio_listening": {
+      "approved": false,
+      "reviewer": null,
+      "reviewed_at": null,
+      "evidence": null
+    },
+    "browser_matrix": {
+      "approved": false,
+      "reviewer": null,
+      "reviewed_at": null,
+      "evidence": null
+    }
+  }
+}

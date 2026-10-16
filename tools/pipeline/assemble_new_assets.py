@@ -23,19 +23,21 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_SOURCE = ROOT if (ROOT / ".asset-packs" / "manifest.json").is_file() else ROOT / "staging" / "MajaAdventure"
 parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument("--output", type=Path, default=ROOT, help="Output root; use a separate folder for visual QA")
 parser.add_argument("--source", type=Path, default=DEFAULT_SOURCE)
 args = parser.parse_args()
 SOURCE = args.source.resolve()
+OUTPUT = args.output.resolve()
 BASE_TERPISAH = str(SOURCE / "assets" / "base-pack")
 BASE_DUNIA = SOURCE / "assets" / "expansions" / "dunia-hidup-01"
 if not Path(BASE_TERPISAH).is_dir() or not BASE_DUNIA.is_dir():
     parser.error("Paket belum dipulihkan. Jalankan tools/restore_assets.py di repo sumber.")
 os.chdir(ROOT)
-OUT_CHARS     = r"assets\characters"
-OUT_ENV       = r"assets\environment"
-OUT_ITEMS     = r"assets\items\final"
-OUT_UI        = r"assets\ui"
-OUT_VFX       = r"assets\vfx\final"
+OUT_CHARS     = "assets/characters"
+OUT_ENV       = "assets/environment"
+OUT_ITEMS     = "assets/items/final"
+OUT_UI        = "assets/ui"
+OUT_VFX       = "assets/vfx/final"
 
 log = []
 errors = []
@@ -73,9 +75,8 @@ def buat_sheet_horisontal(frames, target_w, target_h, output_path):
     for i, frame in enumerate(frames):
         # Resize dengan aspect ratio terjaga, lalu center
         frame_resized = resize_fit(frame, target_w, target_h)
-        sheet.paste(frame_resized, (i * target_w, 0), frame_resized)
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
-    sheet.save(output_path, "PNG")
+        sheet.paste(frame_resized, (i * target_w, 0))
+    simpan(sheet, output_path)
     log_ok(f"{len(frames)} frames -> {output_path} ({sheet.width}x{sheet.height})")
     return True
 
@@ -85,20 +86,24 @@ def resize_fit(img, target_w, target_h):
     scale = min(target_w / src_w, target_h / src_h)
     new_w = max(1, int(src_w * scale))
     new_h = max(1, int(src_h * scale))
-    img_resized = img.resize((new_w, new_h), Image.LANCZOS)
+    img_resized = img.resize((new_w, new_h), Image.Resampling.NEAREST)
     # Jika pixelated lebih baik pakai NEAREST untuk karakter
     result = Image.new("RGBA", (target_w, target_h), (0, 0, 0, 0))
     offset_x = (target_w - new_w) // 2
     offset_y = (target_h - new_h) // 2
-    result.paste(img_resized, (offset_x, offset_y), img_resized)
+    result.paste(img_resized, (offset_x, offset_y))
     return result
 
 def resize_exact(img, w, h):
     """Resize exact tanpa aspect ratio."""
-    return img.resize((w, h), Image.LANCZOS)
+    return img.resize((w, h), Image.Resampling.NEAREST)
 
 def simpan(img, path):
-    os.makedirs(os.path.dirname(path), exist_ok=True)
+    path = Path(path)
+    if path.is_absolute(): path = path.relative_to(ROOT)
+    if ".." in path.parts: raise ValueError("Output path escapes root")
+    path = OUTPUT / path
+    path.parent.mkdir(parents=True, exist_ok=True)
     img.save(path, "PNG")
     log_ok(f"Simpan {path} ({img.width}x{img.height})")
 
@@ -144,7 +149,7 @@ def paste_frame(sheet, img, idx, fw, fh, kolom):
     x = (idx % kolom) * fw
     y = (idx // kolom) * fh
     f = resize_fit(img, fw, fh)
-    sheet.paste(f, (x, y), f)
+    sheet.paste(f, (x, y))
 
 # idle: index 0-3
 for i, f in enumerate(idle_frames[:4]):
@@ -176,7 +181,7 @@ for i, f in enumerate(hurt_frames[:2]):
 for i, f in enumerate(defeat_frames[:2]):
     paste_frame(sheet_warrior, f, 18 + i, FW, FH, KOLOM)
 
-simpan(sheet_warrior, r"assets\characters\warrior\final\chr_warrior_sheet.png")
+simpan(sheet_warrior, "assets/characters/warrior/final/chr_warrior_sheet.png")
 
 # =============================================================================
 # 2. ENEMY SOLDIER (prajurit) — frame 48x52px
@@ -195,7 +200,7 @@ sheet_soldier = Image.new("RGBA", (EFW * TOTAL_SOLDIER, EFH), (0, 0, 0, 0))
 
 def paste_h(sheet, img, idx, fw, fh):
     f = resize_fit(img, fw, fh)
-    sheet.paste(f, (idx * fw, 0), f)
+    sheet.paste(f, (idx * fw, 0))
 
 for i, f in enumerate(praj_idle[:2]):
     paste_h(sheet_soldier, f, i, EFW, EFH)
@@ -205,7 +210,7 @@ for i, f in enumerate(praj_attack[:3]):
 if praj_idle:
     paste_h(sheet_soldier, praj_idle[0], 5, EFW, EFH)
 
-simpan(sheet_soldier, r"assets\characters\enemy_soldier\final\chr_soldier_sheet.png")
+simpan(sheet_soldier, "assets/characters/enemy_soldier/final/chr_soldier_sheet.png")
 
 # =============================================================================
 # 3. ENEMY MONKEY — frame 32x32px
@@ -228,7 +233,7 @@ if monkey_idle:
 for i, f in enumerate(monkey_jump[:2]):
     paste_h(sheet_monkey, f, 2 + i, MFW, MFH)
 
-simpan(sheet_monkey, r"assets\characters\enemy_monkey\final\chr_monkey_sheet.png")
+simpan(sheet_monkey, "assets/characters/enemy_monkey/final/chr_monkey_sheet.png")
 
 # =============================================================================
 # 4. TILESET — 4x4 grid, tile 16x16px = 64x64px total
@@ -244,8 +249,8 @@ TW = TH = 16
 sheet_tile = Image.new("RGBA", (TW * 4, TH * 4), (0, 0, 0, 0))
 
 def paste_tile(sheet, img, col, row, tw=16, th=16):
-    f = img.resize((tw, th), Image.LANCZOS)
-    sheet.paste(f, (col * tw, row * th), f)
+    f = img.resize((tw, th), Image.Resampling.NEAREST)
+    sheet.paste(f, (col * tw, row * th))
 
 # Tile bata/dinding: ambil dari tiles/dinding (5 varian)
 dinding = muat_frames(os.path.join(BASE_TERPISAH, "lingkungan", "tiles", "dinding"), count=5)
@@ -281,7 +286,7 @@ if lantai_rumput: paste_tile(sheet_tile, lantai_rumput[0], 1, 3)  # 14 one_way
 if dinding: paste_tile(sheet_tile, dinding[-1], 2, 3)  # 15 bata_dalam
 if dinding_tanaman: paste_tile(sheet_tile, dinding_tanaman[0], 3, 3)  # 16 canopy
 
-simpan(sheet_tile, r"assets\environment\tilesets\final\env_ruins_wall_01.png")
+simpan(sheet_tile, "assets/environment/tilesets/final/env_ruins_wall_01.png")
 
 # =============================================================================
 # 5. BACKGROUND LAYERS — diperbesar ke 320x180px minimal
@@ -292,16 +297,16 @@ kanopi_jauh  = muat_frames(os.path.join(BASE_TERPISAH, "lingkungan", "kanopi", "
 kanopi_dekat = muat_frames(os.path.join(BASE_TERPISAH, "lingkungan", "kanopi", "dekat"), count=1)
 
 if kanopi_jauh:
-    bg_jauh = kanopi_jauh[0].resize((640, 180), Image.LANCZOS)
-    simpan(bg_jauh, r"assets\environment\backgrounds\final\bg_jungle_far.png")
+    bg_jauh = kanopi_jauh[0].resize((640, 180), Image.Resampling.NEAREST)
+    simpan(bg_jauh, "assets/environment/backgrounds/final/bg_jungle_far.png")
 
 if kanopi_dekat:
-    bg_dekat = kanopi_dekat[0].resize((640, 180), Image.LANCZOS)
-    simpan(bg_dekat, r"assets\environment\backgrounds\final\bg_jungle_near.png")
+    bg_dekat = kanopi_dekat[0].resize((640, 180), Image.Resampling.NEAREST)
+    simpan(bg_dekat, "assets/environment/backgrounds/final/bg_jungle_near.png")
 
 # bg_sky: buat gradient biru (asset baru tidak punya sky, buat solid)
 sky = Image.new("RGBA", (640, 180), (28, 74, 120, 255))
-simpan(sky, r"assets\environment\backgrounds\final\bg_sky_layer.png")
+simpan(sky, "assets/environment/backgrounds/final/bg_sky_layer.png")
 
 # =============================================================================
 # 6. PROPS — sesuai DEF_PROP di PropRenderer.js
@@ -320,21 +325,21 @@ bendera      = muat_frames(os.path.join(BASE_TERPISAH, "dekorasi", "bendera"), c
 
 def simpan_prop(frames, w, h, path):
     if frames:
-        img = frames[0].resize((w, h), Image.LANCZOS)
+        img = frames[0].resize((w, h), Image.Resampling.NEAREST)
         simpan(img, path)
 
-simpan_prop(pohon_tinggi, 32, 64, r"assets\environment\props\final\env_palmtree_tall.png")
-simpan_prop(pohon_sedang, 32, 48, r"assets\environment\props\final\env_palmtree_med.png")
-simpan_prop(pohon_pendek, 24, 32, r"assets\environment\props\final\env_palmtree_short.png")
-simpan_prop(candi_kiri,   32, 64, r"assets\environment\props\final\env_candi_bentar_left.png")
-simpan_prop(candi_kanan,  32, 64, r"assets\environment\props\final\env_candi_bentar_right.png")
-simpan_prop(bendera,      16, 32, r"assets\environment\props\final\env_banner_majapahit.png")
+simpan_prop(pohon_tinggi, 32, 64, "assets/environment/props/final/env_palmtree_tall.png")
+simpan_prop(pohon_sedang, 32, 48, "assets/environment/props/final/env_palmtree_med.png")
+simpan_prop(pohon_pendek, 24, 32, "assets/environment/props/final/env_palmtree_short.png")
+simpan_prop(candi_kiri,   32, 64, "assets/environment/props/final/env_candi_bentar_left.png")
+simpan_prop(candi_kanan,  32, 64, "assets/environment/props/final/env_candi_bentar_right.png")
+simpan_prop(bendera,      16, 32, "assets/environment/props/final/env_banner_majapahit.png")
 
 # Relief: ambil dari relief/kala
 relief_kala_full = muat_frames(os.path.join(BASE_TERPISAH, "lingkungan", "relief", "kala"), count=1)
 if relief_kala_full:
-    img = relief_kala_full[0].resize((16, 16), Image.LANCZOS)
-    simpan(img, r"assets\environment\tilesets\final\env_ruins_relief_01.png")
+    img = relief_kala_full[0].resize((16, 16), Image.Resampling.NEAREST)
+    simpan(img, "assets/environment/tilesets/final/env_ruins_relief_01.png")
 
 # =============================================================================
 # 7. ITEMS — gobog 16x16 (4 frame), peti 32x32 (close/open)
@@ -348,23 +353,23 @@ maja  = muat_frames(os.path.join(BASE_TERPISAH, "items", "maja"),  count=1)
 if gobog:
     sheet_gobog = Image.new("RGBA", (16 * len(gobog), 16), (0, 0, 0, 0))
     for i, f in enumerate(gobog):
-        g = f.resize((16, 16), Image.LANCZOS)
-        sheet_gobog.paste(g, (i * 16, 0), g)
-    simpan(sheet_gobog, r"assets\items\final\itm_gobog_sheet.png")
+        g = f.resize((16, 16), Image.Resampling.NEAREST)
+        sheet_gobog.paste(g, (i * 16, 0))
+    simpan(sheet_gobog, "assets/items/final/itm_gobog_sheet.png")
 
 if peti and len(peti) >= 2:
-    closed = peti[0].resize((32, 32), Image.LANCZOS)
-    opened = peti[1].resize((32, 32), Image.LANCZOS)
-    simpan(closed, r"assets\items\final\itm_chest_closed.png")
-    simpan(opened, r"assets\items\final\itm_chest_open.png")
+    closed = peti[0].resize((32, 32), Image.Resampling.NEAREST)
+    opened = peti[1].resize((32, 32), Image.Resampling.NEAREST)
+    simpan(closed, "assets/items/final/itm_chest_closed.png")
+    simpan(opened, "assets/items/final/itm_chest_open.png")
 elif peti:
-    img = peti[0].resize((32, 32), Image.LANCZOS)
-    simpan(img, r"assets\items\final\itm_chest_closed.png")
-    simpan(img, r"assets\items\final\itm_chest_open.png")
+    img = peti[0].resize((32, 32), Image.Resampling.NEAREST)
+    simpan(img, "assets/items/final/itm_chest_closed.png")
+    simpan(img, "assets/items/final/itm_chest_open.png")
 
 if maja:
-    img = maja[0].resize((16, 16), Image.LANCZOS)
-    simpan(img, r"assets\items\final\itm_maja_static.png")
+    img = maja[0].resize((16, 16), Image.Resampling.NEAREST)
+    simpan(img, "assets/items/final/itm_maja_static.png")
 
 # =============================================================================
 # 8. UI dari staging/majapahit-assets-terpisah/ui/
@@ -375,12 +380,12 @@ ui_gobog = muat_frames(os.path.join(BASE_TERPISAH, "ui", "counter_gobog"), count
 ui_nyawa = muat_frames(os.path.join(BASE_TERPISAH, "ui", "nyawa_keris"),   count=1)
 
 if ui_gobog:
-    img = ui_gobog[0].resize((12, 12), Image.LANCZOS)
-    simpan(img, r"assets\ui\hud\final\ui_coin_icon.png")
+    img = ui_gobog[0].resize((12, 12), Image.Resampling.NEAREST)
+    simpan(img, "assets/ui/hud/final/ui_coin_icon.png")
 
 if ui_nyawa:
-    img = ui_nyawa[0].resize((14, 14), Image.LANCZOS)
-    simpan(img, r"assets\ui\hud\final\ui_icon_life.png")
+    img = ui_nyawa[0].resize((14, 14), Image.Resampling.NEAREST)
+    simpan(img, "assets/ui/hud/final/ui_icon_life.png")
 
 # =============================================================================
 # 9. VFX dan fauna dari Dunia Hidup (bukan sprite pengganti)

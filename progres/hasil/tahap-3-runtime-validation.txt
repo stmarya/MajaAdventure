@@ -1,0 +1,4 @@
+/data/analysis/MajaAdventure-work/tools/validation/validate_assets.py:33: DeprecationWarning: Image.Image.getdata is deprecated and will be removed in Pillow 14 (2027-10-15). Use get_flattened_data instead.
+  pixels=list(image.convert('RGBA').getdata())
+Runtime assets: 53; technical errors: 0; art deviations: 25
+ART NOT APPROVED: palette/alpha deviations remain. Technical PASS is NOT final-art or public-release approval.

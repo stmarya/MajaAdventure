@@ -1,0 +1,10 @@
+Build blocked:
+Approval pending: visual_rights
+Approval pending: audio_rights
+Approval pending: code_license
+Approval pending: art_qa
+Approval pending: human_playtest
+Approval pending: audio_listening
+Approval pending: browser_matrix
+Final art violates palette/alpha policy; art approval cannot bypass strict checks
+EXPECTED_EXIT=1 ACTUAL_EXIT=1

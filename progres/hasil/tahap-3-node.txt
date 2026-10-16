@@ -1,0 +1,56 @@
+
+> maja-adventure@0.1.1 test
+> node --test tools/test_*.mjs
+
+✔ source sheets render all 18 fauna with correct dimensions, frame and facing (4.255567ms)
+✔ missing sheets warn once per type and retain placeholder rendering (3.081193ms)
+✔ animation advances and reinitialization replaces source sheets (0.896365ms)
+✔ landing snaps exactly to floor and stays stable (3.008675ms)
+✔ right and left walls stop at their actual edges (0.460073ms)
+✔ ceiling in row zero is a collision, not a falsy sentinel (0.285964ms)
+✔ one-way: land above, pass from below, and explicit drop-through (0.33611ms)
+✔ large displacement does not tunnel through a floor (0.305407ms)
+✔ left and right world boundaries are solid (0.364656ms)
+✔ death animation completes and reaches gameover (4.371821ms)
+✔ death takes precedence over reaching exit (1.521682ms)
+✔ checkpoint retry preserves run while full reset starts fresh (2.163525ms)
+✔ falling outside level reaches gameover even with invulnerability (2.784273ms)
+✔ score completion is idempotent (0.4657ms)
+✔ 30/60/120/144Hz rendering produces identical fixed-step movement (3.188046ms)
+✔ idle spawn does not oscillate vertically (14.43436ms)
+✔ level spike mutations do not leak into original level data (1.25684ms)
+✔ fixed clock clamps background catchup and discards accumulator on transition (0.298655ms)
+✔ exit is reachable from actual floor contact, not an embedded sprite (1.303713ms)
+✔ keyboard aliases stay active until every mapped key is released (2.312231ms)
+✔ blur clears held keys, virtual pointers and stale edges (0.563184ms)
+✔ multiple virtual pointers do not release each other (0.478564ms)
+✔ soldier telegraph and recovery do not cause damage; strike does (0.861934ms)
+✔ soldier exits recovery when animation next has changed to idle (0.673912ms)
+✔ dead enemy never deals attack damage (0.243637ms)
+✔ jump buffer can trigger on next grounded tick; coyote time permits edge jump (0.691609ms)
+✔ renderer uses punctuation metadata rather than stale charset offsets (0.482778ms)
+[AssetLoader] Gambar gagal dimuat: hung.png
+✔ authored runtime level passes bounded validation (5.280806ms)
+✔ rejects oversized dimension (1.141592ms)
+✔ rejects inconsistent pixel dimensions (0.768918ms)
+✔ rejects unknown tile (2.376445ms)
+✔ rejects truncated tile array (0.775153ms)
+✔ rejects spawn out of bounds (0.716826ms)
+✔ rejects duplicate object ID (0.774305ms)
+✔ rejects unknown object type (1.057129ms)
+✔ rejects missing object type (0.987911ms)
+✔ rejects nonfinite damage (0.896881ms)
+✔ rejects missing exit (1.01817ms)
+✔ rejects trigger extending past level (0.921802ms)
+✔ image loader settles once and clears watchdog on success (0.969523ms)
+✔ image watchdog resolves a hung request instead of freezing boot (1.505533ms)
+Traversal: finished, deaths=1, both checkpoints activated; no teleport, no HP overrides.
+✔ real level clears using movement, jump, combat and checkpoint retry; no teleport or invulnerability override (88.187209ms)
+ℹ tests 42
+ℹ suites 0
+ℹ pass 42
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 716.004706

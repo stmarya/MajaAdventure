@@ -5,6 +5,7 @@
  * Bertanggung jawab men-toggle tile spike berdasarkan timer trigger.
  */
 
+import { validateLevel } from "./validateLevel.js";
 import { KONFIG } from "../engine/config.js";
 
 export class Level {
@@ -36,6 +37,7 @@ export class Level {
    * @param {import("../engine/TilemapRenderer.js").TilemapRenderer} tileMapper
    */
   inisialisasi(levelJson, tileMapper) {
+    validateLevel(levelJson);
     this._data   = levelJson;
     this._tileMap = tileMapper;
 
@@ -90,14 +92,14 @@ export class Level {
         if (state.timer >= state.intervalMs) {
           state.aktif = true;
           state.timer = 0;
-          this._setSpikeArea(obj.tile_x, obj.lebar_tiles ?? 1, true);
+          this._setSpikeArea(obj.tile_x, obj.lebar_tiles ?? 1, true, obj.tile_y);
         }
       } else {
         // Sudah aktif — tunggu durasi lalu kembali idle
         if (state.timer >= state.durasiMs) {
           state.aktif = false;
           state.timer = 0;
-          this._setSpikeArea(obj.tile_x, obj.lebar_tiles ?? 1, false);
+          this._setSpikeArea(obj.tile_x, obj.lebar_tiles ?? 1, false, obj.tile_y);
         }
       }
     }
@@ -109,9 +111,9 @@ export class Level {
    * @param {number} lebarTiles - Jumlah tile spike
    * @param {boolean} aktif
    */
-  _setSpikeArea(tileX, lebarTiles, aktif) {
+  _setSpikeArea(tileX, lebarTiles, aktif, tileY = this.tinggiTiles - 5) {
     const tileId = aktif ? 12 : 11; // 12=spike_aktif, 11=spike_idle
-    const y      = this.tinggiTiles - 5; // baris spike (lantai - 5)
+    const y      = tileY; // posisi trigger dari data level, bukan baris hardcode
     for (let i = 0; i < lebarTiles; i++) {
       const idx = y * this.lebarTiles + (tileX + i);
       if (idx >= 0 && idx < this.tileData.length) {
