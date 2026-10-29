@@ -110,12 +110,34 @@
       "file_count": 39,
       "summary": "Pipeline, manifest, CI, level validation, internal build/public gates; 42 tes Node, 4 delivery + 3 source tests, 13 source + 13 package browser checks.",
       "committed_at": "2026-10-16T10:30:53-05:00"
+    },
+    {
+      "stage": 4,
+      "sha": "5afe9c2642b2a7163c6d09faf7c8e3159f6eb95a",
+      "url": "https://github.com/stmarya/MajaAdventure/commit/5afe9c2642b2a7163c6d09faf7c8e3159f6eb95a",
+      "message": "docs: add visual concept and target A roadmap",
+      "files": [
+        "README.md",
+        "progres/README.md",
+        "progres/ROADMAP.md",
+        "docs/DESAIN_VISUAL_LEVEL_01.md",
+        "docs/mockups/level01-visual-concept.html"
+      ],
+      "file_count": 5,
+      "summary": "Roadmap, art direction, object/action beat map, sound review map, and HTML visual concept using existing image/audio assets; no runtime changes.",
+      "committed_at": "2026-10-29T02:29:28Z"
     }
   ],
   "documentation_finalization": {
     "message": "docs(progres): record all three verified pushes and clean-build evidence",
     "purpose": "Finalisasi log sesudah SHA tahap 3 dikonfirmasi; tidak mengubah kode runtime.",
     "self_hash_note": "SHA commit pencatatan ini tersedia pada riwayat Git file ini; tidak dapat ditanam dalam isi commitnya sendiri.",
+    "history_url": "https://github.com/stmarya/MajaAdventure/commits/main/progres/push-log.json"
+  },
+  "stage_4_documentation_finalization": {
+    "message": "docs(progres): record verified visual-design roadmap push",
+    "purpose": "Record the confirmed SHA/file list for stage 4 after GitHub accepted the design-documentation push; no runtime changes.",
+    "self_hash_note": "The hash of this follow-up log commit is available in Git history and is not embedded in itself.",
     "history_url": "https://github.com/stmarya/MajaAdventure/commits/main/progres/push-log.json"
   }
 }

@@ -1,6 +1,6 @@
 # Detail push perbaikan
 
-Repo: `stmarya/MajaAdventure`; branch: `main`. Ketiga push implementasi berikut telah dikonfirmasi GitHub dan diverifikasi melalui git fetch.
+Repo: `stmarya/MajaAdventure`; branch: `main`. Tiga tahap implementasi dan satu push perencanaan visual berikut telah dikonfirmasi GitHub; desain visual masih draft, bukan implementasi runtime.
 
 ## Tahap 1
 
@@ -26,8 +26,16 @@ Repo: `stmarya/MajaAdventure`; branch: `main`. Ketiga push implementasi berikut 
 - Jumlah file: 39
 - Cakupan/bukti: Pipeline, manifest, CI, level validation, internal build/public gates; 42 tes Node, 4 delivery + 3 source tests, 13 source + 13 package browser checks.
 
+## Tahap 4 — Perencanaan visual dan roadmap
+
+- Commit: [`5afe9c2642b2a7163c6d09faf7c8e3159f6eb95a`](https://github.com/stmarya/MajaAdventure/commit/5afe9c2642b2a7163c6d09faf7c8e3159f6eb95a)
+- Pesan: `docs: add visual concept and target A roadmap`
+- Waktu commit GitHub: `2026-10-29T02:29:28Z`
+- Jumlah file: 5
+- Cakupan/bukti: roadmap progres, konsep visual Level 01, HTML mockup dengan 130 PNG dan 14 audio yang ada, serta tautan navigasi. Mockup diperiksa pada viewport desktop 1440px dan mobile 390px; tidak mengubah runtime/level/aset.
+
 ## Push finalisasi dokumentasi
 
-Pesan: `docs(progres): record all three verified pushes and clean-build evidence`. Memperbarui indeks progres, SHA/daftar file ketiga push, serta hasil clean-build tahap 3. Tidak mengubah runtime. SHA push finalisasi tersedia pada [riwayat file](https://github.com/stmarya/MajaAdventure/commits/main/progres/push-log.json); hash tidak ditanam secara self-referential.
+Pesan: `docs(progres): record all verified pushes and clean-build evidence`. Memperbarui indeks progres, SHA/daftar push tahap 1–4, serta hasil clean-build tahap 3. Tidak mengubah runtime. SHA push finalisasi tersedia pada [riwayat file](https://github.com/stmarya/MajaAdventure/commits/main/progres/push-log.json); hash tidak ditanam secara self-referential.
 
 Daftar file tiap push ada pada `push-log.json`. Log pengujian ada di `hasil/`. Hak distribusi, final-art dan QA manusia masih terbuka; tidak ada rilis publik.

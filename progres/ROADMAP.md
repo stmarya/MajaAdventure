@@ -17,7 +17,7 @@ Proyek sudah memiliki fondasi vertical slice web: simulasi fixed-step, gameplay 
 | 1 — 2026-10-16 | Stabilitas gameplay inti: collision per sumbu, fixed-step, input edge, respawn/checkpoint, exit, skor, dan regression tests | 19/19 tes Node dan 3/3 tes integrasi sumber lulus; Chromium smoke alur state lulus | Selesai di commit `7259c5b`; smoke otomatis bukan playtest manusia. [Detail Tahap 1](01-gameplay-inti.md) |
 | 2 — 2026-10-16 | UX vertical slice: kontrol, pause/retry, status teks, kurangi kedipan, audio settings, checkpoint, combat dan traversal | 28/28 tes Node, 13 pemeriksaan smoke Chromium, 3/3 tes integrasi sumber lulus | Selesai di commit `187a0b4`; touch tetap eksperimental, game feel/balance dan playtest manusia masih terbuka. [Detail Tahap 2](02-vertical-slice.md) |
 | 3 — 2026-10-16 | Pipeline aset dan build, manifest, validasi level, package allowlist/checksum, CI lintas OS, gerbang rilis publik | 42/42 tes Node; 3/3 source integration; 4/4 delivery; 13 pemeriksaan browser pada source dan paket; 53 aset runtime tanpa error teknis | Selesai di commit `a7c89cd` dan difinalisasi dokumentasinya di `4d570d0`; 25 aset masih deviasi palette/alpha, tujuh approval rilis menunggu, dan hasil Actions remote belum diverifikasi. Build publik memang diblokir. [Detail Tahap 3](03-produksi-distribusi.md) |
-| 4 — 2026-10-29 | Review proyek, inventaris aset, diskusi target platform | Target A dipilih: web desktop + keyboard lebih dulu; mockup konsep dibuat memakai aset lokal yang sudah ada | Draft untuk review. Belum mengubah kode, data level, file aset, atau audio produksi. |
+| 4 — 2026-10-29 | Review proyek, inventaris aset, diskusi target platform | Target A dipilih: web desktop + keyboard lebih dulu; mockup konsep dibuat memakai aset lokal yang sudah ada | Draft untuk review; dokumentasi/mockup dipush pada [`5afe9c2`](https://github.com/stmarya/MajaAdventure/commit/5afe9c2642b2a7163c6d09faf7c8e3159f6eb95a). Belum mengubah kode, data level, file aset, atau audio produksi. |
 
 Angka tes dan status Tahap 1–3 disalin dari laporan progres proyek, bukan hasil eksekusi ulang saat membuat dokumen ini. Catatan lengkap dan log per tahap tersedia di [indeks progres](README.md) dan folder `hasil/`.
 
@@ -53,4 +53,4 @@ Angka tes dan status Tahap 1–3 disalin dari laporan progres proyek, bukan hasi
 
 ## Catatan perubahan dokumen
 
-- 2026-10-29 — Menambahkan target A, ringkasan progres historis, roadmap polish pengalaman, serta konsep visual awal berbasis aset lokal. **Dokumentasi/mockup saja; runtime belum diubah.**
+- 2026-10-29 — Menambahkan target A, ringkasan progres historis, roadmap polish pengalaman, serta konsep visual awal berbasis aset lokal. **Dokumentasi/mockup saja; runtime belum diubah.** Commit: [`5afe9c2`](https://github.com/stmarya/MajaAdventure/commit/5afe9c2642b2a7163c6d09faf7c8e3159f6eb95a).
