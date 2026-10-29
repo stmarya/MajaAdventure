@@ -6,7 +6,7 @@
 
 ## Ringkasan
 
-Proyek sudah memiliki fondasi vertical slice web: simulasi fixed-step, gameplay platformer, aset runtime terdaftar, tes regresi, browser smoke, dan build internal. Tahap selanjutnya berfokus pada kualitas pengalaman—gerak, action/combat, penataan objek, efek, lingkungan, dan sound—dengan playtest manusia dan perbaikan kecil yang bisa diukur. Mockup dan desain visual tahap sekarang adalah **draft diskusi**; belum diterapkan ke runtime atau layout level produksi.
+Proyek sudah memiliki fondasi vertical slice web: simulasi fixed-step, gameplay platformer, aset runtime terdaftar, tes regresi, browser smoke, dan build internal. Tahap selanjutnya berfokus pada kualitas pengalaman—gerak, action/combat, penataan objek, efek, lingkungan, dan sound—dengan playtest manusia dan perbaikan kecil yang bisa diukur. Mockup dan desain visual tahap sekarang adalah **draft diskusi**; revisi komposisi v0.3 menindaklanjuti persetujuan arah pengguna, tetapi belum diterapkan ke runtime atau layout level produksi.
 
 [Konsep visual dan peta sound Level 01](../docs/DESAIN_VISUAL_LEVEL_01.md) · [Mockup visual dan katalog aset](../docs/mockups/level01-visual-concept.html)
 
@@ -18,6 +18,7 @@ Proyek sudah memiliki fondasi vertical slice web: simulasi fixed-step, gameplay 
 | 2 — 2026-10-16 | UX vertical slice: kontrol, pause/retry, status teks, kurangi kedipan, audio settings, checkpoint, combat dan traversal | 28/28 tes Node, 13 pemeriksaan smoke Chromium, 3/3 tes integrasi sumber lulus | Selesai di commit `187a0b4`; touch tetap eksperimental, game feel/balance dan playtest manusia masih terbuka. [Detail Tahap 2](02-vertical-slice.md) |
 | 3 — 2026-10-16 | Pipeline aset dan build, manifest, validasi level, package allowlist/checksum, CI lintas OS, gerbang rilis publik | 42/42 tes Node; 3/3 source integration; 4/4 delivery; 13 pemeriksaan browser pada source dan paket; 53 aset runtime tanpa error teknis | Selesai di commit `a7c89cd` dan difinalisasi dokumentasinya di `4d570d0`; 25 aset masih deviasi palette/alpha, tujuh approval rilis menunggu, dan hasil Actions remote belum diverifikasi. Build publik memang diblokir. [Detail Tahap 3](03-produksi-distribusi.md) |
 | 4 — 2026-10-29 | Review proyek, inventaris aset, diskusi target platform | Target A dipilih: web desktop + keyboard lebih dulu; mockup konsep dibuat memakai aset lokal yang sudah ada | Draft untuk review; dokumentasi/mockup dipush pada [`5afe9c2`](https://github.com/stmarya/MajaAdventure/commit/5afe9c2642b2a7163c6d09faf7c8e3159f6eb95a). Belum mengubah kode, data level, file aset, atau audio produksi. |
+| 5 — 2026-10-29 | Revisi komposisi hero, Gobog, spike, reward, penjaga, dan landmark berdasarkan review | Gobog dipisah dari hero; spike diberi buffer pendaratan; penjaga dipisah dari hazard; buah Maja menjadi reward tunggal; hero dan penjaga dihadapkan satu sama lain; candi dibersihkan sebagai tujuan; peti tidak ditumpuk di viewport | Konsep v0.3 menunggu tinjauan pengguna. Dokumentasi/mockup saja; tidak mengubah runtime, koordinat level, file aset, atau audio produksi. |
 
 Angka tes dan status Tahap 1–3 disalin dari laporan progres proyek, bukan hasil eksekusi ulang saat membuat dokumen ini. Catatan lengkap dan log per tahap tersedia di [indeks progres](README.md) dan folder `hasil/`.
 
@@ -34,7 +35,7 @@ Angka tes dan status Tahap 1–3 disalin dari laporan progres proyek, bukan hasi
 
 | Urutan | Pekerjaan | Hasil yang diharapkan | Bukti / kriteria selesai | Status |
 |---|---|---|---|---|
-| A0 | Review mockup, arah art, urutan beat level, dan sound map bersama pemilik proyek | Komposisi dan daftar perubahan disepakati sebelum implementasi | Persetujuan pada draft; keputusan yang masih terbuka ditulis | Sedang didiskusikan |
+| A0 | Review mockup, arah art, urutan beat level, dan sound map bersama pemilik proyek | Draft komposisi v0.3 menindaklanjuti keputusan review sebelum implementasi | Tinjau v0.3; catat perubahan atau persetujuan final; keputusan yang masih terbuka tetap tertulis | Menunggu tinjauan v0.3 |
 | A1 | Baseline playtest web desktop + keyboard tanpa bantuan pembuat | Catatan gerak, kebingungan, kematian, combat, dan sesi selesai | Catatan tester, browser/OS/commit, langkah reproduksi; pisahkan fakta dari opini | Belum mulai |
 | A2 | Tuning gerak dan kontrol secara bertahap | Gerak terasa responsif dan konsisten pada browser desktop yang disepakati | Tes collision/regression dan playtest sebelum/sesudah; tidak menumpuk perubahan yang belum terukur | Belum mulai |
 | A3 | Tata ulang pacing, object, hazard, checkpoint, dan action | Jalur aman, tantangan, jeda, dan hadiah mudah dibaca | Uji playthrough penuh; hazard tidak tertutup; pickup/checkpoint/combat memberi feedback benar | Belum mulai |
@@ -55,3 +56,4 @@ Angka tes dan status Tahap 1–3 disalin dari laporan progres proyek, bukan hasi
 
 - 2026-10-29 — Menambahkan target A, ringkasan progres historis, roadmap polish pengalaman, serta konsep visual awal berbasis aset lokal. **Dokumentasi/mockup saja; runtime belum diubah.** Commit: [`5afe9c2`](https://github.com/stmarya/MajaAdventure/commit/5afe9c2642b2a7163c6d09faf7c8e3159f6eb95a).
 - 2026-10-29 — Merevisi mockup agar sprite/tile/HUD pada scene memakai ukuran sumber, panorama dipotong 1:1, dan preview desktop memakai pembesaran 3×. Audit aset: belum perlu art/sound baru untuk draft; reuse candi sebagai landmark exit, tunda platform satu arah (belum dipakai level), dan catat integrasi VFX slash sebagai pekerjaan runtime. Belum mengubah runtime, level, atau aset produksi. Revisi konsep dipush pada [`5f14bbf`](https://github.com/stmarya/MajaAdventure/commit/5f14bbfead77e8dd807c82e3098a60e66d4759f5).
+- 2026-10-29 — Revisi komposisi v0.3 setelah review hero/musuh/hazard/reward/landmark: koin tidak lagi menimpa hero; hazard dan penjaga dipisahkan oleh area mendarat; efek hit statis dihapus; buah Maja menjadi satu reward yang jelas; candi diberi ruang sebagai tujuan dan peti disimpan untuk beat terpisah. Hanya mockup dan dokumentasi yang berubah; runtime, level, dan aset produksi tetap tidak berubah. Menunggu tinjauan pengguna.

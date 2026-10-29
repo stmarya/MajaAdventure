@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark light">
-<title>MajaAdventure — konsep visual Level 01</title>
+<title>MajaAdventure — konsep visual Level 01 v0.3</title>
 <style>
 :root{color-scheme:dark;--bg:#101b1c;--surface:#172526;--surface2:#1d3030;--line:#344847;--text:#f0ebd8;--muted:#b8c4b7;--gold:#f5c842;--leaf:#7ab648;--brick:#c1440e;--focus:#f5c842;font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text)}a{color:#f5c842;text-underline-offset:3px}a:focus-visible,button:focus-visible,summary:focus-visible,audio:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
@@ -16,30 +16,31 @@ main{max-width:1200px;margin:auto;padding:32px 28px 64px}.topline{display:flex;a
 </head>
 <body>
 <main>
-  <div class="topline"><span>MajaAdventure / studi desain level</span><span class="tag">Konsep v0.2 · Target A</span></div>
+  <div class="topline"><span>MajaAdventure / studi desain level</span><span class="tag">Konsep v0.3 · Target A</span></div>
   <h1>Reruntuhan hutan — Level 01</h1>
   <p class="lede">Arah visual sementara untuk web desktop + keyboard: suasana hutan Majapahit berlapis, jalur baca yang jelas, dan ruang yang cukup agar gerak, ancaman, serta hadiah mudah dipahami.</p>
   <section class="shell hero" aria-labelledby="scene-title">
     <div>
       <h2 id="scene-title">Studi komposisi gameplay</h2>
-      <div class="scene-frame"><canvas id="scene" width="320" height="180" role="img" aria-label="Mockup pixel-art menggunakan aset yang ada pada ukuran frame asli, background dipotong tanpa diregangkan. Komposisi ini belum diterapkan ke level produksi.">Mockup adegan MajaAdventure.</canvas><div class="scene-caption">Canvas 320 × 180 · sprite/tile native-size · background dipotong 1:1 · preview desktop 3× nearest-neighbor; bukan screenshot build</div></div>
+      <div class="scene-frame"><canvas id="scene" width="320" height="180" role="img" aria-label="Mockup pixel-art v0.3: hero, lengkung Gobog, satu segmen spike, ruang mendarat, penjaga, reward Maja, dan landmark candi. Aset native-size; belum diterapkan ke level produksi.">Mockup adegan MajaAdventure.</canvas><div class="scene-caption">Canvas 320 × 180 · sprite/tile native-size · crop 1:1 · preview desktop 3× nearest-neighbor · komposisi v0.3, bukan screenshot build</div></div>
     </div>
     <div class="scene-notes">
-      <div class="note"><strong>1 · Lapisan dan kedalaman</strong><span>Langit → hutan jauh → landmark candi → jalur bermain → objek/interaksi → foliage dekat.</span></div>
-      <div class="note"><strong>2 · Baca jalur sebelum bereaksi</strong><span>Gobog membentuk lengkung lompatan; hazard diletakkan dengan ruang ancang dan area mendarat yang tampak.</span></div>
-      <div class="note"><strong>3 · Action punya sebab-akibat</strong><span>Telegraph musuh → serangan keris → slash/hit → SFX singkat; efek hanya muncul saat event terjadi.</span></div>
-      <div class="note"><strong>4 · Landmark dan jeda</strong><span>Obor checkpoint, buah Maja, dan peti menjadi titik orientasi/pemulihan—tidak ditumpuk pada satu layar.</span></div>
-      <div class="callout"><strong>Konsep saja.</strong> Aset tidak diregangkan. Tidak ada file runtime/level yang diubah; audit awal tidak menemukan aset baru yang wajib dibuat sebelum layout disetujui.</div>
+      <div class="note"><strong>1 · Start aman</strong><span>Obor checkpoint berada di belakang hero; siluet dan ruang awal tetap terbaca.</span></div>
+      <div class="note"><strong>2 · Gobog menuntun</strong><span>Lengkung koin dimulai di depan hero dan tidak menutupi tubuhnya.</span></div>
+      <div class="note"><strong>3 · Spike lalu mendarat</strong><span>Hazard terlihat sebelum lompatan; ada buffer pendaratan yang jelas sesudahnya.</span></div>
+      <div class="note"><strong>4 · Musuh setelah jeda</strong><span>Penjaga dipisah dari spike. Slash/hit tidak ditampilkan sebelum serangan benar-benar terjadi.</span></div>
+      <div class="note"><strong>5 · Reward dan tujuan</strong><span>Buah Maja menandai pemulihan; candi tetap terbaca sebagai exit. Peti disimpan untuk beat reward terpisah.</span></div>
+      <div class="callout"><strong>Draft konsep v0.3.</strong> Hanya aset yang sudah ada, pada ukuran native. Posisi di canvas adalah panduan komposisi—bukan koordinat level final. Runtime, data level, dan aset produksi tidak diubah.</div>
     </div>
   </section>
 
-  <div class="section-head"><div><h2>Alur yang ingin dirasakan pemain</h2><p>Beat berikut adalah draft untuk mendiskusikan pacing dan jarak antartantangan. Angka koordinat dan timing belum dikunci.</p></div></div>
+  <div class="section-head"><div><h2>Alur yang ingin dirasakan pemain</h2><p>Beat berikut menjelaskan urutan baca yang dituju. Komposisi v0.3 adalah studi satu layar; koordinat serta timing produksi belum dikunci.</p></div></div>
   <section class="flow" aria-label="Urutan beat level">
     <article class="beat"><span class="num">01 / AMATI</span><h3>Ruang aman</h3><p>Pemain memahami bergerak, lompat, tujuan, dan kumpulkan Gobog tanpa ancaman yang mendadak.</p></article>
     <article class="beat"><span class="num">02 / LATIH</span><h3>Lompatan pertama</h3><p>Jalur koin memberi petunjuk lompatan; bahaya terlihat sebelum pemain mencapai tepinya.</p></article>
-    <article class="beat"><span class="num">03 / PULIHKAN</span><h3>Checkpoint</h3><p>Obor mudah dikenali, aktivasi memberi audio/visual singkat, lalu pemain tahu titik respawn-nya.</p></article>
+    <article class="beat"><span class="num">03 / PULIHKAN</span><h3>Mendarat dan pulih</h3><p>Area setelah spike memberi ruang mendarat; buah Maja adalah satu reward yang jelas, bukan kumpulan objek.</p></article>
     <article class="beat"><span class="num">04 / HADAPI</span><h3>Combat terbaca</h3><p>Penjaga memberi tanda serang; pemain punya waktu bereaksi, menyerang, lalu melihat hit confirm.</p></article>
-    <article class="beat"><span class="num">05 / SELESAIKAN</span><h3>Hadiah dan gerbang</h3><p>Peti/buah memberi payoff, landmark candi menuntun ke gerbang akhir, tanpa objek penting saling menutupi.</p></article>
+    <article class="beat"><span class="num">05 / SELESAIKAN</span><h3>Landmark tujuan</h3><p>Candi memberi arah akhir. Peti bisa dipakai pada ruang reward terpisah, tidak menumpuk di pintu keluar.</p></article>
   </section>
 
   <div class="section-head"><div><h2>Kontrol desktop yang dipertahankan</h2><p>Mockup mengikuti kontrol yang sudah dijelaskan proyek. Perubahan mapping sebaiknya diuji dulu, bukan dilakukan bersamaan dengan tuning gerak.</p></div></div>
@@ -213,7 +214,7 @@ const AUDIO=[
 const load=(src)=>new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=reject;im.src=src;});
 async function paint(){
  const c=document.getElementById('scene'),x=c.getContext('2d');x.imageSmoothingEnabled=false;
- const paths={sky:'../../assets/environment/backgrounds/final/bg_sky_layer.png',far:'../../assets/environment/backgrounds/final/bg_jungle_far.png',near:'../../assets/environment/backgrounds/final/bg_jungle_near.png',tiles:'../../assets/environment/tilesets/final/env_ruins_wall_01.png',palm:'../../assets/environment/props/final/env_palmtree_tall.png',palmMed:'../../assets/environment/props/final/env_palmtree_med.png',palmShort:'../../assets/environment/props/final/env_palmtree_short.png',candiL:'../../assets/environment/props/final/env_candi_bentar_left.png',candiR:'../../assets/environment/props/final/env_candi_bentar_right.png',banner:'../../assets/environment/props/final/env_banner_majapahit.png',torch:'../../assets/vfx/final/vfx_torch_sheet.png',hero:'../../assets/characters/warrior/final/chr_warrior_sheet.png',soldier:'../../assets/characters/enemy_soldier/final/chr_soldier_sheet.png',coin:'../../assets/items/final/itm_gobog_sheet.png',maja:'../../assets/items/final/itm_maja_static.png',chest:'../../assets/items/final/itm_chest_closed.png',spike:'../../assets/environment/tilesets/final/env_trap_spike_active.png',slash:'../../assets/vfx/vfx_slash/vfx_slash_f01.png',hit:'../../assets/vfx/final/vfx_hit_sheet.png',health:'../../assets/ui/hud/final/ui_healthbar_empty.png',healthFill:'../../assets/ui/hud/final/ui_healthbar_fill.png',coinIcon:'../../assets/ui/hud/final/ui_coin_icon.png',pause:'../../assets/ui/buttons/pause/ui_btn_pause_normal.png'};
+ const paths={sky:'../../assets/environment/backgrounds/final/bg_sky_layer.png',far:'../../assets/environment/backgrounds/final/bg_jungle_far.png',near:'../../assets/environment/backgrounds/final/bg_jungle_near.png',tiles:'../../assets/environment/tilesets/final/env_ruins_wall_01.png',palm:'../../assets/environment/props/final/env_palmtree_tall.png',candiL:'../../assets/environment/props/final/env_candi_bentar_left.png',candiR:'../../assets/environment/props/final/env_candi_bentar_right.png',torch:'../../assets/vfx/final/vfx_torch_sheet.png',hero:'../../assets/characters/warrior/final/chr_warrior_sheet.png',soldier:'../../assets/characters/enemy_soldier/final/chr_soldier_sheet.png',coin:'../../assets/items/final/itm_gobog_sheet.png',maja:'../../assets/items/final/itm_maja_static.png',spike:'../../assets/environment/tilesets/final/env_trap_spike_active.png',health:'../../assets/ui/hud/final/ui_healthbar_empty.png',healthFill:'../../assets/ui/hud/final/ui_healthbar_fill.png',coinIcon:'../../assets/ui/hud/final/ui_coin_icon.png',pause:'../../assets/ui/buttons/pause/ui_btn_pause_normal.png'};
  const entries=await Promise.all(Object.entries(paths).map(async([k,v])=>[k,await load(v)]));const im=Object.fromEntries(entries);
  const d=(name,sx,sy,sw,sh,dx,dy,dw,dh)=>x.drawImage(im[name],sx,sy,sw,sh,dx,dy,dw,dh);
  x.fillStyle='#1a3a5c';x.fillRect(0,0,320,180);
@@ -221,20 +222,20 @@ async function paint(){
  d('sky',0,0,320,180,0,0,320,180);
  d('far',160,0,320,180,0,0,320,180);
  d('near',160,0,320,180,0,0,320,180);
- // Existing props keep their authored frame dimensions.
- d('palm',0,0,32,64,7,78,32,64);d('palmMed',0,0,32,48,79,96,32,48);d('palmShort',0,0,24,32,296,112,24,32);
- d('candiL',0,0,32,64,247,80,32,64);d('candiR',0,0,32,64,279,80,32,64);d('banner',0,0,16,32,219,96,16,32);
- // Main walkway uses 16 px tiles; no hypothetical floating platform is added.
+ // Existing frames keep native dimensions; the near palm frames the safe start.
+ d('palm',0,0,32,64,0,78,32,64);
+ d('candiL',0,0,32,64,256,80,32,64);d('candiR',0,0,32,64,288,80,32,64);
+ // Continuous 16 px walkway; the clear route remains unobstructed by foreground props.
  for(let px=0;px<320;px+=16){d('tiles',0,16,16,16,px,144,16,16);d('tiles',0,0,16,16,px,160,16,16);}
- // Hazard, checkpoint and reward use their native sprite sizes.
- d('spike',0,0,16,16,200,144,16,16);d('spike',0,0,16,16,216,144,16,16);
- d('torch',0,0,16,24,42,120,16,24);
- d('coin',0,0,16,16,84,103,16,16);d('coin',0,0,16,16,100,88,16,16);d('coin',0,0,16,16,116,103,16,16);
- d('maja',0,0,16,16,134,128,16,16);d('chest',0,0,32,32,220,112,32,32);
- // Combat still: warrior and soldier remain at authored frame dimensions.
- d('soldier',0,0,48,52,153,92,48,52);
- x.save();x.translate(188,0);x.scale(-1,1);d('hero',0,0,48,48,70,95,48,48);x.restore();
- d('hit',0,0,32,32,158,100,32,32);
+ // Start → Gobog cue → one spike segment → 32 px landing buffer → reward → guard → candi.
+ d('torch',0,0,16,24,16,120,16,24);
+ d('coin',0,0,16,16,96,104,16,16);d('coin',0,0,16,16,112,88,16,16);d('coin',0,0,16,16,128,104,16,16);
+ d('spike',0,0,16,16,152,144,16,16);
+ d('maja',0,0,16,16,176,128,16,16);
+ // Guard waits beyond the landing/recovery space; no hit VFX in this static pose.
+ x.save();x.translate(448,0);x.scale(-1,1);d('soldier',0,0,48,52,200,92,48,52);x.restore();
+ // Warrior's source frame faces right; keep it unflipped toward the route and gate.
+ d('hero',0,0,48,48,40,95,48,48);
  // HUD sprites are not resized; crop only the health fill to show a sample value.
  d('health',0,0,96,12,7,7,96,12);x.save();x.beginPath();x.rect(7,7,64,12);x.clip();d('healthFill',0,0,96,12,7,7,96,12);x.restore();
  d('coinIcon',0,0,12,12,237,8,12,12);x.fillStyle='#f0ebd8';x.font='7px monospace';x.fillText('018',252,17);d('pause',0,0,24,24,287,5,24,24);

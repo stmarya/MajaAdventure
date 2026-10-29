@@ -1,6 +1,6 @@
 # Konsep visual Level 01 — MajaAdventure
 
-**Status:** draft untuk diskusi, belum implementasi.  
+**Status:** draft v0.3 untuk diskusi, belum implementasi.  
 **Target desain sekarang:** web desktop + keyboard (A).  
 **Tujuan:** menyepakati cara membaca lingkungan, karakter, object, action, effects, dan sound sebelum mengubah aset produksi atau koordinat level.
 
@@ -13,14 +13,14 @@ Mockup memakai PNG yang sudah ada di `assets/`; halaman HTML juga memuat katalog
 ## Arah visual sementara
 
 - **Tema:** jalur reruntuhan Majapahit di dalam hutan—kontras batu bata, kanopi, dan landmark candi dari aset yang tersedia.
-- **Gaya:** pertahankan pixel-art dan nearest-neighbor; jangan menambah blur, glow, atau upscale yang mengaburkan piksel. Dalam preview v0.2, sprite, tiles, dan HUD digambar pada ukuran frame sumber; panorama dipotong 1:1, bukan diregangkan. Preview desktop memakai canvas 3×; bukan ukuran produksi baru.
+- **Gaya:** pertahankan pixel-art dan nearest-neighbor; jangan menambah blur, glow, atau upscale yang mengaburkan piksel. Dalam preview v0.3, sprite, tiles, dan HUD digambar pada ukuran frame sumber; panorama dipotong 1:1, bukan diregangkan. Preview desktop memakai canvas 3×; bukan ukuran produksi baru.
 - **Kedalaman:** langit → hutan jauh → landmark/pepohonan → jalur tile dan hazard → karakter/item → foliage foreground secukupnya.
 - **Hierarki:** player dan ancaman menjadi fokus; landmark seperti gerbang/candi memberi orientasi; dekorasi tidak boleh menutupi collision atau telegraph.
 - **Motion:** perubahan pose harus mengikuti aksi (run, jump, attack, hurt, land), sementara kamera mengikuti tanpa membuat jalur sulit dibaca. Nilai timing final harus ditentukan lewat playtest, bukan asumsi.
 
 ## Komposisi contoh
 
-Mockup satu layar menggunakan scene internal 320×180. Komposisi contoh menempatkan hero di kiri-tengah, lawan di depan dengan ruang untuk membaca serangan, koin membentuk petunjuk lompatan, spike dalam satu klaster terlihat, checkpoint obor dan hadiah tidak menumpuk di jalur bahaya, serta landmark candi di sisi tujuan. Semua sprite dan tile pada scene memakai ukuran frame sumber; latar panorama dipotong alih-alih di-stretch. Ini **contoh komposisi**, bukan salinan koordinat final level.
+Mockup v0.3 menggunakan scene internal 320×180 dan memperbaiki tumpang tindih yang ditemukan saat review. Urutan baca dari kiri ke kanan: start/checkpoint obor → hero → lengkung Gobog → satu segmen spike → buffer pendaratan 32 px → buah Maja → penjaga → pasangan candi sebagai landmark exit. Hero menghadap ke jalur/candi dan penjaga menghadap balik ke hero; koin tidak menutupi sprite; spike tidak bersentuhan dengan penjaga; efek slash/hit tidak ditampilkan pada pose statis. Peti tidak dipaksakan masuk ke viewport ini—simpan untuk beat reward/ruang jeda terpisah bila dibutuhkan. Semua sprite dan tile memakai ukuran frame sumber; panorama dipotong alih-alih di-stretch. Angka koordinat pada mockup hanya untuk studi komposisi, bukan koordinat final level.
 
 
 ## Audit aset dan keputusan penambahan
@@ -38,13 +38,13 @@ Mockup satu layar menggunakan scene internal 320×180. Komposisi contoh menempat
 
 | Zona konseptual | Fungsi | Penataan object/action yang diusulkan |
 |---|---|---|
-| 1 · Pembuka | Orientasi dan latihan aman | Mulai di jalur yang terbaca; kenalkan bergerak/lompat dan koin sebelum ancaman padat. |
-| 2 · Tantangan pertama | Menguji satu kemampuan per beat | Tampilkan hazard sebelum pemain harus bereaksi; sediakan ruang ancang dan tempat mendarat yang tampak. |
-| 3 · Jeda/checkpoint | Memulihkan dan memberi orientasi | Letakkan obor, buah Maja atau peti sebagai titik baca/reward dengan ruang aman. |
-| 4 · Combat | Mengajari baca telegraph dan strike | Jaga jarak musuh dari hazard; urutkan persiapan musuh → kesempatan merespons → strike → feedback hit → recovery. |
-| 5 · Penutup | Menggabungkan kemampuan | Gunakan landmark/gerbang yang mudah dikenali; hindari memasukkan ancaman baru di detik terakhir. |
+| 1 · Pembuka | Orientasi dan latihan aman | Obor/checkpoint berada di zona start; hero memiliki ruang aman dan siluetnya tidak tertutup foliage. |
+| 2 · Lompatan | Menguji satu kemampuan | Lengkung Gobog memandu ke spike; hazard tampak sebelum pemain harus bereaksi. |
+| 3 · Mendarat/pulih | Memberi jeda dan payoff | Sediakan ruang pendaratan sesudah spike; satu reward Maja mudah dibaca tanpa menempel ke hazard. |
+| 4 · Combat | Mengajari baca telegraph dan strike | Penjaga berada setelah buffer pendaratan; urutkan telegraph → respons pemain → strike → hit confirm → recovery. |
+| 5 · Penutup | Memberi tujuan | Candi tetap menjadi landmark/exit yang bersih; peti ditempatkan pada beat reward terpisah jika dipakai. |
 
-Pembagian zona ini perlu dicocokkan dengan koordinat aktual `levels/level_01.json` dan playtest; jangan memindahkan object sampai draft disetujui.
+Pembagian zona ini adalah usulan konseptual v0.3. Koordinat aktual `levels/level_01.json` tidak diubah; pencocokan layout dan jarak tetap menunggu persetujuan mockup serta playtest.
 
 ## Peran aset dan action
 
