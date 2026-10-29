@@ -37,6 +37,8 @@ Build allowlist menghasilkan `dist/web/`, ZIP internal, checksum, dan `BUILD_INF
 ## Dokumentasi tim
 
 - [Progres dan detail push per tahap](progres/README.md)
+- [Roadmap polish visual dan gameplay](progres/ROADMAP.md)
+- [Konsep visual Level 01 dan katalog aset](docs/DESAIN_VISUAL_LEVEL_01.md)
 - [Prosedur build dan gerbang rilis](docs/BUILD_RELEASE.md)
 - [Checklist produksi](docs/production_checklist.md)
 - [Protokol playtest manusia](docs/PLAYTEST.md)

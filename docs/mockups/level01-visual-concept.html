@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>MajaAdventure — konsep visual Level 01</title>
+<style>
+:root{color-scheme:dark;--bg:#101b1c;--surface:#172526;--surface2:#1d3030;--line:#344847;--text:#f0ebd8;--muted:#b8c4b7;--gold:#f5c842;--leaf:#7ab648;--brick:#c1440e;--focus:#f5c842;font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text)}a{color:#f5c842;text-underline-offset:3px}a:focus-visible,button:focus-visible,summary:focus-visible,audio:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+main{max-width:1200px;margin:auto;padding:32px 28px 64px}.topline{display:flex;align-items:center;justify-content:space-between;gap:16px;color:var(--muted);font-size:14px}.tag{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;padding:5px 12px;color:var(--gold);font-size:13px;letter-spacing:.04em;text-transform:uppercase}h1{font-size:clamp(28px,4vw,44px);line-height:1.08;letter-spacing:-.03em;margin:22px 0 10px}h2{font-size:24px;line-height:1.2;margin:0 0 12px}h3{font-size:18px;line-height:1.3;margin:0 0 8px}.lede{max-width:720px;color:var(--muted);font-size:17px;margin:0 0 26px}.shell{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:22px;margin:20px 0 26px}.hero{display:grid;grid-template-columns:minmax(0,2fr) minmax(250px,.9fr);gap:22px;align-items:center}.scene-frame{overflow:hidden;border:1px solid #53615a;border-radius:8px;background:#1a3a5c;box-shadow:0 12px 28px rgba(0,0,0,.22)}canvas{display:block;width:100%;height:auto;aspect-ratio:16/9;image-rendering:pixelated;image-rendering:crisp-edges}.scene-caption{padding:9px 12px;background:#172526;color:var(--muted);font-size:13px}.scene-notes{display:grid;gap:13px}.note{border-left:3px solid var(--gold);padding:2px 0 2px 12px}.note strong{display:block;color:var(--text);font-size:14px}.note span{display:block;color:var(--muted);font-size:14px}.callout{border:1px solid #685632;background:#2a281d;border-radius:8px;padding:12px 14px;color:#f3e7c0;font-size:14px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin:42px 0 14px}.section-head p{color:var(--muted);max-width:680px;margin:0;font-size:14px}.flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}.beat{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:15px;min-height:145px}.beat .num{display:inline-block;color:var(--gold);font:700 12px/1 ui-monospace,monospace;letter-spacing:.08em;margin-bottom:10px}.beat p{color:var(--muted);font-size:14px;margin:0}.controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.control{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:14px}.key{display:inline-block;min-width:34px;text-align:center;padding:3px 7px;border:1px solid #66736a;border-bottom-width:3px;border-radius:5px;background:#202e2b;color:#fff;font:600 13px ui-monospace,monospace;margin:2px}.control p{margin:6px 0 0;color:var(--muted);font-size:14px}.audio-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.audio-card{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:12px}.audio-card strong{display:block;font-size:14px;margin-bottom:8px;overflow-wrap:anywhere}.audio-card audio{display:block;width:100%;height:40px}.catalog{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:12px}.asset{border:1px solid var(--line);border-radius:8px;padding:8px;background:var(--surface);min-width:0}.asset img{width:100%;height:96px;display:block;object-fit:contain;image-rendering:pixelated;background-color:#1b2a29;background-image:linear-gradient(45deg,#253634 25%,transparent 25%),linear-gradient(-45deg,#253634 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#253634 75%),linear-gradient(-45deg,transparent 75%,#253634 75%);background-size:14px 14px;background-position:0 0,0 7px,7px -7px,-7px 0}.asset small{display:block;color:var(--muted);font-size:12px;line-height:1.35;overflow-wrap:anywhere;margin-top:7px}details{border:1px solid var(--line);border-radius:8px;background:var(--surface);padding:12px 14px;margin:10px 0}summary{cursor:pointer;font-weight:650}details[open]>summary{margin-bottom:10px}.status{color:var(--muted);font-size:14px}.footer{border-top:1px solid var(--line);margin-top:42px;padding-top:18px;color:var(--muted);font-size:13px}.small{font-size:13px;color:var(--muted)}
+@media(max-width:850px){main{padding:24px 20px 48px}.hero{grid-template-columns:1fr}.flow{grid-template-columns:repeat(2,minmax(0,1fr))}.catalog{grid-template-columns:repeat(3,minmax(0,1fr))}.controls{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){main{padding:18px 16px 40px}.topline{align-items:flex-start;flex-direction:column;gap:8px}.shell{padding:14px}.section-head{align-items:flex-start;flex-direction:column}.flow,.controls,.audio-grid{grid-template-columns:1fr}.catalog{grid-template-columns:repeat(2,minmax(0,1fr))}.beat{min-height:0}.lede{font-size:16px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<main>
+  <div class="topline"><span>MajaAdventure / studi desain level</span><span class="tag">Konsep · Target A</span></div>
+  <h1>Reruntuhan hutan — Level 01</h1>
+  <p class="lede">Arah visual sementara untuk web desktop + keyboard: suasana hutan Majapahit berlapis, jalur baca yang jelas, dan ruang yang cukup agar gerak, ancaman, serta hadiah mudah dipahami.</p>
+  <section class="shell hero" aria-labelledby="scene-title">
+    <div>
+      <h2 id="scene-title">Studi komposisi gameplay</h2>
+      <div class="scene-frame"><canvas id="scene" width="320" height="180" role="img" aria-label="Mockup pixel-art menggunakan aset hutan, candi, karakter, koin, chest, spike, dan efek dari repositori. Komposisi ini belum diterapkan ke level produksi.">Mockup adegan MajaAdventure.</canvas><div class="scene-caption">Layar permainan internal 320 × 180 · diperbesar dengan nearest-neighbor · komposisi konsep, bukan screenshot build</div></div>
+    </div>
+    <div class="scene-notes">
+      <div class="note"><strong>1 · Lapisan dan kedalaman</strong><span>Langit → hutan jauh → landmark candi → jalur bermain → objek/interaksi → foliage dekat.</span></div>
+      <div class="note"><strong>2 · Baca jalur sebelum bereaksi</strong><span>Gobog membentuk lengkung lompatan; hazard diletakkan dengan ruang ancang dan area mendarat yang tampak.</span></div>
+      <div class="note"><strong>3 · Action punya sebab-akibat</strong><span>Telegraph musuh → serangan keris → slash/hit → SFX singkat; efek hanya muncul saat event terjadi.</span></div>
+      <div class="note"><strong>4 · Landmark dan jeda</strong><span>Obor checkpoint, buah Maja, dan peti menjadi titik orientasi/pemulihan—tidak ditumpuk pada satu layar.</span></div>
+      <div class="callout"><strong>Konsep saja.</strong> Menggunakan PNG yang sudah ada; tidak mengganti runtime, koordinat level, atau memberikan persetujuan lisensi aset.</div>
+    </div>
+  </section>
+
+  <div class="section-head"><div><h2>Alur yang ingin dirasakan pemain</h2><p>Beat berikut adalah draft untuk mendiskusikan pacing dan jarak antartantangan. Angka koordinat dan timing belum dikunci.</p></div></div>
+  <section class="flow" aria-label="Urutan beat level">
+    <article class="beat"><span class="num">01 / AMATI</span><h3>Ruang aman</h3><p>Pemain memahami bergerak, lompat, tujuan, dan kumpulkan Gobog tanpa ancaman yang mendadak.</p></article>
+    <article class="beat"><span class="num">02 / LATIH</span><h3>Lompatan pertama</h3><p>Jalur koin memberi petunjuk lompatan; bahaya terlihat sebelum pemain mencapai tepinya.</p></article>
+    <article class="beat"><span class="num">03 / PULIHKAN</span><h3>Checkpoint</h3><p>Obor mudah dikenali, aktivasi memberi audio/visual singkat, lalu pemain tahu titik respawn-nya.</p></article>
+    <article class="beat"><span class="num">04 / HADAPI</span><h3>Combat terbaca</h3><p>Penjaga memberi tanda serang; pemain punya waktu bereaksi, menyerang, lalu melihat hit confirm.</p></article>
+    <article class="beat"><span class="num">05 / SELESAIKAN</span><h3>Hadiah dan gerbang</h3><p>Peti/buah memberi payoff, landmark candi menuntun ke gerbang akhir, tanpa objek penting saling menutupi.</p></article>
+  </section>
+
+  <div class="section-head"><div><h2>Kontrol desktop yang dipertahankan</h2><p>Mockup mengikuti kontrol yang sudah dijelaskan proyek. Perubahan mapping sebaiknya diuji dulu, bukan dilakukan bersamaan dengan tuning gerak.</p></div></div>
+  <section class="controls" aria-label="Ringkasan kontrol keyboard">
+    <div class="control"><span class="key">A</span><span class="key">D</span><span class="key">←</span><span class="key">→</span><p>Bergerak kiri / kanan</p></div>
+    <div class="control"><span class="key">W</span><span class="key">↑</span><span class="key">X</span><span class="key">Space</span><p>Lompat</p></div>
+    <div class="control"><span class="key">Z</span><p>Serang dengan keris</p></div>
+    <div class="control"><span class="key">Esc</span><p>Jeda / lanjutkan</p></div>
+    <div class="control"><span class="key">M</span><p>Bisukan / nyalakan audio</p></div>
+    <div class="control"><span class="key">S</span><span class="key">↓</span><p>Turun dari platform satu arah</p></div>
+  </section>
+
+  <div class="section-head"><div><h2>Sound map — dengarkan aset yang tersedia</h2><p>Player di bawah hanya untuk review manual; tidak ada audio yang diputar otomatis. Bandingkan varian BGM sebelum menentukan mix final.</p></div></div>
+  <section id="audio-catalog" class="audio-grid" aria-label="Aset audio proyek"></section>
+
+  <div class="section-head"><div><h2>Katalog aset visual saat ini</h2><p>Seluruh PNG di folder <code>assets/</code> ditampilkan per kategori, termasuk frame animasi, varian state UI, VFX, serta gambar sumber. State alternatif dipakai pada konteksnya masing-masing—bukan ditampilkan bersamaan di gameplay.</p></div></div>
+  <p id="catalog-status" class="status" aria-live="polite">Memuat indeks aset…</p>
+  <div id="image-catalog"></div>
+
+  <footer class="footer">MajaAdventure · draft visual untuk diskusi internal · tidak mengubah data level atau memberi izin distribusi aset. Silakan buka folder aset asli untuk file sumber dan lisensinya.</footer>
+</main>
+<script>
+const ASSETS=[
+{src:'../../assets/characters/enemy_monkey/final/chr_monkey_sheet.png',label:'characters/enemy_monkey/final/chr_monkey_sheet.png'},
+{src:'../../assets/characters/enemy_soldier/final/chr_soldier_sheet.png',label:'characters/enemy_soldier/final/chr_soldier_sheet.png'},
+{src:'../../assets/characters/warrior/final/chr_warrior_sheet.png',label:'characters/warrior/final/chr_warrior_sheet.png'},
+{src:'../../assets/environment/backgrounds/final/bg_jungle_far.png',label:'environment/backgrounds/final/bg_jungle_far.png'},
+{src:'../../assets/environment/backgrounds/final/bg_jungle_near.png',label:'environment/backgrounds/final/bg_jungle_near.png'},
+{src:'../../assets/environment/backgrounds/final/bg_sky_layer.png',label:'environment/backgrounds/final/bg_sky_layer.png'},
+{src:'../../assets/environment/fauna/burung/frame_00.png',label:'environment/fauna/burung/frame_00.png'},
+{src:'../../assets/environment/fauna/burung/frame_01.png',label:'environment/fauna/burung/frame_01.png'},
+{src:'../../assets/environment/fauna/burung/frame_02.png',label:'environment/fauna/burung/frame_02.png'},
+{src:'../../assets/environment/fauna/burung/frame_03.png',label:'environment/fauna/burung/frame_03.png'},
+{src:'../../assets/environment/fauna/capung/frame_00.png',label:'environment/fauna/capung/frame_00.png'},
+{src:'../../assets/environment/fauna/capung/frame_01.png',label:'environment/fauna/capung/frame_01.png'},
+{src:'../../assets/environment/fauna/capung/frame_02.png',label:'environment/fauna/capung/frame_02.png'},
+{src:'../../assets/environment/fauna/capung/frame_03.png',label:'environment/fauna/capung/frame_03.png'},
+{src:'../../assets/environment/fauna/fauna_burung_sheet.png',label:'environment/fauna/fauna_burung_sheet.png'},
+{src:'../../assets/environment/fauna/fauna_capung_sheet.png',label:'environment/fauna/fauna_capung_sheet.png'},
+{src:'../../assets/environment/fauna/fauna_kunang_kunang_sheet.png',label:'environment/fauna/fauna_kunang_kunang_sheet.png'},
+{src:'../../assets/environment/fauna/fauna_kupu_kupu_sheet.png',label:'environment/fauna/fauna_kupu_kupu_sheet.png'},
+{src:'../../assets/environment/fauna/kunang_kunang/frame_00.png',label:'environment/fauna/kunang_kunang/frame_00.png'},
+{src:'../../assets/environment/fauna/kunang_kunang/frame_01.png',label:'environment/fauna/kunang_kunang/frame_01.png'},
+{src:'../../assets/environment/fauna/kunang_kunang/frame_02.png',label:'environment/fauna/kunang_kunang/frame_02.png'},
+{src:'../../assets/environment/fauna/kunang_kunang/frame_03.png',label:'environment/fauna/kunang_kunang/frame_03.png'},
+{src:'../../assets/environment/fauna/kupu_kupu/frame_00.png',label:'environment/fauna/kupu_kupu/frame_00.png'},
+{src:'../../assets/environment/fauna/kupu_kupu/frame_01.png',label:'environment/fauna/kupu_kupu/frame_01.png'},
+{src:'../../assets/environment/fauna/kupu_kupu/frame_02.png',label:'environment/fauna/kupu_kupu/frame_02.png'},
+{src:'../../assets/environment/fauna/kupu_kupu/frame_03.png',label:'environment/fauna/kupu_kupu/frame_03.png'},
+{src:'../../assets/environment/props/animated/daun_jatuh/frame_00.png',label:'environment/props/animated/daun_jatuh/frame_00.png'},
+{src:'../../assets/environment/props/animated/daun_jatuh/frame_01.png',label:'environment/props/animated/daun_jatuh/frame_01.png'},
+{src:'../../assets/environment/props/animated/daun_jatuh/frame_02.png',label:'environment/props/animated/daun_jatuh/frame_02.png'},
+{src:'../../assets/environment/props/animated/daun_jatuh/frame_03.png',label:'environment/props/animated/daun_jatuh/frame_03.png'},
+{src:'../../assets/environment/props/animated/obor_f0.png',label:'environment/props/animated/obor_f0.png'},
+{src:'../../assets/environment/props/animated/obor_f1.png',label:'environment/props/animated/obor_f1.png'},
+{src:'../../assets/environment/props/animated/obor_f2.png',label:'environment/props/animated/obor_f2.png'},
+{src:'../../assets/environment/props/animated/obor_f3.png',label:'environment/props/animated/obor_f3.png'},
+{src:'../../assets/environment/props/animated/rumput/frame_00.png',label:'environment/props/animated/rumput/frame_00.png'},
+{src:'../../assets/environment/props/animated/rumput/frame_01.png',label:'environment/props/animated/rumput/frame_01.png'},
+{src:'../../assets/environment/props/animated/rumput/frame_02.png',label:'environment/props/animated/rumput/frame_02.png'},
+{src:'../../assets/environment/props/animated/rumput/frame_03.png',label:'environment/props/animated/rumput/frame_03.png'},
+{src:'../../assets/environment/props/animated/semak/frame_00.png',label:'environment/props/animated/semak/frame_00.png'},
+{src:'../../assets/environment/props/animated/semak/frame_01.png',label:'environment/props/animated/semak/frame_01.png'},
+{src:'../../assets/environment/props/animated/semak/frame_02.png',label:'environment/props/animated/semak/frame_02.png'},
+{src:'../../assets/environment/props/animated/semak/frame_03.png',label:'environment/props/animated/semak/frame_03.png'},
+{src:'../../assets/environment/props/final/env_banner_majapahit.png',label:'environment/props/final/env_banner_majapahit.png'},
+{src:'../../assets/environment/props/final/env_candi_bentar_left.png',label:'environment/props/final/env_candi_bentar_left.png'},
+{src:'../../assets/environment/props/final/env_candi_bentar_right.png',label:'environment/props/final/env_candi_bentar_right.png'},
+{src:'../../assets/environment/props/final/env_palmtree_med.png',label:'environment/props/final/env_palmtree_med.png'},
+{src:'../../assets/environment/props/final/env_palmtree_short.png',label:'environment/props/final/env_palmtree_short.png'},
+{src:'../../assets/environment/props/final/env_palmtree_tall.png',label:'environment/props/final/env_palmtree_tall.png'},
+{src:'../../assets/environment/tilesets/final/env_ladder_tile.png',label:'environment/tilesets/final/env_ladder_tile.png'},
+{src:'../../assets/environment/tilesets/final/env_ruins_relief_01.png',label:'environment/tilesets/final/env_ruins_relief_01.png'},
+{src:'../../assets/environment/tilesets/final/env_ruins_wall_01.png',label:'environment/tilesets/final/env_ruins_wall_01.png'},
+{src:'../../assets/environment/tilesets/final/env_trap_spike_active.png',label:'environment/tilesets/final/env_trap_spike_active.png'},
+{src:'../../assets/environment/tilesets/final/env_trap_spike_idle.png',label:'environment/tilesets/final/env_trap_spike_idle.png'},
+{src:'../../assets/items/final/itm_chest_closed.png',label:'items/final/itm_chest_closed.png'},
+{src:'../../assets/items/final/itm_chest_open.png',label:'items/final/itm_chest_open.png'},
+{src:'../../assets/items/final/itm_gobog_sheet.png',label:'items/final/itm_gobog_sheet.png'},
+{src:'../../assets/items/final/itm_maja_static.png',label:'items/final/itm_maja_static.png'},
+{src:'../../assets/ui/buttons/audio_off/ui_btn_audio_off_normal.png',label:'ui/buttons/audio_off/ui_btn_audio_off_normal.png'},
+{src:'../../assets/ui/buttons/audio_off/ui_btn_audio_off_pressed.png',label:'ui/buttons/audio_off/ui_btn_audio_off_pressed.png'},
+{src:'../../assets/ui/buttons/audio_on/ui_btn_audio_on_normal.png',label:'ui/buttons/audio_on/ui_btn_audio_on_normal.png'},
+{src:'../../assets/ui/buttons/audio_on/ui_btn_audio_on_pressed.png',label:'ui/buttons/audio_on/ui_btn_audio_on_pressed.png'},
+{src:'../../assets/ui/buttons/close/ui_btn_close_disabled.png',label:'ui/buttons/close/ui_btn_close_disabled.png'},
+{src:'../../assets/ui/buttons/close/ui_btn_close_normal.png',label:'ui/buttons/close/ui_btn_close_normal.png'},
+{src:'../../assets/ui/buttons/close/ui_btn_close_pressed.png',label:'ui/buttons/close/ui_btn_close_pressed.png'},
+{src:'../../assets/ui/buttons/home/ui_btn_home_disabled.png',label:'ui/buttons/home/ui_btn_home_disabled.png'},
+{src:'../../assets/ui/buttons/home/ui_btn_home_normal.png',label:'ui/buttons/home/ui_btn_home_normal.png'},
+{src:'../../assets/ui/buttons/home/ui_btn_home_pressed.png',label:'ui/buttons/home/ui_btn_home_pressed.png'},
+{src:'../../assets/ui/buttons/lanjut/ui_btn_lanjut_disabled.png',label:'ui/buttons/lanjut/ui_btn_lanjut_disabled.png'},
+{src:'../../assets/ui/buttons/lanjut/ui_btn_lanjut_normal.png',label:'ui/buttons/lanjut/ui_btn_lanjut_normal.png'},
+{src:'../../assets/ui/buttons/lanjut/ui_btn_lanjut_pressed.png',label:'ui/buttons/lanjut/ui_btn_lanjut_pressed.png'},
+{src:'../../assets/ui/buttons/mulai/ui_btn_mulai_disabled.png',label:'ui/buttons/mulai/ui_btn_mulai_disabled.png'},
+{src:'../../assets/ui/buttons/mulai/ui_btn_mulai_normal.png',label:'ui/buttons/mulai/ui_btn_mulai_normal.png'},
+{src:'../../assets/ui/buttons/mulai/ui_btn_mulai_pressed.png',label:'ui/buttons/mulai/ui_btn_mulai_pressed.png'},
+{src:'../../assets/ui/buttons/pause/ui_btn_pause_disabled.png',label:'ui/buttons/pause/ui_btn_pause_disabled.png'},
+{src:'../../assets/ui/buttons/pause/ui_btn_pause_normal.png',label:'ui/buttons/pause/ui_btn_pause_normal.png'},
+{src:'../../assets/ui/buttons/pause/ui_btn_pause_pressed.png',label:'ui/buttons/pause/ui_btn_pause_pressed.png'},
+{src:'../../assets/ui/buttons/play/ui_btn_play_disabled.png',label:'ui/buttons/play/ui_btn_play_disabled.png'},
+{src:'../../assets/ui/buttons/play/ui_btn_play_normal.png',label:'ui/buttons/play/ui_btn_play_normal.png'},
+{src:'../../assets/ui/buttons/play/ui_btn_play_pressed.png',label:'ui/buttons/play/ui_btn_play_pressed.png'},
+{src:'../../assets/ui/buttons/retry/ui_btn_retry_disabled.png',label:'ui/buttons/retry/ui_btn_retry_disabled.png'},
+{src:'../../assets/ui/buttons/retry/ui_btn_retry_normal.png',label:'ui/buttons/retry/ui_btn_retry_normal.png'},
+{src:'../../assets/ui/buttons/retry/ui_btn_retry_pressed.png',label:'ui/buttons/retry/ui_btn_retry_pressed.png'},
+{src:'../../assets/ui/buttons/settings/ui_btn_settings_disabled.png',label:'ui/buttons/settings/ui_btn_settings_disabled.png'},
+{src:'../../assets/ui/buttons/settings/ui_btn_settings_normal.png',label:'ui/buttons/settings/ui_btn_settings_normal.png'},
+{src:'../../assets/ui/buttons/settings/ui_btn_settings_pressed.png',label:'ui/buttons/settings/ui_btn_settings_pressed.png'},
+{src:'../../assets/ui/buttons/ui_panel_stone_gold.png',label:'ui/buttons/ui_panel_stone_gold.png'},
+{src:'../../assets/ui/buttons/ulang/ui_btn_ulang_disabled.png',label:'ui/buttons/ulang/ui_btn_ulang_disabled.png'},
+{src:'../../assets/ui/buttons/ulang/ui_btn_ulang_normal.png',label:'ui/buttons/ulang/ui_btn_ulang_normal.png'},
+{src:'../../assets/ui/buttons/ulang/ui_btn_ulang_pressed.png',label:'ui/buttons/ulang/ui_btn_ulang_pressed.png'},
+{src:'../../assets/ui/fonts/font_majapahit_bitmap.png',label:'ui/fonts/font_majapahit_bitmap.png'},
+{src:'../../assets/ui/hud/final/ui_coin_counter.png',label:'ui/hud/final/ui_coin_counter.png'},
+{src:'../../assets/ui/hud/final/ui_coin_icon.png',label:'ui/hud/final/ui_coin_icon.png'},
+{src:'../../assets/ui/hud/final/ui_healthbar_empty.png',label:'ui/hud/final/ui_healthbar_empty.png'},
+{src:'../../assets/ui/hud/final/ui_healthbar_fill.png',label:'ui/hud/final/ui_healthbar_fill.png'},
+{src:'../../assets/ui/hud/final/ui_healthbar_full.png',label:'ui/hud/final/ui_healthbar_full.png'},
+{src:'../../assets/ui/hud/final/ui_healthbar_half.png',label:'ui/hud/final/ui_healthbar_half.png'},
+{src:'../../assets/ui/hud/final/ui_icon_heart.png',label:'ui/hud/final/ui_icon_heart.png'},
+{src:'../../assets/ui/hud/final/ui_icon_life.png',label:'ui/hud/final/ui_icon_life.png'},
+{src:'../../assets/ui/hud/final/ui_icon_maja.png',label:'ui/hud/final/ui_icon_maja.png'},
+{src:'../../assets/ui/screens/final/ui_screen_gameover.png',label:'ui/screens/final/ui_screen_gameover.png'},
+{src:'../../assets/ui/screens/final/ui_screen_levelcomplete.png',label:'ui/screens/final/ui_screen_levelcomplete.png'},
+{src:'../../assets/ui/screens/final/ui_screen_mainmenu.png',label:'ui/screens/final/ui_screen_mainmenu.png'},
+{src:'../../assets/ui/screens/final/ui_screen_pause.png',label:'ui/screens/final/ui_screen_pause.png'},
+{src:'../../assets/vfx/checkpoint/cp_aktif_f0.png',label:'vfx/checkpoint/cp_aktif_f0.png'},
+{src:'../../assets/vfx/checkpoint/cp_aktif_f1.png',label:'vfx/checkpoint/cp_aktif_f1.png'},
+{src:'../../assets/vfx/checkpoint/cp_aktif_f2.png',label:'vfx/checkpoint/cp_aktif_f2.png'},
+{src:'../../assets/vfx/checkpoint/cp_aktif_f3.png',label:'vfx/checkpoint/cp_aktif_f3.png'},
+{src:'../../assets/vfx/checkpoint/cp_aktivasi_f0.png',label:'vfx/checkpoint/cp_aktivasi_f0.png'},
+{src:'../../assets/vfx/checkpoint/cp_aktivasi_f1.png',label:'vfx/checkpoint/cp_aktivasi_f1.png'},
+{src:'../../assets/vfx/checkpoint/cp_aktivasi_f2.png',label:'vfx/checkpoint/cp_aktivasi_f2.png'},
+{src:'../../assets/vfx/checkpoint/cp_aktivasi_f3.png',label:'vfx/checkpoint/cp_aktivasi_f3.png'},
+{src:'../../assets/vfx/final/vfx_dust_sheet.png',label:'vfx/final/vfx_dust_sheet.png'},
+{src:'../../assets/vfx/final/vfx_hit_sheet.png',label:'vfx/final/vfx_hit_sheet.png'},
+{src:'../../assets/vfx/final/vfx_torch_sheet.png',label:'vfx/final/vfx_torch_sheet.png'},
+{src:'../../assets/vfx/vfx_coin_burst/vfx_coin_burst_f00.png',label:'vfx/vfx_coin_burst/vfx_coin_burst_f00.png'},
+{src:'../../assets/vfx/vfx_coin_burst/vfx_coin_burst_f01.png',label:'vfx/vfx_coin_burst/vfx_coin_burst_f01.png'},
+{src:'../../assets/vfx/vfx_coin_burst/vfx_coin_burst_f02.png',label:'vfx/vfx_coin_burst/vfx_coin_burst_f02.png'},
+{src:'../../assets/vfx/vfx_coin_burst/vfx_coin_burst_f03.png',label:'vfx/vfx_coin_burst/vfx_coin_burst_f03.png'},
+{src:'../../assets/vfx/vfx_dust/vfx_dust_f00.png',label:'vfx/vfx_dust/vfx_dust_f00.png'},
+{src:'../../assets/vfx/vfx_dust/vfx_dust_f01.png',label:'vfx/vfx_dust/vfx_dust_f01.png'},
+{src:'../../assets/vfx/vfx_dust/vfx_dust_f02.png',label:'vfx/vfx_dust/vfx_dust_f02.png'},
+{src:'../../assets/vfx/vfx_dust/vfx_dust_f03.png',label:'vfx/vfx_dust/vfx_dust_f03.png'},
+{src:'../../assets/vfx/vfx_hit/vfx_hit_f00.png',label:'vfx/vfx_hit/vfx_hit_f00.png'},
+{src:'../../assets/vfx/vfx_hit/vfx_hit_f01.png',label:'vfx/vfx_hit/vfx_hit_f01.png'},
+{src:'../../assets/vfx/vfx_hit/vfx_hit_f02.png',label:'vfx/vfx_hit/vfx_hit_f02.png'},
+{src:'../../assets/vfx/vfx_hit/vfx_hit_f03.png',label:'vfx/vfx_hit/vfx_hit_f03.png'},
+{src:'../../assets/vfx/vfx_slash/vfx_slash_f00.png',label:'vfx/vfx_slash/vfx_slash_f00.png'},
+{src:'../../assets/vfx/vfx_slash/vfx_slash_f01.png',label:'vfx/vfx_slash/vfx_slash_f01.png'},
+{src:'../../assets/vfx/vfx_slash/vfx_slash_f02.png',label:'vfx/vfx_slash/vfx_slash_f02.png'},
+{src:'../../assets/vfx/vfx_slash/vfx_slash_f03.png',label:'vfx/vfx_slash/vfx_slash_f03.png'}
+];
+const AUDIO=[
+{src:'../../assets/audio/bgm/bgm_level01_01.wav',label:'bgm/bgm_level01_01.wav'},
+{src:'../../assets/audio/bgm/bgm_level01_02.ogg',label:'bgm/bgm_level01_02.ogg'},
+{src:'../../assets/audio/bgm/bgm_mainmenu_01.wav',label:'bgm/bgm_mainmenu_01.wav'},
+{src:'../../assets/audio/bgm/bgm_mainmenu_02.ogg',label:'bgm/bgm_mainmenu_02.ogg'},
+{src:'../../assets/audio/sfx/sfx_ambient_jungle.wav',label:'sfx/sfx_ambient_jungle.wav'},
+{src:'../../assets/audio/sfx/sfx_attack_keris.wav',label:'sfx/sfx_attack_keris.wav'},
+{src:'../../assets/audio/sfx/sfx_checkpoint.wav',label:'sfx/sfx_checkpoint.wav'},
+{src:'../../assets/audio/sfx/sfx_chest_open.wav',label:'sfx/sfx_chest_open.wav'},
+{src:'../../assets/audio/sfx/sfx_coin_pickup.wav',label:'sfx/sfx_coin_pickup.wav'},
+{src:'../../assets/audio/sfx/sfx_damage_hit.wav',label:'sfx/sfx_damage_hit.wav'},
+{src:'../../assets/audio/sfx/sfx_gameover.wav',label:'sfx/sfx_gameover.wav'},
+{src:'../../assets/audio/sfx/sfx_jump.wav',label:'sfx/sfx_jump.wav'},
+{src:'../../assets/audio/sfx/sfx_levelcomplete.wav',label:'sfx/sfx_levelcomplete.wav'},
+{src:'../../assets/audio/sfx/sfx_spike_trap.wav',label:'sfx/sfx_spike_trap.wav'}
+];
+const load=(src)=>new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>resolve(im);im.onerror=reject;im.src=src;});
+async function paint(){
+ const c=document.getElementById('scene'),x=c.getContext('2d');x.imageSmoothingEnabled=false;
+ const paths={sky:'../../assets/environment/backgrounds/final/bg_sky_layer.png',far:'../../assets/environment/backgrounds/final/bg_jungle_far.png',near:'../../assets/environment/backgrounds/final/bg_jungle_near.png',tiles:'../../assets/environment/tilesets/final/env_ruins_wall_01.png',palm:'../../assets/environment/props/final/env_palmtree_tall.png',palmMed:'../../assets/environment/props/final/env_palmtree_med.png',palmShort:'../../assets/environment/props/final/env_palmtree_short.png',candiL:'../../assets/environment/props/final/env_candi_bentar_left.png',candiR:'../../assets/environment/props/final/env_candi_bentar_right.png',banner:'../../assets/environment/props/final/env_banner_majapahit.png',torch:'../../assets/vfx/final/vfx_torch_sheet.png',hero:'../../assets/characters/warrior/final/chr_warrior_sheet.png',soldier:'../../assets/characters/enemy_soldier/final/chr_soldier_sheet.png',coin:'../../assets/items/final/itm_gobog_sheet.png',maja:'../../assets/items/final/itm_maja_static.png',chest:'../../assets/items/final/itm_chest_closed.png',spike:'../../assets/environment/tilesets/final/env_trap_spike_active.png',slash:'../../assets/vfx/vfx_slash/vfx_slash_f01.png',hit:'../../assets/vfx/final/vfx_hit_sheet.png',bird:'../../assets/environment/fauna/burung/frame_01.png',health:'../../assets/ui/hud/final/ui_healthbar_empty.png',healthFill:'../../assets/ui/hud/final/ui_healthbar_fill.png',coinIcon:'../../assets/ui/hud/final/ui_coin_icon.png',pause:'../../assets/ui/buttons/pause/ui_btn_pause_normal.png'};
+ const entries=await Promise.all(Object.entries(paths).map(async([k,v])=>[k,await load(v)]));const im=Object.fromEntries(entries);
+ const d=(name,sx,sy,sw,sh,dx,dy,dw,dh)=>x.drawImage(im[name],sx,sy,sw,sh,dx,dy,dw,dh);
+ x.fillStyle='#1a3a5c';x.fillRect(0,0,320,180);
+ d('sky',0,0,640,180,0,0,320,180);
+ d('far',0,0,640,180,0,22,320,96);
+ d('near',0,0,640,180,0,44,320,96);
+ // Landmark silhouettes and canopy props in the middle distance.
+ d('palm',0,0,32,64,7,78,32,64);d('palmMed',0,0,32,48,79,99,24,36);d('palmShort',0,0,24,32,296,112,18,24);
+ d('candiL',0,0,32,64,247,78,32,64);d('candiR',0,0,32,64,279,78,32,64);d('banner',0,0,16,32,219,99,16,32);
+ // Platform / readable main walkway.
+ for(let px=0;px<320;px+=16){d('tiles',0,16,16,16,px,144,16,16);d('tiles',0,0,16,16,px,160,16,16);}
+ // Raised one-way route suggests a jump path.
+ for(let px=104;px<152;px+=16)d('tiles',16,48,16,16,px,120,16,16);
+ // Hazard grouped in a single visible cluster with landing room beyond it.
+ d('spike',0,0,16,16,200,144,16,16);d('spike',0,0,16,16,216,144,16,16);
+ // A distant fauna cue and checkpoint torch.
+ d('bird',0,0,68,68,176,57,22,22);d('torch',0,0,16,24,42,120,16,24);
+ // Coins trace a jump arc; fruit and chest sit off the hazard lane.
+ d('coin',0,0,16,16,84,103,16,16);d('coin',16,0,16,16,100,88,16,16);d('coin',32,0,16,16,116,103,16,16);
+ d('maja',0,0,16,16,134,128,16,16);d('chest',0,0,32,32,220,112,32,32);
+ // Enemy and player are separated enough to read the approach/strike moment.
+ d('soldier',0,0,48,52,153,92,40,44);
+ x.save();x.translate(188,0);x.scale(-1,1);d('hero',0,0,48,48,70,95,48,48);x.restore();
+ d('slash',0,0,68,68,111,97,36,36);d('hit',0,0,32,32,156,100,22,22);
+ // Existing HUD assets, with a minimal illustrative text layer.
+ d('health',0,0,96,12,7,7,76,10);x.save();x.beginPath();x.rect(7,7,50,10);x.clip();d('healthFill',0,0,96,12,7,7,76,10);x.restore();
+ d('coinIcon',0,0,12,12,237,8,12,12);x.fillStyle='#f0ebd8';x.font='7px monospace';x.fillText('018',252,17);d('pause',0,0,24,24,287,5,18,18);
+}
+paint().catch(err=>{const c=document.getElementById('scene'),x=c.getContext('2d');x.fillStyle='#1a3a5c';x.fillRect(0,0,320,180);x.fillStyle='#f0ebd8';x.font='10px monospace';x.fillText('Preview asset gagal dimuat',8,22);console.error(err);});
+function groupName(path){const p=path.split('/');return p.slice(0,Math.min(3,p.length-1)).join(' / ')}
+function renderImages(){const root=document.getElementById('image-catalog'),groups=new Map();for(const a of ASSETS){const g=groupName(a.label);if(!groups.has(g))groups.set(g,[]);groups.get(g).push(a)}for(const [g,items] of groups){const details=document.createElement('details');const summary=document.createElement('summary');summary.textContent=`${g} · ${items.length} aset`;details.append(summary);const grid=document.createElement('div');grid.className='catalog';for(const item of items){const card=document.createElement('div');card.className='asset';const im=document.createElement('img');im.loading='lazy';im.decoding='async';im.src=item.src;im.alt=item.label;const label=document.createElement('small');label.textContent=item.label;card.append(im,label);grid.append(card)}details.append(grid);root.append(details)}document.getElementById('catalog-status').textContent=`${ASSETS.length} file PNG tersedia di assets/ · dikelompokkan untuk review; aset sumber dan runtime tetap tidak diubah.`}
+function renderAudio(){const root=document.getElementById('audio-catalog');for(const item of AUDIO){const card=document.createElement('div');card.className='audio-card';const name=document.createElement('strong');name.textContent=item.label;const player=document.createElement('audio');player.controls=true;player.preload='none';player.src=item.src;player.setAttribute('aria-label','Dengarkan '+item.label);card.append(name,player);root.append(card)}}
+renderImages();renderAudio();
+</script>
+</body>
+</html>

@@ -2,6 +2,8 @@
 
 Baseline audit: `77be52feceb0c2c18c157ccdf750079937994ce2` (2026-10-16).
 
+Roadmap ringkas seluruh progres dan rencana tahap polish: [ROADMAP.md](ROADMAP.md). Draft arah art, layout level, action, VFX, dan sound: [Desain Visual Level 01](../docs/DESAIN_VISUAL_LEVEL_01.md).
+
 Setiap tahap dipush terpisah ke `main`. Laporan menjelaskan perubahan, tes, batasan, dan pekerjaan manusia yang masih terbuka. Hash push aktual dicatat setelah GitHub mengonfirmasi commit, pada tahap berikutnya / finalisasi log; bukan hash buatan.
 
 | Tahap | Laporan | Status |
