@@ -54,3 +54,4 @@ Angka tes dan status Tahap 1–3 disalin dari laporan progres proyek, bukan hasi
 ## Catatan perubahan dokumen
 
 - 2026-10-29 — Menambahkan target A, ringkasan progres historis, roadmap polish pengalaman, serta konsep visual awal berbasis aset lokal. **Dokumentasi/mockup saja; runtime belum diubah.** Commit: [`5afe9c2`](https://github.com/stmarya/MajaAdventure/commit/5afe9c2642b2a7163c6d09faf7c8e3159f6eb95a).
+- 2026-10-29 — Merevisi mockup agar sprite/tile/HUD pada scene memakai ukuran sumber, panorama dipotong 1:1, dan preview desktop memakai pembesaran 3×. Audit aset: belum perlu art/sound baru untuk draft; reuse candi sebagai landmark exit, tunda platform satu arah (belum dipakai level), dan catat integrasi VFX slash sebagai pekerjaan runtime. Belum mengubah runtime, level, atau aset produksi.
