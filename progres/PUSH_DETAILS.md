@@ -1,6 +1,6 @@
 # Detail push perbaikan
 
-Repo: `stmarya/MajaAdventure`; branch: `main`. Tiga tahap implementasi dan satu push perencanaan visual berikut telah dikonfirmasi GitHub; desain visual masih draft, bukan implementasi runtime.
+Repo: `stmarya/MajaAdventure`; branch: `main`. Tiga tahap implementasi dan push perencanaan visual awal dan revisi native-scale v0.2 telah dikonfirmasi GitHub; desain visual masih draft, bukan implementasi runtime.
 
 ## Tahap 1
 
@@ -34,8 +34,16 @@ Repo: `stmarya/MajaAdventure`; branch: `main`. Tiga tahap implementasi dan satu 
 - Jumlah file: 5
 - Cakupan/bukti: roadmap progres, konsep visual Level 01, HTML mockup dengan 130 PNG dan 14 audio yang ada, serta tautan navigasi. Mockup diperiksa pada viewport desktop 1440px dan mobile 390px; tidak mengubah runtime/level/aset.
 
+### Revisi konsep visual v0.2
+
+- Commit: [`5f14bbfead77e8dd807c82e3098a60e66d4759f5`](https://github.com/stmarya/MajaAdventure/commit/5f14bbfead77e8dd807c82e3098a60e66d4759f5)
+- Pesan: `docs: revise visual concept to native pixel scale`
+- Waktu commit GitHub: `2026-10-29T02:57:12Z`
+- Jumlah file: 3
+- Cakupan/bukti: revisi HTML supaya sprite/tile/HUD scene memakai ukuran frame sumber, panorama dicrop 1:1, dan desktop preview 3×. Audit menemukan belum ada aset baru yang wajib untuk draft; gunakan ulang gerbang candi, tunda platform one-way (belum dipakai Level 01), serta catat integrasi slash sebagai pekerjaan runtime. Pemeriksaan Chromium desktop 1440px dan narrow 390px: tidak ada console/resource error atau overflow horizontal. Tidak mengubah gameplay/data level/asset produksi.
+
 ## Push finalisasi dokumentasi
 
-Pesan: `docs(progres): record all verified pushes and clean-build evidence`. Memperbarui indeks progres, SHA/daftar push tahap 1–4, serta hasil clean-build tahap 3. Tidak mengubah runtime. SHA push finalisasi tersedia pada [riwayat file](https://github.com/stmarya/MajaAdventure/commits/main/progres/push-log.json); hash tidak ditanam secara self-referential.
+Pesan: `docs(progres): record all verified pushes and clean-build evidence`. Memperbarui indeks progres, SHA/daftar push tahap 1–4 termasuk revisi visual v0.2, serta hasil clean-build tahap 3. Tidak mengubah runtime. SHA push finalisasi tersedia pada [riwayat file](https://github.com/stmarya/MajaAdventure/commits/main/progres/push-log.json); hash tidak ditanam secara self-referential.
 
 Daftar file tiap push ada pada `push-log.json`. Log pengujian ada di `hasil/`. Hak distribusi, final-art dan QA manusia masih terbuka; tidak ada rilis publik.

@@ -126,6 +126,21 @@
       "file_count": 5,
       "summary": "Roadmap, art direction, object/action beat map, sound review map, and HTML visual concept using existing image/audio assets; no runtime changes.",
       "committed_at": "2026-10-29T02:29:28Z"
+    },
+    {
+      "stage": 4,
+      "revision": 2,
+      "sha": "5f14bbfead77e8dd807c82e3098a60e66d4759f5",
+      "url": "https://github.com/stmarya/MajaAdventure/commit/5f14bbfead77e8dd807c82e3098a60e66d4759f5",
+      "message": "docs: revise visual concept to native pixel scale",
+      "files": [
+        "docs/DESAIN_VISUAL_LEVEL_01.md",
+        "docs/mockups/level01-visual-concept.html",
+        "progres/ROADMAP.md"
+      ],
+      "file_count": 3,
+      "summary": "Native-size scene sprites, 1:1 panorama crop, integer 3x desktop preview, and asset-gap audit; no production art/runtime changes.",
+      "committed_at": "2026-10-29T02:57:12Z"
     }
   ],
   "documentation_finalization": {
@@ -137,6 +152,12 @@
   "stage_4_documentation_finalization": {
     "message": "docs(progres): record verified visual-design roadmap push",
     "purpose": "Record the confirmed SHA/file list for stage 4 after GitHub accepted the design-documentation push; no runtime changes.",
+    "self_hash_note": "The hash of this follow-up log commit is available in Git history and is not embedded in itself.",
+    "history_url": "https://github.com/stmarya/MajaAdventure/commits/main/progres/push-log.json"
+  },
+  "stage_4_revision_finalization": {
+    "message": "docs(progres): record verified native-scale visual revision",
+    "purpose": "Record the confirmed v0.2 concept revision commit and viewport review after GitHub accepted the update; no runtime changes.",
     "self_hash_note": "The hash of this follow-up log commit is available in Git history and is not embedded in itself.",
     "history_url": "https://github.com/stmarya/MajaAdventure/commits/main/progres/push-log.json"
   }
