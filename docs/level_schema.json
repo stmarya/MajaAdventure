@@ -7,7 +7,7 @@
       "id": "level_01",
       "nama": "Gerbang Hutan Majapahit",
       "urutan": 1,
-      "bgm": "bgm_level01_01.ogg",
+      "bgm": "bgm_level01_02.ogg",
       "background_layers": [
         { "file": "assets/environment/backgrounds/final/bg_sky_layer.png",     "parallax_x": 0.1, "parallax_y": 0.0, "z": 0 },
         { "file": "assets/environment/backgrounds/final/bg_jungle_far.png",    "parallax_x": 0.3, "parallax_y": 0.0, "z": 1 },

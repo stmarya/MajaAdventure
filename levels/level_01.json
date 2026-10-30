@@ -3,7 +3,7 @@
     "id": "level_01",
     "nama": "Gerbang Hutan Majapahit",
     "urutan": 1,
-    "bgm": "bgm_level01_01.ogg",
+    "bgm": "bgm_level01_02.ogg",
     "background_layers": [
       {
         "file": "assets/environment/backgrounds/final/bg_sky_layer.png",
@@ -220,18 +220,6 @@
       ]
     },
     {
-      "tipe": "prop_candi_kiri",
-      "id": "candi_01_kiri",
-      "tile_x": 90,
-      "tile_y": 9
-    },
-    {
-      "tipe": "prop_candi_kanan",
-      "id": "candi_01_kanan",
-      "tile_x": 92,
-      "tile_y": 9
-    },
-    {
       "tipe": "prop_palmtree_tall",
       "id": "palm_001_v2",
       "tile_x": 10,
@@ -252,36 +240,8 @@
     {
       "tipe": "prop_palmtree_short",
       "id": "palm_004_v2",
-      "tile_x": 160,
+      "tile_x": 168,
       "tile_y": 10
-    },
-    {
-      "tipe": "prop_torch",
-      "id": "torch_001",
-      "tile_x": 15,
-      "tile_y": 13,
-      "animasi": "burn"
-    },
-    {
-      "tipe": "prop_torch",
-      "id": "torch_002",
-      "tile_x": 35,
-      "tile_y": 13,
-      "animasi": "burn"
-    },
-    {
-      "tipe": "prop_torch",
-      "id": "torch_003",
-      "tile_x": 88,
-      "tile_y": 13,
-      "animasi": "burn"
-    },
-    {
-      "tipe": "prop_torch",
-      "id": "torch_004",
-      "tile_x": 92,
-      "tile_y": 13,
-      "animasi": "burn"
     },
     {
       "tipe": "prop_banner",
@@ -334,25 +294,19 @@
     {
       "tipe": "prop_candi_kiri",
       "id": "prop_candi_kiri_001",
-      "tile_x": 10,
-      "tile_y": 16
+      "tile_x": 188,
+      "tile_y": 14
     },
     {
       "tipe": "prop_candi_kanan",
       "id": "prop_candi_kanan_001",
-      "tile_x": 12,
-      "tile_y": 16
+      "tile_x": 190,
+      "tile_y": 14
     },
     {
       "tipe": "prop_palmtree_tall",
       "id": "prop_palm_tall_001",
       "tile_x": 18,
-      "tile_y": 16
-    },
-    {
-      "tipe": "prop_palmtree_tall",
-      "id": "prop_palm_tall_002",
-      "tile_x": 35,
       "tile_y": 16
     },
     {
@@ -365,12 +319,6 @@
       "tipe": "prop_palmtree_short",
       "id": "prop_palm_short_001",
       "tile_x": 70,
-      "tile_y": 16
-    },
-    {
-      "tipe": "prop_palmtree_tall",
-      "id": "prop_palm_tall_003",
-      "tile_x": 90,
       "tile_y": 16
     },
     {
@@ -400,25 +348,25 @@
     {
       "tipe": "prop_torch",
       "id": "prop_torch_002",
-      "tile_x": 45,
+      "tile_x": 59,
       "tile_y": 14
     },
     {
       "tipe": "prop_torch",
       "id": "prop_torch_003",
-      "tile_x": 75,
+      "tile_x": 90,
       "tile_y": 14
     },
     {
       "tipe": "prop_torch",
       "id": "prop_torch_004",
-      "tile_x": 105,
+      "tile_x": 129,
       "tile_y": 14
     },
     {
       "tipe": "prop_torch",
       "id": "prop_torch_005",
-      "tile_x": 145,
+      "tile_x": 182,
       "tile_y": 14
     },
     {

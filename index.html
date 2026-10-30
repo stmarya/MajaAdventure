@@ -7,25 +7,69 @@
   <title>MajaAdventure — Majapahit Platformer</title>
   <link rel="icon" href="data:,">
   <style>
-    :root { color-scheme:dark; font:16px/1.5 system-ui,sans-serif; background:#1a0f08; color:#F0EBD8; }
-    * { box-sizing:border-box; } body { margin:0; padding:16px; }
-    main { max-width:1320px; margin:auto; } h1 { font-size:1.4rem; margin:0 0 8px; }
-    #container { display:flex; flex-direction:column; align-items:center; gap:8px; }
-    #canvas { image-rendering:pixelated; image-rendering:crisp-edges; display:block; max-width:100%; height:auto; }
-    #loading-bar-wrap { width:min(100%,960px); height:8px; background:#2B1810; }
-    #loading-bar { height:100%; width:0; background:#D4A017; }
-    #controls { display:flex; gap:8px; flex-wrap:wrap; margin:12px 0; }
-    button { font:inherit; min-height:44px; padding:8px 14px; border:1px solid #D4A017; border-radius:4px; background:#2B1810; color:#F0EBD8; cursor:pointer; }
-    button:hover { background:#5C2E1A; } button:focus-visible,summary:focus-visible,input:focus-visible { outline:3px solid #F5C842; outline-offset:3px; }
-    button[aria-pressed="true"] { background:#5C2E1A; } [hidden] { display:none!important; }
-    #status { min-height:1.5em; color:#FDEEA0; } details { border-top:1px solid #5C2E1A; padding:10px 0; }
-    summary { cursor:pointer; } label { display:inline-flex; align-items:center; gap:8px; margin:8px 16px 8px 0; }
-    #touch-controls { gap:8px; display:none; flex-wrap:wrap; } #touch-controls button { touch-action:none; user-select:none; min-width:56px; }
-    .note { color:#C8A882; font-size:.9rem; } @media(pointer:coarse) { #touch-controls { display:flex; } }
+    :root {
+      color-scheme: dark;
+      font: 16px/1.5 system-ui, sans-serif;
+      --latar: #120d09;
+      --panel: #1e140e;
+      --panel-angkat: #2b1b11;
+      --teks: #f3ecdc;
+      --redup: #c8a882;
+      --garis: #5c3b24;
+      --emas: #d4a017;
+      --emas-terang: #f5c842;
+      background: radial-gradient(ellipse at 50% 0, #2b1a0e 0, var(--latar) 62%);
+      color: var(--teks);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: clamp(16px, 3vw, 40px); }
+    main { max-width: 1320px; margin: 0 auto; }
+    h1 { font-size: clamp(1.25rem, 2.5vw, 1.6rem); line-height: 1.2; margin: 0; }
+    .masthead { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 0 0 16px; }
+    .badge { flex: 0 0 auto; border: 1px solid var(--garis); border-radius: 999px; padding: 5px 10px; color: var(--emas-terang); font-size: .875rem; letter-spacing: .04em; }
+    #container { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: clamp(8px, 1.5vw, 16px); border: 1px solid var(--garis); border-radius: 12px; background: rgba(30, 20, 14, .88); box-shadow: 0 8px 24px rgba(0, 0, 0, .24); }
+    #canvas { display: block; max-width: 100%; height: auto !important; border: 2px solid #76502a; border-radius: 5px; image-rendering: pixelated; image-rendering: crisp-edges; }
+    #canvas:focus-visible { outline: 3px solid var(--emas-terang); outline-offset: 4px; }
+    #loading-bar-wrap { width: min(100%, 960px); height: 8px; overflow: hidden; border: 1px solid var(--garis); border-radius: 999px; background: #2b1810; }
+    #loading-bar { height: 100%; width: 0; background: var(--emas); transition: width 160ms ease; }
+    #loading-text { color: var(--redup); font-size: .9rem; }
+    #status { min-height: 48px; margin: 12px 0; padding: 12px 16px; border: 1px solid var(--garis); border-left: 4px solid var(--emas); border-radius: 8px; background: var(--panel); color: #fdeea0; }
+    #controls { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 16px; }
+    button { min-height: 48px; padding: 9px 16px; border: 1px solid #84612e; border-radius: 8px; background: var(--panel); color: var(--teks); font: inherit; font-weight: 600; cursor: pointer; transition: background-color 140ms ease, border-color 140ms ease, transform 140ms ease, box-shadow 140ms ease; }
+    button:hover:not(:disabled) { border-color: var(--emas-terang); background: #4a2b15; transform: translateY(-1px); }
+    button:active:not(:disabled) { background: #3a2113; box-shadow: inset 0 2px 5px rgba(0, 0, 0, .35); transform: translateY(1px); }
+    button:disabled { border-color: #55483b; background: #211a15; color: #958777; cursor: not-allowed; opacity: .65; }
+    button:focus-visible, summary:focus-visible, input:focus-visible { outline: 3px solid var(--emas-terang); outline-offset: 3px; }
+    button[aria-pressed="true"] { border-color: var(--emas-terang); background: #5c2e1a; }
+    [hidden] { display: none !important; }
+    details { margin-top: 10px; padding: 12px 16px; border: 1px solid var(--garis); border-radius: 8px; background: rgba(30, 20, 14, .72); }
+    summary { color: var(--teks); cursor: pointer; font-weight: 650; }
+    details[open] summary { margin-bottom: 8px; color: var(--emas-terang); }
+    label { display: inline-flex; align-items: center; gap: 10px; margin: 8px 20px 8px 0; }
+    input[type="range"] { accent-color: var(--emas-terang); }
+    input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--emas-terang); }
+    #touch-controls { display: none; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
+    #touch-controls button { min-width: 64px; min-height: 56px; touch-action: none; user-select: none; }
+    .note { color: var(--redup); font-size: .9rem; }
+    @media (pointer: coarse) { #touch-controls { display: flex; } }
+    @media (max-width: 520px) {
+      body { padding: 16px; }
+      .masthead { align-items: flex-start; flex-direction: column; gap: 8px; }
+      #container { padding: 8px; }
+      #status { padding: 10px 12px; }
+      #controls button { flex: 1 1 140px; }
+      label { width: 100%; justify-content: space-between; margin-right: 0; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
   </style>
 </head>
 <body><main>
-  <h1>MajaAdventure <span class="note">— prototipe web</span></h1>
+  <header class="masthead">
+    <h1>MajaAdventure <span class="note">— prototipe web</span></h1>
+    <span class="badge">PRATINJAU INTERNAL · WEB + KEYBOARD</span>
+  </header>
   <div id="container">
     <canvas id="canvas" tabindex="0" aria-label="Area permainan platformer Majapahit" aria-describedby="guide status">Browser ini perlu mendukung Canvas 2D untuk bermain.</canvas>
     <div id="loading-bar-wrap" role="progressbar" aria-label="Memuat aset" aria-valuemin="0" aria-valuemax="100"><div id="loading-bar"></div></div>

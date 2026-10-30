@@ -325,21 +325,6 @@
     }
   },
 
-  "vfx_coin_burst": {
-    "sprite_sheet": "assets/vfx/final/vfx_coin_burst_sheet.png",
-    "frame_lebar": 16,
-    "frame_tinggi": 16,
-    "animasi": {
-      "play": {
-        "id": "play",
-        "frames": [0, 1, 2, 3],
-        "fps": 14,
-        "loop": false,
-        "next": null
-      }
-    }
-  },
-
   "vfx_torch": {
     "sprite_sheet": "assets/vfx/final/vfx_torch_sheet.png",
     "frame_lebar": 16,

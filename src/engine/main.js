@@ -35,6 +35,9 @@ let   fauna    = /** @type {FaunaSystem|null} */ (null);
 
 // Debug explicitly opt-in via ?debug=1; F3 never conflicts with movement.
 let debugMode = false;
+let audioHover = false;
+let audioPressed = false;
+let audioPointerId = null;
 window.addEventListener("keydown", (e) => {
   if (/^(INPUT|TEXTAREA|SELECT|BUTTON)$/.test(e.target?.tagName ?? "") || e.repeat) return;
   if (e.code === "F3" && new URLSearchParams(location.search).get("debug") === "1") { e.preventDefault(); debugMode = !debugMode; }
@@ -131,7 +134,7 @@ let stateGame      = "loading";
 let animConfig     = null;
 let levelData      = null;
 let tilesetCfg     = null;
-/** Statistik yang di-cache saat levelcomplete/gameover untuk ditampilkan di layar. */
+/** Statistik yang ditampilkan melalui ringkasan status DOM pada layar akhir. */
 let _statsCache    = null;
 
 let kamera     = /** @type {Camera|null} */ (null);
@@ -358,13 +361,9 @@ function loop(timestamp) {
         renderer.bersihkan(KONFIG.WARNA.HITAM_TUA);
         renderer.renderTeks(loader.ambilGambar("font_bitmap"),
           "GAME OVER", KONFIG.CANVAS_LEBAR / 2 - 36, KONFIG.CANVAS_TINGGI / 2 - 28);
+        renderer.renderTeks(loader.ambilGambar("font_bitmap"),
+          "TEKAN Z COBA LAGI", KONFIG.CANVAS_LEBAR / 2 - 68, KONFIG.CANVAS_TINGGI / 2 + 44);
       }
-      // Tampilkan statistik terakhir di layar game over
-      if (_statsCache) {
-        _renderStatistik(renderer, loader, _statsCache, KONFIG.CANVAS_TINGGI / 2 - 10);
-      }
-      renderer.renderTeks(loader.ambilGambar("font_bitmap"),
-        "TEKAN Z COBA LAGI", KONFIG.CANVAS_LEBAR / 2 - 68, KONFIG.CANVAS_TINGGI / 2 + 44);
       if (input.baruDitekan("serang") || input.baruDitekan("konfirmasi")) {
         retryCheckpoint();
       }
@@ -379,13 +378,9 @@ function loop(timestamp) {
         renderer.bersihkan(KONFIG.WARNA.BIRU_INDIGO);
         renderer.renderTeks(loader.ambilGambar("font_bitmap"),
           "LEVEL SELESAI!", KONFIG.CANVAS_LEBAR / 2 - 56, KONFIG.CANVAS_TINGGI / 2 - 50);
+        renderer.renderTeks(loader.ambilGambar("font_bitmap"),
+          "TEKAN Z LANJUT", KONFIG.CANVAS_LEBAR / 2 - 52, KONFIG.CANVAS_TINGGI / 2 + 44);
       }
-      // Tampilkan statistik di layar level complete
-      if (_statsCache) {
-        _renderStatistik(renderer, loader, _statsCache, KONFIG.CANVAS_TINGGI / 2 - 32);
-      }
-      renderer.renderTeks(loader.ambilGambar("font_bitmap"),
-        "TEKAN Z LANJUT", KONFIG.CANVAS_LEBAR / 2 - 52, KONFIG.CANVAS_TINGGI / 2 + 44);
       if (input.baruDitekan("serang") || input.baruDitekan("konfirmasi")) {
         audio.putarBGM("bgm_mainmenu");
         _statsCache = null;
@@ -413,10 +408,21 @@ function _renderAudioToggle(renderer, loader, audio) {
   const x = KONFIG.CANVAS_LEBAR  - SIZE - 4;
   const y = 4;
 
+  const offset = audioPressed ? 1 : 0;
+  if (audioHover || audioPressed) {
+    renderer.ctx.save();
+    renderer.ctx.fillStyle = audioPressed ? "rgba(24, 12, 4, 0.78)" : "rgba(245, 200, 66, 0.22)";
+    renderer.ctx.fillRect(x - 2, y - 2, SIZE + 4, SIZE + 4);
+    renderer.ctx.strokeStyle = "#F5C842";
+    renderer.ctx.lineWidth = 1;
+    renderer.ctx.strokeRect(x - 1.5, y - 1.5, SIZE + 3, SIZE + 3);
+    renderer.ctx.restore();
+  }
+
   const btnId = audio.dibisukan ? "ui_btn_audio_off" : "ui_btn_audio_on";
   const btn   = loader.ambilGambar(btnId);
   if (btn) {
-    renderer.ctx.drawImage(btn, x, y, SIZE, SIZE);
+    renderer.ctx.drawImage(btn, x + offset, y + offset, SIZE, SIZE);
   } else {
     // Fallback: ikon teks
     renderer.ctx.save();
@@ -435,24 +441,6 @@ function _renderAudioToggle(renderer, loader, audio) {
  * @param {{skor, koin, musuhKalah, waktu, highscore}} stats
  * @param {number} y  - Y awal baris pertama
  */
-function _renderStatistik(renderer, loader, stats, y) {
-  const font = loader.ambilGambar("font_bitmap");
-  const cx   = KONFIG.CANVAS_LEBAR / 2;
-  const BARIS = 14; // jarak antar baris (px)
-
-  // Latar transparan di belakang statistik
-  renderer.ctx.save();
-  renderer.ctx.fillStyle = "rgba(0,0,0,0.45)";
-  renderer.ctx.fillRect(cx - 80, y - 4, 160, BARIS * 6 + 8);
-  renderer.ctx.restore();
-
-  renderer.renderTeks(font, `KOIN    : ${String(stats.koin).padStart(3, " ")}`, cx - 72, y);
-  renderer.renderTeks(font, `MUSUH   : ${String(stats.musuhKalah).padStart(3, " ")}`, cx - 72, y + BARIS);
-  renderer.renderTeks(font, `WAKTU   : ${stats.waktu}`, cx - 72, y + BARIS * 2);
-  renderer.renderTeks(font, `SKOR    : ${String(stats.skor).padStart(6, "0")}`, cx - 72, y + BARIS * 3);
-  renderer.renderTeks(font, `TERBAIK : ${String(stats.highscore).padStart(6, "0")}`, cx - 72, y + BARIS * 4);
-}
-
 // ─── Bootstrap ────────────────────────────────────────────────────────────────
 
 async function bootstrap() {
@@ -510,6 +498,7 @@ function syncUI(force = false) {
     mute:["mainmenu","bermain","pause","gameover","levelcomplete"], reload:["error"],
   };
   for (const [id,states] of Object.entries(visible)) ui(id).hidden = !states.includes(stateGame);
+  ui("touch-controls").hidden = stateGame !== "bermain";
   const names = { loading:"Memuat permainan…", mainmenu:"Siap. Mulai lalu capai gerbang di ujung kanan.",
     bermain:"Bermain — Z menyerang, Spasi melompat, Esc menjeda.", pause:"Permainan dijeda.",
     gameover:"Kamu gugur. Coba lagi dari checkpoint atau ulang dari awal.", levelcomplete:"Level selesai! Pilih ulang dari awal atau kembali ke menu.", error:"Gagal memuat permainan. Periksa koneksi lalu muat ulang halaman." };
@@ -530,9 +519,53 @@ ui("volume-bgm").oninput = e => audio.setVolumeBGM(Number(e.target.value));
 ui("volume-sfx").oninput = e => audio.setVolumeSFX(Number(e.target.value));
 try { ui("reduce-flash").checked = localStorage.getItem("maja_reduce_flash") === "true"; } catch { /* optional */ }
 ui("reduce-flash").onchange = e => { if (gameMgr.player) applyPreferences(); try { localStorage.setItem("maja_reduce_flash",String(e.target.checked)); } catch { /* optional */ } };
+function posisiAudioDariPointer(e) {
+  const rect = canvas.getBoundingClientRect();
+  return {
+    x: (e.clientX - rect.left) * KONFIG.CANVAS_LEBAR / rect.width,
+    y: (e.clientY - rect.top) * KONFIG.CANVAS_TINGGI / rect.height,
+  };
+}
+function pointerDiAudio(e) {
+  const { x, y } = posisiAudioDariPointer(e);
+  const kiri = KONFIG.CANVAS_LEBAR - 28;
+  return x >= kiri && x <= KONFIG.CANVAS_LEBAR - 4 && y >= 4 && y <= 28;
+}
+function audioTersediaUntukState() {
+  return ["mainmenu", "bermain", "pause", "gameover", "levelcomplete"].includes(stateGame);
+}
+canvas.addEventListener("pointermove", e => {
+  audioHover = audioTersediaUntukState() && pointerDiAudio(e);
+  canvas.style.cursor = audioHover ? "pointer" : "";
+});
+canvas.addEventListener("pointerleave", () => {
+  audioHover = false;
+  canvas.style.cursor = "";
+});
+canvas.addEventListener("pointerdown", e => {
+  if (!audioTersediaUntukState() || !pointerDiAudio(e)) return;
+  e.preventDefault();
+  audioPointerId = e.pointerId;
+  audioPressed = true;
+  audioHover = true;
+  canvas.setPointerCapture(e.pointerId);
+});
 canvas.addEventListener("pointerup", e => {
-  const rect = canvas.getBoundingClientRect(), x=(e.clientX-rect.left)*320/rect.width, y=(e.clientY-rect.top)*180/rect.height;
-  if (["bermain","pause"].includes(stateGame) && x>=292 && x<=316 && y>=4 && y<=28) { audio.toggleBisu(); syncUI(true); }
+  if (audioPointerId !== e.pointerId) return;
+  const aktifkan = audioTersediaUntukState() && pointerDiAudio(e);
+  audioPointerId = null;
+  audioPressed = false;
+  audioHover = aktifkan;
+  if (aktifkan) {
+    audio.toggleBisu();
+    syncUI(true);
+  }
+});
+canvas.addEventListener("pointercancel", e => {
+  if (audioPointerId !== e.pointerId) return;
+  audioPointerId = null;
+  audioPressed = false;
+  audioHover = false;
 });
 for (const button of document.querySelectorAll("[data-action]")) {
   button.addEventListener("pointerdown",e=>{ if(stateGame!=="bermain")return; e.preventDefault();button.setPointerCapture(e.pointerId);input.setVirtual(`touch-${e.pointerId}`,button.dataset.action,true); });

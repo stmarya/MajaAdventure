@@ -1,8 +1,8 @@
 # Konsep visual Level 01 — MajaAdventure
 
-**Status:** draft v0.3 untuk diskusi, belum implementasi.  
+**Status:** draf evaluasi A0/v0.4; implementasi awal tersimpan di cabang review, belum disetujui final. Mockup yang ditautkan tetap studi komposisi v0.3.
 **Target desain sekarang:** web desktop + keyboard (A).  
-**Tujuan:** menyepakati cara membaca lingkungan, karakter, object, action, effects, dan sound sebelum mengubah aset produksi atau koordinat level.
+**Tujuan:** menyepakati cara membaca lingkungan, karakter, object, action, effects, dan sound; mencatat perubahan A0 yang masih harus divalidasi melalui review dan playtest.
 
 ## Preview
 
@@ -44,7 +44,14 @@ Mockup v0.3 menggunakan scene internal 320×180 dan memperbaiki tumpang tindih y
 | 4 · Combat | Mengajari baca telegraph dan strike | Penjaga berada setelah buffer pendaratan; urutkan telegraph → respons pemain → strike → hit confirm → recovery. |
 | 5 · Penutup | Memberi tujuan | Candi tetap menjadi landmark/exit yang bersih; peti ditempatkan pada beat reward terpisah jika dipakai. |
 
-Pembagian zona ini adalah usulan konseptual v0.3. Koordinat aktual `levels/level_01.json` tidak diubah; pencocokan layout dan jarak tetap menunggu persetujuan mockup serta playtest.
+Pembagian zona ini adalah usulan konseptual; koordinat aktual telah mendapat penataan prop awal pada cabang A0. Perubahan tersebut belum membuktikan jarak atau pacing final: komposisi, collision visual, dan jarak tetap perlu persetujuan pemilik serta playtest.
+
+### Catatan implementasi awal A0
+
+- Pasangan candi dipindahkan ke sekitar exit dan dipijakkan pada lantai; pasangan duplikat di tengah level dihapus. Obor dekoratif yang duplikatif dihapus dari daftar objek level dan obor/palem tersisa diberi jarak lebih baik.
+- Aset biner tidak diubah nama atau dihapus. Inventaris penuh, status penggunaan, keputusan aset lama, serta panduan layer/density ada di [laporan A0](A0_REVIEW.md) dan [CSV inventaris](A0_inventaris_aset.csv).
+- UI shell web mendapat state tombol dan feedback mute pointer. Ini belum merombak semua layar canvas atau menyetujui art akhir.
+- Mockup v0.3 tetap referensi visual, bukan screenshot build dari perubahan level A0.
 
 ## Peran aset dan action
 
