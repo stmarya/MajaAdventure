@@ -39,6 +39,9 @@ Hitungan di atas diverifikasi dari isi ZIP dan checksum arsip pada audit A0
 Paket audio eksternal berisi 330 OGG + 1 MP3 (331 berkas). Seluruh audio eksternal
 tetap kandidat dan tidak otomatis masuk runtime.
 
+Untuk meninjau katalog gambar, animasi, berkas audio, dan aset arsip lewat browser,
+buka [Galeri aset A0](mockups/galeri-aset-a0.html) melalui server lokal dari folder proyek.
+
 ## Audio eksternal CC0 — sumber gratis
 
 **331 file audio eksternal** telah ditambahkan sebagai paket terpisah, bukan hasil sintesis proyek.

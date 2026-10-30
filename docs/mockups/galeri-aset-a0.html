@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="data:,">
+  <title>Galeri aset — MajaAdventure</title>
+  <style>
+    :root {
+      color-scheme: light;
+      font: 16px/1.5 system-ui, sans-serif;
+      --latar: #f4f1e9;
+      --panel: #fffdf7;
+      --panel-alt: #eee8d8;
+      --teks: #25231e;
+      --redup: #625e52;
+      --garis: #d1c7ad;
+      --emas: #a77800;
+      --emas-lembut: #f6e5a6;
+      --merah: #8d3f25;
+      background: var(--latar);
+      color: var(--teks);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        color-scheme: dark;
+        --latar: #15130f;
+        --panel: #211b14;
+        --panel-alt: #30261a;
+        --teks: #f3ecdc;
+        --redup: #c3b69f;
+        --garis: #57442d;
+        --emas: #e4b52d;
+        --emas-lembut: #514018;
+        --merah: #c87545;
+      }
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--latar); color: var(--teks); }
+    main { width: min(100% - 48px, 1280px); margin: 0 auto; padding: 32px 0 56px; }
+    .masthead { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: end; margin-bottom: 24px; }
+    .kicker { margin: 0 0 8px; color: var(--emas); font-size: .875rem; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { max-width: 760px; margin: 0; font-size: clamp(2rem, 4vw, 3.25rem); line-height: 1.05; letter-spacing: -.035em; }
+    .intro { max-width: 760px; margin: 14px 0 0; color: var(--redup); }
+    .label { display: inline-flex; align-items: center; min-height: 34px; padding: 4px 12px; border: 1px solid var(--garis); border-radius: 999px; color: var(--emas); font-size: .875rem; font-weight: 700; white-space: nowrap; }
+    .summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 24px 0; }
+    .metric { min-height: 88px; padding: 14px 16px; border: 1px solid var(--garis); border-radius: 10px; background: var(--panel); }
+    .metric strong { display: block; font-size: 1.55rem; line-height: 1.2; }
+    .metric span { color: var(--redup); font-size: .9rem; }
+    .toolbar { display: grid; grid-template-columns: minmax(220px, 2fr) repeat(3, minmax(150px, 1fr)) auto; gap: 10px; margin: 24px 0 12px; }
+    input, select, button { min-height: 48px; padding: 10px 13px; border: 1px solid var(--garis); border-radius: 8px; background: var(--panel); color: var(--teks); font: inherit; }
+    input::placeholder { color: var(--redup); opacity: .9; }
+    button { cursor: pointer; font-weight: 700; }
+    button:hover { border-color: var(--emas); background: var(--panel-alt); }
+    :focus-visible { outline: 3px solid var(--emas); outline-offset: 3px; }
+    #status { min-height: 28px; margin: 14px 0 18px; color: var(--redup); }
+    #galeri { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .kartu { min-width: 0; overflow: hidden; border: 1px solid var(--garis); border-radius: 10px; background: var(--panel); }
+    .pratinjau { display: grid; height: 220px; place-items: center; overflow: hidden; padding: 12px; border-bottom: 1px solid var(--garis); background:
+      linear-gradient(45deg, var(--panel-alt) 25%, transparent 25%, transparent 75%, var(--panel-alt) 75%),
+      linear-gradient(45deg, var(--panel-alt) 25%, transparent 25%, transparent 75%, var(--panel-alt) 75%);
+      background-position: 0 0, 8px 8px; background-size: 16px 16px; }
+    .pratinjau img { display: block; width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
+    .pratinjau audio { width: 100%; }
+    .audio-kosong, .data-kosong { display: grid; min-height: 126px; place-items: center; color: var(--redup); text-align: center; }
+    .audio-kosong strong { display: block; color: var(--merah); font-size: 2.25rem; line-height: 1; }
+    .data-kosong strong { color: var(--emas); font-size: 1.1rem; }
+    .isi-kartu { padding: 12px 14px 14px; }
+    .baris-label { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+    .chip { display: inline-flex; align-items: center; min-height: 24px; padding: 2px 8px; border: 1px solid var(--garis); border-radius: 999px; color: var(--redup); font-size: .75rem; font-weight: 650; }
+    .chip.aktif { border-color: var(--emas); color: var(--emas); }
+    .chip.arsip { border-color: var(--merah); color: var(--merah); }
+    .nama { overflow-wrap: anywhere; margin: 0 0 6px; font-size: .975rem; line-height: 1.3; }
+    .lokasi { overflow-wrap: anywhere; margin: 0; color: var(--redup); font-size: .8rem; line-height: 1.4; }
+    .catatan { margin: 10px 0 0; color: var(--redup); font-size: .85rem; }
+    code { overflow-wrap: anywhere; }
+    .aksi-audio { width: 100%; margin-top: 8px; }
+    .peringatan { margin: 20px 0 0; padding: 14px 16px; border-left: 4px solid var(--emas); border-radius: 8px; background: var(--panel-alt); color: var(--redup); }
+    .peringatan strong { color: var(--teks); }
+    footer { margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--garis); color: var(--redup); font-size: .9rem; }
+    @media (max-width: 1040px) {
+      #galeri { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .toolbar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 680px) {
+      main { width: min(100% - 32px, 560px); padding-top: 24px; }
+      .masthead { grid-template-columns: 1fr; gap: 12px; align-items: start; }
+      .summary { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+      .metric { min-height: 78px; padding: 11px 12px; }
+      #galeri { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+      .pratinjau { height: 160px; padding: 8px; }
+      .isi-kartu { padding: 10px; }
+      .toolbar { grid-template-columns: 1fr 1fr; }
+      #cari { grid-column: 1 / -1; }
+    }
+    @media (max-width: 390px) {
+      #galeri { grid-template-columns: 1fr; }
+      .toolbar { grid-template-columns: 1fr; }
+      #cari { grid-column: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
+  </style>
+</head>
+<body>
+<main>
+  <header class="masthead">
+    <div>
+      <p class="kicker">MajaAdventure · Audit A0</p>
+      <h1>Galeri aset</h1>
+      <p class="intro">Ruang pamer satu halaman untuk meninjau karakter, environment, properti, antarmuka, efek, gambar animasi, dan audio dari aset runtime maupun paket sumber.</p>
+    </div>
+    <span class="label">GALERI INTERNAL · BUKAN LEVEL RILIS</span>
+  </header>
+
+  <section class="summary" aria-label="Ringkasan koleksi">
+    <div class="metric"><strong id="jumlah-semua">—</strong><span>entri inventaris</span></div>
+    <div class="metric"><strong id="jumlah-gambar">—</strong><span>gambar dan animasi</span></div>
+    <div class="metric"><strong id="jumlah-audio">—</strong><span>berkas audio</span></div>
+    <div class="metric"><strong id="jumlah-sumber">—</strong><span>aset sumber arsip</span></div>
+  </section>
+
+  <section aria-label="Cari dan saring aset">
+    <div class="toolbar">
+      <input id="cari" type="search" autocomplete="off" placeholder="Cari nama, kategori, status, atau lokasi…" aria-label="Cari aset">
+      <select id="filter-kategori" aria-label="Saring berdasarkan kategori"><option value="">Semua kategori</option></select>
+      <select id="filter-jenis" aria-label="Saring berdasarkan jenis">
+        <option value="">Semua jenis</option><option value="gambar">Gambar / animasi</option><option value="audio">Audio</option><option value="data">Berkas data</option>
+      </select>
+      <select id="filter-sumber" aria-label="Saring berdasarkan sumber">
+        <option value="">Semua sumber</option><option value="runtime">Direktori aset</option><option value="arsip">Paket arsip</option>
+      </select>
+      <button id="reset-filter" type="button">Atur ulang</button>
+    </div>
+    <p id="status" role="status" aria-live="polite">Memuat inventaris aset…</p>
+  </section>
+
+  <section id="galeri" aria-label="Koleksi aset"></section>
+
+  <aside class="peringatan">
+    <strong>Cara membuka galeri:</strong> jalankan server lokal dari folder proyek dengan <code>python3 -m http.server 8080</code>, lalu buka <code>http://localhost:8080/docs/mockups/galeri-aset-a0.html</code>. Aset arsip dimuat dari paket ZIP secara bertahap saat gambarnya terlihat atau saat audio dipilih. Buka lewat server lokal, bukan <code>file://</code>.
+  </aside>
+  <footer>
+    Kartu arsip yang byte-identik memakai pratinjau file kanonis agar hemat pemuatan, tetapi tetap menampilkan lokasi sumber arsipnya. Label “belum aktif” atau “kandidat” adalah status audit, bukan keputusan untuk menghapus.
+  </footer>
+</main>
+
+<script type="module">
+  const ROOT = new URL("../../", location.href);
+  const CSV_URL = new URL("../A0_inventaris_aset.csv", location.href);
+  const PACKS_URL = new URL(".asset-packs/manifest.json", ROOT);
+  const AUDIO_EXT = new Set(["WAV", "OGG", "MP3", "FLAC", "M4A", "AAC"]);
+  const IMAGE_EXT = new Set(["PNG", "GIF", "JPG", "JPEG", "WEBP"]);
+  const zipPromises = new Map();
+  const objectUrls = new Set();
+  let semua = [];
+
+  const el = id => document.getElementById(id);
+  const urlRepo = path => new URL(path.split("/").map(encodeURIComponent).join("/"), ROOT).href;
+  const jenisMedia = row => AUDIO_EXT.has(row.jenis) ? "audio" : IMAGE_EXT.has(row.jenis) ? "gambar" : "data";
+
+  function bacaCSV(teks) {
+    const hasil = [];
+    let baris = [], sel = "", kutip = false;
+    for (let i = 0; i < teks.length; i++) {
+      const c = teks[i];
+      if (kutip) {
+        if (c === '"' && teks[i + 1] === '"') { sel += '"'; i++; }
+        else if (c === '"') kutip = false;
+        else sel += c;
+      } else if (c === '"') kutip = true;
+      else if (c === ";") { baris.push(sel); sel = ""; }
+      else if (c === "\n") { baris.push(sel.replace(/\r$/, "")); hasil.push(baris); baris = []; sel = ""; }
+      else sel += c;
+    }
+    if (sel || baris.length) { baris.push(sel.replace(/\r$/, "")); hasil.push(baris); }
+    const kepala = hasil.shift() ?? [];
+    return hasil.filter(r => r.some(Boolean)).map(r => Object.fromEntries(kepala.map((k, i) => [k, r[i] ?? ""])));
+  }
+
+  function uraikanArsip(lokasi) {
+    const cocok = lokasi.match(/^\.asset-packs\/(.+?) \(arsip\) :: (.+)$/);
+    return cocok ? { pack: cocok[1], anggota: cocok[2] } : null;
+  }
+
+  function b64KeByte(teks) {
+    const bin = atob(teks.replace(/\s/g, ""));
+    const byte = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) byte[i] = bin.charCodeAt(i);
+    return byte;
+  }
+
+  async function indeksZip(namaPack) {
+    if (zipPromises.has(namaPack)) return zipPromises.get(namaPack);
+    const janji = (async () => {
+      const respons = await fetch(PACKS_URL);
+      if (!respons.ok) throw new Error("Manifest paket sumber gagal dimuat.");
+      const manifest = await respons.json();
+      const pack = manifest.packs.find(p => p.name === namaPack);
+      if (!pack) throw new Error(`Paket ${namaPack} tidak ada di manifest.`);
+      const bagian = await Promise.all(pack.parts.map(async p => {
+        const r = await fetch(urlRepo(p));
+        if (!r.ok) throw new Error(`Bagian arsip gagal dimuat: ${p}`);
+        return r.text();
+      }));
+      const zip = b64KeByte(bagian.join(""));
+      const digest = await crypto.subtle.digest("SHA-256", zip);
+      const hash = [...new Uint8Array(digest)].map(n => n.toString(16).padStart(2, "0")).join("");
+      if (hash !== pack.sha256) throw new Error(`Checksum arsip ${namaPack} tidak cocok.`);
+
+      const view = new DataView(zip.buffer, zip.byteOffset, zip.byteLength);
+      let eocd = -1;
+      const batas = Math.max(0, zip.length - 65557);
+      for (let p = zip.length - 22; p >= batas; p--) {
+        if (view.getUint32(p, true) === 0x06054b50) { eocd = p; break; }
+      }
+      if (eocd < 0) throw new Error(`Direktori ZIP ${namaPack} tidak terbaca.`);
+      const jumlah = view.getUint16(eocd + 10, true);
+      let posisi = view.getUint32(eocd + 16, true);
+      const dekoder = new TextDecoder("utf-8");
+      const anggota = new Map();
+      for (let i = 0; i < jumlah; i++) {
+        if (view.getUint32(posisi, true) !== 0x02014b50) throw new Error(`Indeks ZIP ${namaPack} rusak.`);
+        const metode = view.getUint16(posisi + 10, true);
+        const ukuranPadat = view.getUint32(posisi + 20, true);
+        const ukuranAsli = view.getUint32(posisi + 24, true);
+        const panjangNama = view.getUint16(posisi + 28, true);
+        const panjangExtra = view.getUint16(posisi + 30, true);
+        const panjangKomentar = view.getUint16(posisi + 32, true);
+        const offsetLokal = view.getUint32(posisi + 42, true);
+        const nama = dekoder.decode(zip.subarray(posisi + 46, posisi + 46 + panjangNama));
+        anggota.set(nama, { metode, ukuranPadat, ukuranAsli, offsetLokal });
+        posisi += 46 + panjangNama + panjangExtra + panjangKomentar;
+      }
+      return { zip, anggota };
+    })();
+    zipPromises.set(namaPack, janji);
+    try { return await janji; } catch (e) { zipPromises.delete(namaPack); throw e; }
+  }
+
+  async function ambilMediaArsip(pack, namaAnggota) {
+    const { zip, anggota } = await indeksZip(pack);
+    const info = anggota.get(namaAnggota);
+    if (!info) throw new Error(`File tidak ditemukan dalam arsip: ${namaAnggota}`);
+    const view = new DataView(zip.buffer, zip.byteOffset, zip.byteLength);
+    const awal = info.offsetLokal;
+    if (view.getUint32(awal, true) !== 0x04034b50) throw new Error("Header file ZIP tidak valid.");
+    const panjangNama = view.getUint16(awal + 26, true);
+    const panjangExtra = view.getUint16(awal + 28, true);
+    const mulaiData = awal + 30 + panjangNama + panjangExtra;
+    const padat = zip.slice(mulaiData, mulaiData + info.ukuranPadat);
+    let data;
+    if (info.metode === 0) data = padat;
+    else if (info.metode === 8) {
+      const aliran = new Blob([padat]).stream().pipeThrough(new DecompressionStream("deflate-raw"));
+      data = new Uint8Array(await new Response(aliran).arrayBuffer());
+    } else throw new Error(`Metode kompresi ZIP ${info.metode} belum didukung.`);
+    if (data.length !== info.ukuranAsli) throw new Error("Ukuran hasil ekstraksi tidak cocok.");
+    return data;
+  }
+
+  function sumberPratinjau(row) {
+    if (row.rujukan_kanonis) return { url: urlRepo(row.rujukan_kanonis), duplikat: true };
+    if (row.lokasi.startsWith("assets/")) return { url: urlRepo(row.lokasi), duplikat: false };
+    const arsip = uraikanArsip(row.lokasi);
+    return arsip ? { arsip, duplikat: false } : null;
+  }
+
+  function buatChip(teks, kelas = "") {
+    const chip = document.createElement("span");
+    chip.className = `chip ${kelas}`.trim();
+    chip.textContent = teks;
+    return chip;
+  }
+
+  function buatKartu(row) {
+    const kartu = document.createElement("article");
+    kartu.className = "kartu";
+    const preview = document.createElement("div");
+    preview.className = "pratinjau";
+    const sumber = sumberPratinjau(row);
+    const jenis = jenisMedia(row);
+
+    if (jenis === "gambar" && sumber) {
+      const gambar = document.createElement("img");
+      gambar.alt = row.nama_file; gambar.loading = "lazy";
+      if (sumber.url) gambar.src = sumber.url;
+      else {
+        gambar.dataset.pack = sumber.arsip.pack;
+        gambar.dataset.anggota = sumber.arsip.anggota;
+        gambar.dataset.ext = row.jenis;
+        gambar.dataset.status = "menunggu";
+        pengamat.observe(gambar);
+      }
+      gambar.addEventListener("error", () => {
+        gambar.remove();
+        preview.textContent = "Pratinjau tidak tersedia";
+      }, { once: true });
+      preview.append(gambar);
+    } else if (jenis === "audio" && sumber) {
+      const isiAudio = document.createElement("div");
+      isiAudio.className = "audio-kosong";
+      isiAudio.innerHTML = "<div><strong aria-hidden=\"true\">♫</strong><span>PRATINJAU AUDIO</span></div>";
+      preview.append(isiAudio);
+      if (sumber.url) {
+        const audio = document.createElement("audio");
+        audio.controls = true; audio.preload = "none"; audio.src = sumber.url;
+        preview.replaceChildren(audio);
+      } else {
+        const tombol = document.createElement("button");
+        tombol.className = "aksi-audio"; tombol.type = "button"; tombol.textContent = "Muat pemutar audio";
+        tombol.addEventListener("click", async () => {
+          tombol.disabled = true; tombol.textContent = "Membuka audio…";
+          try {
+            const data = await ambilMediaArsip(sumber.arsip.pack, sumber.arsip.anggota);
+            const url = URL.createObjectURL(new Blob([data], { type: mime(row.jenis) }));
+            objectUrls.add(url);
+            const audio = document.createElement("audio");
+            audio.controls = true; audio.preload = "none"; audio.src = url;
+            preview.replaceChildren(audio);
+          } catch (e) { tombol.disabled = false; tombol.textContent = "Coba muat ulang audio"; tombol.title = e.message; }
+        });
+        preview.append(tombol);
+      }
+    } else {
+      const data = document.createElement("div");
+      data.className = "data-kosong";
+      data.innerHTML = `<div><strong>${jenis === "data" ? "BERKAS DATA" : "ASET"}</strong><br><span>${row.jenis}</span></div>`;
+      preview.append(data);
+    }
+
+    const isi = document.createElement("div");
+    isi.className = "isi-kartu";
+    const label = document.createElement("div");
+    label.className = "baris-label";
+    label.append(buatChip(row.kategori));
+    label.append(buatChip(row.jenis));
+    label.append(buatChip(row.status_penggunaan, row.status_penggunaan === "Aktif runtime" ? "aktif" : ""));
+    label.append(buatChip(row.lokasi.startsWith(".asset-packs/") ? "ARSIP" : "ASSETS", row.lokasi.startsWith(".asset-packs/") ? "arsip" : "aktif"));
+    const nama = document.createElement("h2");
+    nama.className = "nama"; nama.textContent = row.nama_file;
+    const lokasi = document.createElement("p");
+    lokasi.className = "lokasi"; lokasi.textContent = row.lokasi;
+    isi.append(label, nama, lokasi);
+    if (row.dimensi_px || row.ukuran_byte) {
+      const detail = document.createElement("p");
+      detail.className = "catatan";
+      const ukuran = Number(row.ukuran_byte);
+      detail.textContent = [row.dimensi_px ? `${row.dimensi_px} px` : "", Number.isFinite(ukuran) ? `${ukuran.toLocaleString("id-ID")} byte` : ""].filter(Boolean).join(" · ");
+      isi.append(detail);
+    }
+    if (row.rujukan_kanonis) {
+      const catatan = document.createElement("p");
+      catatan.className = "catatan"; catatan.textContent = `Salinan arsip identik · pratinjau: ${row.rujukan_kanonis}`;
+      isi.append(catatan);
+    }
+    kartu.append(preview, isi);
+    kartu.dataset.search = [row.nama_file, row.kategori, row.jenis, row.status_penggunaan, row.lokasi].join(" ").toLocaleLowerCase("id");
+    kartu.dataset.category = row.kategori;
+    kartu.dataset.type = jenis;
+    kartu.dataset.source = row.lokasi.startsWith(".asset-packs/") ? "arsip" : "runtime";
+    return kartu;
+  }
+
+  function mime(ext) {
+    return ({ PNG:"image/png", GIF:"image/gif", JPG:"image/jpeg", JPEG:"image/jpeg", WEBP:"image/webp", WAV:"audio/wav", OGG:"audio/ogg", MP3:"audio/mpeg" })[ext] ?? "application/octet-stream";
+  }
+
+  const pengamat = new IntersectionObserver(entries => {
+    for (const entri of entries) {
+      if (!entri.isIntersecting) continue;
+      const gambar = entri.target;
+      if (gambar.dataset.status !== "menunggu") continue;
+      gambar.dataset.status = "memuat";
+      ambilMediaArsip(gambar.dataset.pack, gambar.dataset.anggota).then(data => {
+        const url = URL.createObjectURL(new Blob([data], { type: mime(gambar.dataset.ext) }));
+        objectUrls.add(url); gambar.src = url; gambar.dataset.status = "selesai";
+      }).catch(() => { gambar.dataset.status = "gagal"; gambar.alt = `${gambar.alt} — pratinjau gagal dimuat`; });
+      pengamat.unobserve(gambar);
+    }
+  }, { rootMargin: "240px" });
+
+  function isiFilter() {
+    const kategori = [...new Set(semua.map(r => r.kategori))].sort((a, b) => a.localeCompare(b, "id"));
+    for (const nilai of kategori) {
+      const opsi = document.createElement("option"); opsi.value = nilai; opsi.textContent = nilai;
+      el("filter-kategori").append(opsi);
+    }
+  }
+
+  function saring() {
+    const cari = el("cari").value.trim().toLocaleLowerCase("id");
+    const kategori = el("filter-kategori").value;
+    const jenis = el("filter-jenis").value;
+    const sumber = el("filter-sumber").value;
+    const cocok = semua.filter(r =>
+      (!cari || [r.nama_file, r.kategori, r.jenis, r.status_penggunaan, r.lokasi].join(" ").toLocaleLowerCase("id").includes(cari)) &&
+      (!kategori || r.kategori === kategori) &&
+      (!jenis || jenisMedia(r) === jenis) &&
+      (!sumber || (r.lokasi.startsWith(".asset-packs/") ? "arsip" : "runtime") === sumber)
+    );
+    const urutanJenis = { gambar: 0, data: 1, audio: 2 };
+    cocok.sort((a, b) =>
+      urutanJenis[jenisMedia(a)] - urutanJenis[jenisMedia(b)] ||
+      Number(!a.lokasi.startsWith("assets/")) - Number(!b.lokasi.startsWith("assets/")) ||
+      a.kategori.localeCompare(b.kategori, "id") ||
+      a.nama_file.localeCompare(b.nama_file, "id")
+    );
+    const fragmen = document.createDocumentFragment();
+    for (const row of cocok) fragmen.append(buatKartu(row));
+    el("galeri").replaceChildren(fragmen);
+    el("status").textContent = `${cocok.length.toLocaleString("id-ID")} dari ${semua.length.toLocaleString("id-ID")} entri ditampilkan. Pratinjau arsip dimuat saat diperlukan.`;
+  }
+
+  async function mulai() {
+    try {
+      const [rCsv, rPaket] = await Promise.all([fetch(CSV_URL), fetch(PACKS_URL)]);
+      if (!rCsv.ok || !rPaket.ok) throw new Error("Inventaris atau manifest arsip tidak dapat dibaca.");
+      semua = bacaCSV(await rCsv.text());
+      isiFilter();
+      const gambar = semua.filter(r => IMAGE_EXT.has(r.jenis)).length;
+      const audio = semua.filter(r => AUDIO_EXT.has(r.jenis)).length;
+      const arsip = semua.filter(r => r.lokasi.startsWith(".asset-packs/")).length;
+      el("jumlah-semua").textContent = semua.length.toLocaleString("id-ID");
+      el("jumlah-gambar").textContent = gambar.toLocaleString("id-ID");
+      el("jumlah-audio").textContent = audio.toLocaleString("id-ID");
+      el("jumlah-sumber").textContent = arsip.toLocaleString("id-ID");
+      saring();
+    } catch (e) {
+      el("status").textContent = `Galeri gagal dimuat: ${e.message} Jalankan server lokal dari folder proyek.`;
+    }
+  }
+
+  for (const id of ["cari", "filter-kategori", "filter-jenis", "filter-sumber"]) {
+    el(id).addEventListener(id === "cari" ? "input" : "change", saring);
+  }
+  el("reset-filter").addEventListener("click", () => {
+    el("cari").value = ""; el("filter-kategori").value = ""; el("filter-jenis").value = ""; el("filter-sumber").value = ""; saring();
+  });
+  window.addEventListener("beforeunload", () => objectUrls.forEach(URL.revokeObjectURL));
+  mulai();
+</script>
+</body>
+</html>

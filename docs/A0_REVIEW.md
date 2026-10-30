@@ -7,6 +7,7 @@
 ## Ringkasan keputusan
 
 - Inventaris lengkap tersedia di [`A0_inventaris_aset.csv`](A0_inventaris_aset.csv). Audit mencakup 146 berkas di `assets/` dan 692 media di paket sumber; total 838 baris aset/media.
+- [Galeri aset interaktif](mockups/galeri-aset-a0.html) memudahkan peninjauan gambar, animasi, audio, dan varian dari inventaris. Jalankan server lokal dari root proyek; galeri ini adalah katalog, bukan level game.
 - Tidak ditemukan nama generik seperti `asset1.png` atau `bg_old.png`. Tidak ada nama/path aset yang di-rename dan tidak ada berkas gambar/audio yang dihapus. Struktur direktori saat ini memberi konteks subjek pada nama frame berulang.
 - Sembilan puluh lima anggota arsip merupakan salinan byte-identik dari aset di `assets/`; duplikasi byte-identik di antara 146 berkas `assets/` tidak ditemukan. Salinan arsip dipertahankan sebagai provenance.
 - Layout Level 01 dirapikan pada data level: landmark candi dipindah ke tujuan akhir, obor dekoratif ganda dan dua palem yang mengganggu dihapus dari susunan level, serta obor/palem tersisa ditata ulang. Tilemap, collision, hazard, pickup, checkpoint, dan tujuan gameplay tidak diubah.
@@ -16,6 +17,8 @@
 ## 1. Cakupan dan metode inventaris
 
 Inventaris memeriksa file secara rekursif, mencatat ekstensi, kategori, status, lokasi lengkap, ukuran, dimensi gambar, SHA-256, dan hubungan salinan kanonis bila ada. Paket sumber ZIP diverifikasi dengan SHA-256 dari manifest sebelum anggota medianya dihitung. File lisensi, README, dan manifest tetap berada dalam paket sumber dan bukan baris media CSV.
+
+Galeri browser mengindeks 838 baris yang sama dari CSV, menampilkan pratinjau langsung file `assets/`, dan mengekstrak media unik dari ZIP saat dibutuhkan. Buka [`Galeri aset A0`](mockups/galeri-aset-a0.html) lewat server lokal sesuai petunjuk di halaman.
 
 | Cakupan | Hasil |
 |---|---:|

@@ -6,7 +6,7 @@
 
 ## Preview
 
-Mockup memakai PNG yang sudah ada di `assets/`; halaman HTML juga memuat katalog seluruh PNG serta pemutar manual untuk seluruh file audio yang tersedia. Aset varian dan state ditampilkan sebagai katalog, bukan ditumpuk sekaligus ke dalam satu layar gameplay.
+Mockup memakai PNG yang sudah ada di `assets/`; halaman HTML juga memuat katalog seluruh PNG serta pemutar manual untuk seluruh file audio yang tersedia. Untuk peninjauan menyeluruh terhadap seluruh 838 entri aset runtime dan arsip—termasuk audio, GIF, dan berkas data—gunakan [Galeri aset A0](mockups/galeri-aset-a0.html). Aset varian dan state ditampilkan sebagai katalog, bukan ditumpuk sekaligus ke dalam satu layar gameplay.
 
 [Buka mockup visual dan katalog aset](mockups/level01-visual-concept.html)
 
