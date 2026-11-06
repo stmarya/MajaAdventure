@@ -152,7 +152,7 @@
   const CSV_URL = new URL("../A0_inventaris_aset.csv", location.href);
   const PACKS_URL = new URL(".asset-packs/manifest.json", ROOT);
   const AUDIO_EXT = new Set(["WAV", "OGG", "MP3", "FLAC", "M4A", "AAC"]);
-  const IMAGE_EXT = new Set(["PNG", "GIF", "JPG", "JPEG", "WEBP"]);
+  const IMAGE_EXT = new Set(["PNG", "GIF", "JPG", "JPEG", "WEBP", "SVG"]);
   const zipPromises = new Map();
   const objectUrls = new Set();
   let semua = [];
@@ -365,7 +365,7 @@
   }
 
   function mime(ext) {
-    return ({ PNG:"image/png", GIF:"image/gif", JPG:"image/jpeg", JPEG:"image/jpeg", WEBP:"image/webp", WAV:"audio/wav", OGG:"audio/ogg", MP3:"audio/mpeg" })[ext] ?? "application/octet-stream";
+    return ({ PNG:"image/png", GIF:"image/gif", JPG:"image/jpeg", JPEG:"image/jpeg", WEBP:"image/webp", SVG:"image/svg+xml", WAV:"audio/wav", OGG:"audio/ogg", MP3:"audio/mpeg" })[ext] ?? "application/octet-stream";
   }
 
   const pengamat = new IntersectionObserver(entries => {

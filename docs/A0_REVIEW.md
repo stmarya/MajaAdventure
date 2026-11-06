@@ -6,10 +6,11 @@
 
 ## Ringkasan keputusan
 
-- Inventaris lengkap tersedia di [`A0_inventaris_aset.csv`](A0_inventaris_aset.csv). Audit mencakup 146 berkas di `assets/` dan 692 media di paket sumber; total 838 baris aset/media.
+- Inventaris terkini tersedia di [`A0_inventaris_aset.csv`](A0_inventaris_aset.csv): 147 berkas di `assets/` dan 692 media di paket sumber, total 839 baris aset/media.
 - [Galeri aset interaktif](mockups/galeri-aset-a0.html) memudahkan peninjauan gambar, animasi, audio, dan varian dari inventaris. Jalankan server lokal dari root proyek; galeri ini adalah katalog, bukan level game.
+- Atas permintaan pemilik, ditambahkan satu sprite api pixel-art empat bingkai di `assets/vfx/draft/vfx_flame_loop_01.svg`. Ini draf VFX yang belum terdaftar di manifest runtime dan belum dipasang ke level.
 - Tidak ditemukan nama generik seperti `asset1.png` atau `bg_old.png`. Tidak ada nama/path aset yang di-rename dan tidak ada berkas gambar/audio yang dihapus. Struktur direktori saat ini memberi konteks subjek pada nama frame berulang.
-- Sembilan puluh lima anggota arsip merupakan salinan byte-identik dari aset di `assets/`; duplikasi byte-identik di antara 146 berkas `assets/` tidak ditemukan. Salinan arsip dipertahankan sebagai provenance.
+- Sembilan puluh lima anggota arsip merupakan salinan byte-identik dari aset di `assets/`; duplikasi byte-identik di antara 147 berkas `assets/` tidak ditemukan. Salinan arsip dipertahankan sebagai provenance.
 - Layout Level 01 dirapikan pada data level: landmark candi dipindah ke tujuan akhir, obor dekoratif ganda dan dua palem yang mengganggu dihapus dari susunan level, serta obor/palem tersisa ditata ulang. Tilemap, collision, hazard, pickup, checkpoint, dan tujuan gameplay tidak diubah.
 - Shell UI web mendapatkan state hover/pressed/focus/disabled dan tata letak responsif; tombol mute di canvas mendapat feedback hover/pressed dan penanganan pointer yang konsisten.
 - A0 siap ditinjau pemilik, tetapi komposisi final, pengalaman bermain, hak aset, dan kelayakan rilis tetap belum disetujui.
@@ -18,16 +19,16 @@
 
 Inventaris memeriksa file secara rekursif, mencatat ekstensi, kategori, status, lokasi lengkap, ukuran, dimensi gambar, SHA-256, dan hubungan salinan kanonis bila ada. Paket sumber ZIP diverifikasi dengan SHA-256 dari manifest sebelum anggota medianya dihitung. File lisensi, README, dan manifest tetap berada dalam paket sumber dan bukan baris media CSV.
 
-Galeri browser mengindeks 838 baris yang sama dari CSV, menampilkan pratinjau langsung file `assets/`, dan mengekstrak media unik dari ZIP saat dibutuhkan. Buka [`Galeri aset A0`](mockups/galeri-aset-a0.html) lewat server lokal sesuai petunjuk di halaman.
+Galeri browser mengindeks 839 baris yang sama dari CSV, menampilkan pratinjau langsung file `assets/`, dan mengekstrak media unik dari ZIP saat dibutuhkan. Buka [`Galeri aset A0`](mockups/galeri-aset-a0.html) lewat server lokal sesuai petunjuk di halaman.
 
 | Cakupan | Hasil |
 |---|---:|
-| Berkas yang dilacak langsung di `assets/` | 146 |
+| Berkas yang dilacak langsung di `assets/` | 147 |
 | Aset media runtime pada `docs/asset_manifest.json` | 53 |
 | Berkas data runtime tambahan dalam manifest | 4 |
 | Total path dalam manifest (media + data) | 57 |
 | Media dalam paket sumber | 692 |
-| Baris dalam CSV (assets langsung + media arsip) | 838 |
+| Baris dalam CSV (assets langsung + media arsip) | 839 |
 | Salinan arsip byte-identik dengan `assets/` | 95 |
 | Duplikat SHA-256 di antara file langsung `assets/` | 0 |
 
@@ -113,7 +114,7 @@ Rentang zona di atas adalah pembagian kerja untuk review, bukan pemisahan level 
 | Tombol DOM | Respons visual terbatas dan fokus keyboard kurang menonjol. | State hover, active/pressed, disabled, `focus-visible`, ukuran target sentuh, dan transisi singkat ditambahkan. | Transisi dibatasi; `prefers-reduced-motion` mengurangi gerakan. |
 | Kontrol mute dalam canvas | Feedback pointer hanya terjadi saat aktivasi. | Hover/pressed diberi highlight; pointer capture, hit-test, pembatalan, dan perubahan kursor ditangani agar aktivasi konsisten. | State keyboard ditangani shell/keyboard game; bukan aset tombol baru. |
 | State akhir dan sentuh | Overlay statistik game over/selesai memakai atlas font dengan glyph berulang sehingga menimpa CTA; kontrol sentuh juga muncul saat menu/jeda. | Overlay statistik duplikatif di canvas dihilangkan; judul/CTA memakai artwork yang sudah ada, ringkasan skor/koin/waktu tetap di status DOM yang dapat diakses. Kontrol sentuh disembunyikan di luar gameplay. | Font bitmap belum diperbaiki/diganti; mobile tetap eksperimental dan bukan target rilis A0. |
-| Aset UI | Ada state sumber yang belum terhubung ke seluruh kontrol. | Aset lama dipertahankan; tidak dibuat file gambar baru untuk menghindari duplikasi art. | Approval hak distribusi aset dan review art masih tertunda. |
+| Aset UI | Ada state sumber yang belum terhubung ke seluruh kontrol. | Aset UI lama dipertahankan; tidak dibuat gambar UI baru. Sprite api VFX terpisah dibuat sebagai draf atas permintaan, belum aktif runtime. | Approval hak distribusi aset dan review art masih tertunda. |
 
 Perbaikan ini memoles shell dan feedback interaksi web, bukan desain ulang semua layar pixel-art di dalam canvas. Status layar menu/jeda dan HUD dalam canvas masih perlu diuji pada sesi bermain dan dapat menjadi pekerjaan A4 setelah baseline A1.
 

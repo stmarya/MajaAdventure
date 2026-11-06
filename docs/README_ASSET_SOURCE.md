@@ -69,7 +69,7 @@ Seluruh sumber terpilih menyatakanCC0. Lisensi sumber disertakan per paket/track
 Draft lama2BGM+8SFX sintetis tetap tersimpan terpisah di ui-audio-03, bukan bagian paket eksternal.
 
 Tiap paket menyertakan README dan manifest. GIF adalah pratinjau animasi. Direktori
-`assets/` memuat 146 file yang dilacak langsung; 53 berkas media tercatat sebagai
+`assets/` memuat 147 file yang dilacak langsung; 53 berkas media tercatat sebagai
 aset runtime. Manifest juga mencatat 4 berkas data runtime, satu di antaranya berada
 di `assets/` dan tiga lainnya berada di `docs/` atau `levels/`. Sebanyak 95 anggota arsip media merupakan salinan byte-identik dari
 file di `assets/` dan dipertahankan untuk menjaga provenance. Duplikasi di dalam
